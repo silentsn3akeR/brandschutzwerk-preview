@@ -1,0 +1,15 @@
+/* PATTERN — FinalCTA */
+
+.final-cta { padding-block: 5.25rem; }
+.final-cta__inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 3rem; }
+.final-cta h2 { max-width: 22ch; margin-bottom: .75rem; }
+.final-cta p:not(.eyebrow) { max-width: 35rem; }
+.final-cta__action { min-width: 16.25rem; display: flex; flex-direction: column; align-items: flex-end; gap: .75rem; }
+.final-cta__note { max-width: 16.25rem; color: rgba(255, 255, 255, .5); font-size: var(--font-size-xs); text-align: right; }
+
+@media (max-width: 900px) {
+  .final-cta__inner { flex-direction: column; align-items: flex-start; }
+  .final-cta__action { align-items: stretch; width: 100%; }
+  .final-cta__note { max-width: none; text-align: left; }
+}
+@media (max-width: 767px) { .final-cta { padding-block: 4rem; } }

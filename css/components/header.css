@@ -1,0 +1,123 @@
+/* COMPONENT — SiteHeader + MobileNavigation
+   Every navigation control meets --control-min-target. The V1 20px-tall
+   desktop nav links are the defect this contract exists to prevent. */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(247, 247, 245, .92);
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--motion-fast) var(--ease-standard),
+              border-color var(--motion-fast) var(--ease-standard);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.site-header.is-scrolled {
+  background: rgba(247, 247, 245, .97);
+  border-bottom-color: var(--color-border);
+}
+
+.site-header__inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.site-header__brand {
+  min-height: var(--control-min-target);
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+  font-weight: 720;
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+.site-header__brand:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.site-header__nav { display: flex; align-items: center; gap: 1.75rem; }
+.site-header__links { display: flex; align-items: center; gap: .5rem; }
+
+.site-header__links a {
+  min-height: var(--control-min-target);
+  display: inline-flex;
+  align-items: center;
+  padding-inline: .75rem;
+  border-radius: var(--radius-sm);
+  color: #42474d;
+  font-size: .9375rem;
+  font-weight: 560;
+  transition: color var(--motion-fast) var(--ease-standard);
+}
+.site-header__links a:hover { color: var(--color-text); }
+.site-header__links a[aria-current="page"] { color: var(--color-text); font-weight: 650; }
+
+.site-header__cta { min-height: 2.875rem; padding-inline: 1.125rem; font-size: .9375rem; }
+
+.menu-toggle {
+  display: none;
+  width: var(--control-min-target);
+  height: var(--control-min-target);
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background: var(--color-surface);
+}
+
+.mobile-navigation {
+  position: fixed;
+  z-index: var(--z-drawer);
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(247, 247, 245, .99);
+  border-bottom: 1px solid var(--color-border);
+  transform: translateY(-8px);
+  transition: opacity var(--motion-fast) var(--ease-standard),
+              transform var(--motion-fast) var(--ease-standard),
+              max-height var(--motion-base) var(--ease-standard),
+              visibility var(--motion-fast);
+}
+.mobile-navigation.is-open {
+  max-height: calc(100dvh - var(--header-height));
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-navigation__inner { display: flex; flex-direction: column; padding-block: 1rem 1.5rem; }
+.mobile-navigation__inner > a:not(.btn) {
+  min-height: 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 1.0625rem;
+  font-weight: 610;
+}
+.mobile-navigation__cta { margin-top: 1.5rem; }
+
+body.mobile-menu-open { overflow: hidden; }
+
+@media (max-width: 1023px) {
+  .site-header__nav { display: none; }
+  .menu-toggle { display: grid; }
+}
+@media (min-width: 1024px) {
+  .mobile-navigation { display: none; }
+}
+@media (max-width: 640px) {
+  :root { --header-height: 4.25rem; }
+}

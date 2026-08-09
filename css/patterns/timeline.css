@@ -1,0 +1,41 @@
+/* PATTERN — Timeline (process / curriculum / day flow) */
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(var(--timeline-columns, 3), minmax(0, 1fr));
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--timeline-rule, var(--color-border));
+}
+.timeline__step { position: relative; min-width: 0; padding: 1.875rem 2rem 0 0; }
+.timeline__step + .timeline__step { padding-left: 2rem; border-left: 1px solid var(--timeline-rule, var(--color-border)); }
+.timeline__step::before {
+  content: "";
+  position: absolute;
+  top: -5px; left: 0;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--color-brand);
+}
+.timeline__step + .timeline__step::before { left: 2rem; }
+.timeline__number {
+  display: block;
+  margin-bottom: 2.5rem;
+  color: var(--timeline-number, var(--color-brand));
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.timeline__step h3 { margin-bottom: .625rem; }
+
+.surface-authority .timeline { --timeline-rule: rgba(255,255,255,.2); --timeline-number: #ff8d84; }
+
+@media (max-width: 1023px) {
+  .timeline { grid-template-columns: 1fr; margin-top: 2.75rem; border-top: 0; }
+  .timeline__step, .timeline__step + .timeline__step {
+    padding: 0 0 1.875rem 1.875rem;
+    border-left: 1px solid var(--timeline-rule, var(--color-border));
+  }
+  .timeline__step:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .timeline__step::before, .timeline__step + .timeline__step::before { top: 6px; left: -5px; }
+  .timeline__number { margin-bottom: .5rem; }
+}

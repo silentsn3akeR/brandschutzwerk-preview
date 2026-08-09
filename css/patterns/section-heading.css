@@ -1,0 +1,7 @@
+/* PATTERN — SectionHeading */
+
+.section-heading { max-width: 47.5rem; }
+.section-heading h2 { margin-bottom: 1.125rem; }
+.section-heading .lead + p { margin-top: .875rem; }
+.section-heading--light { color: var(--color-text-on-dark); }
+.section-heading--light p:not(.eyebrow) { max-width: 38.75rem; color: rgba(255, 255, 255, .68); }

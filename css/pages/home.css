@@ -1,0 +1,411 @@
+
+
+/* ---------------------------------------------------------------- HOME_01_HERO
+   Text cols 1-7, fact panel cols 9-12, full-width 16:7 media below. */
+
+.home-hero__grid { row-gap: var(--space-5); align-items: start; }
+
+.home-hero__copy { grid-column: 1 / span 7; }
+.home-fact-panel { grid-column: 9 / span 4; }
+
+.home-hero__supporting { margin-top: 1.25rem; color: var(--color-text); font-weight: 560; }
+.home-hero__body { margin-top: .875rem; max-width: 34rem; }
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+.home-fact-panel {
+  padding: 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.home-fact-panel__list { display: grid; gap: 0; }
+.home-fact-panel__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: .875rem;
+  border-top: 1px solid var(--color-border);
+}
+.home-fact-panel__row:first-child { border-top: 0; padding-top: 0; }
+.home-fact-panel__row dt {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+.home-fact-panel__row dd {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 680;
+  text-align: right;
+}
+.home-fact-panel__footnote {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+}
+
+.home-hero__media { margin-top: var(--space-6); }
+
+/* ------------------------------------------------- HOME_02_CREDIBILITY_STRIP */
+
+.home-credibility { border-block: 1px solid var(--color-border); }
+.home-credibility__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem;
+}
+.home-credibility__item { min-width: 0; }
+.home-credibility__item .icon { color: var(--color-brand); }
+.home-credibility__item h3 {
+  margin-top: 1rem;
+  margin-bottom: .375rem;
+  font-size: var(--font-size-lg);
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.home-credibility__item p { font-size: var(--font-size-sm); }
+
+/* ------------------------------------- HOME_03_SERVICE_INTRO + HOME_04_BENTO
+   Intro and bento read as one editorial block, so the intro drops its bottom
+   padding and the bento supplies the section rhythm. */
+
+.home-service-intro { padding-bottom: 0; }
+.home-bento { padding-bottom: var(--space-9); padding-top: var(--space-5); }
+
+.home-bento__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: var(--grid-gap);
+  align-items: stretch;
+}
+
+.home-bento__primary {
+  display: flex;
+  flex-direction: column;
+  min-height: 36.25rem; 
+  padding: 2.5rem;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+.home-bento__primary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.home-bento__primary-head .icon { color: var(--color-brand); }
+.home-bento__media { margin-top: 1.75rem; }
+.home-bento__primary h3 {
+  margin-top: 1.75rem;
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  letter-spacing: -.03em;
+}
+.home-bento__primary > p { margin-top: .875rem; max-width: 34rem; }
+.home-bento__meta {
+  margin-top: 1.25rem;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 620;
+}
+.home-bento__cta { margin-top: 1.75rem; align-self: flex-start; }
+
+.home-bento__secondary { display: grid; grid-template-rows: 1fr 1fr; gap: var(--grid-gap); }
+.home-bento__card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+.home-bento__card .icon--feature { color: var(--color-brand); }
+.home-bento__card-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.home-bento__card h3 { margin-top: 1.125rem; font-size: var(--font-size-xl); letter-spacing: -.02em; }
+.home-bento__card p { margin-top: .5rem; font-size: var(--font-size-sm); }
+.home-bento__card .link-cta { margin-top: auto; padding-top: 1rem; color: var(--color-brand); }
+
+/* ------------------------------------------------------------ HOME_05_PROCESS
+   Surface, spacing and rule colours come from .surface-authority + .timeline. */
+
+.home-process .section-heading { margin-bottom: 0; }
+
+/* -------------------------------------------------- HOME_06_TRAINER_AUTHORITY
+   5 / 7 split on the 12-column grid. */
+
+.home-trainer__grid { row-gap: var(--space-5); align-items: start; }
+.home-trainer__media { grid-column: 1 / span 5; }
+.home-trainer__copy  { grid-column: 6 / span 7; }
+
+.home-trainer__media .asset-frame { position: sticky; top: calc(var(--header-height) + 2rem); }
+
+.home-qualifications { display: grid; gap: 1.25rem; margin-top: 2.5rem; }
+.home-qualifications li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .875rem; }
+.home-qualifications .icon { margin-top: .25rem; color: var(--color-brand); }
+.home-qualifications h3 { font-size: var(--font-size-base); font-weight: 680; line-height: 1.4; letter-spacing: -.005em; }
+.home-qualifications p { margin-top: .1875rem; font-size: var(--font-size-sm); }
+.home-qualifications li[data-status="REAL_DATA_REQUIRED"] .icon { color: var(--color-text-muted); }
+
+.home-quote {
+  margin-top: 2.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.home-quote__label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.home-quote figcaption { display: flex; align-items: center; gap: .625rem; }
+.home-quote figcaption::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+.home-quote blockquote {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--color-text);
+  font-size: var(--font-size-xl);
+  font-weight: 620;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+}
+
+/* --------------------------------------------------------- HOME_07_INDUSTRIES
+   3 photo cards plus 3 compact labels. */
+
+.home-industries__featured {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: 3.5rem;
+}
+.home-industry-card { min-width: 0; }
+.home-industry-card h3 {
+  margin-top: 1.25rem;
+  margin-bottom: .375rem;
+  font-size: var(--font-size-lg);
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.home-industry-card p { font-size: var(--font-size-sm); }
+
+.home-industries__compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+.home-industries__compact li {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 620;
+}
+.home-industries__compact .icon { color: var(--color-text-muted); }
+
+/* ------------------------------------------------------ HOME_08_QUOTE_PREVIEW
+   Copy cols 1-5, widget cols 7-12. */
+
+.home-quote-preview__grid { row-gap: var(--space-5); align-items: start; }
+.home-quote-preview__copy   { grid-column: 1 / span 5; }
+.home-quote-widget          { grid-column: 7 / span 6; }
+
+.home-quote-preview__copy > p:not(.eyebrow):last-child { margin-top: 1rem; font-size: var(--font-size-sm); }
+
+.home-quote-widget {
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.home-quote-widget__field { border: 0; padding: 0; margin: 0; }
+.home-quote-widget__options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .625rem;
+  margin-top: .75rem;
+}
+.home-quote-widget__options .selectable-card {
+  justify-items: center;
+  text-align: center;
+  padding-inline: .5rem;
+  font-weight: 620;
+}
+.home-quote-widget__options .selectable-card__check { margin-top: .125rem; }
+
+.home-quote-widget__plz { margin-top: 1.5rem; max-width: 12rem; }
+
+.home-quote-widget__result {
+  display: grid;
+  justify-items: start;
+  gap: .375rem;
+  margin-top: 1.75rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-input);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.home-quote-widget__result-label {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 620;
+}
+.home-quote-widget__price {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(2rem, 3.4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+.home-quote-widget__suffix {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: normal;
+}
+/* CUSTOM_INQUIRY: the 20+ band has no demo price, so the "Beispiel ab" label
+   and the DEMO-PREIS badge are removed rather than left pointing at nothing. */
+.home-quote-widget__result[data-state="custom"] .home-quote-widget__price { font-size: var(--font-size-xl); }
+.home-quote-widget__result[data-state="custom"] .home-quote-widget__result-label,
+.home-quote-widget__result[data-state="custom"] .badge { display: none; }
+
+.home-quote-widget__disclaimer {
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+}
+.home-quote-widget .btn--block { margin-top: 1.25rem; }
+
+/* ----------------------------------------------------- HOME_09_VALUE_PROPOSITION */
+
+.home-values__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: 3rem;
+}
+.home-values__item { min-width: 0; padding-top: 1.5rem; border-top: 2px solid var(--color-border); }
+.home-values__marker {
+  display: block;
+  width: 1.75rem;
+  height: 2px;
+  margin-top: -1.625rem;
+  margin-bottom: 1.5rem;
+  background: var(--color-brand);
+}
+.home-values__item h3 {
+  margin-bottom: .5rem;
+  font-size: var(--font-size-lg);
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.home-values__item p { font-size: var(--font-size-sm); }
+
+/* ---------------------------------------------------------------- HOME_10_FAQ
+   Intro cols 1-4 (sticky), list cols 6-12. */
+
+.home-faq__grid { row-gap: var(--space-4); align-items: start; }
+.home-faq__intro { grid-column: 1 / span 4; position: sticky; top: calc(var(--header-height) + 2rem); }
+.home-faq__list  { grid-column: 6 / span 7; }
+
+.home-faq__intro p:not(.eyebrow) { margin-bottom: 1.25rem; }
+.home-faq__intro .link-cta { color: var(--color-brand); }
+
+/* ----------------------------------------------------------------- RESPONSIVE */
+
+@media (max-width: 1023px) {
+  /* 8-column grid below 1024 (layout.css). Spans are restated for that grid. */
+  .home-hero__copy            { grid-column: 1 / span 8; }
+  .home-fact-panel            { grid-column: 1 / span 8; }
+  .home-trainer__media        { grid-column: 1 / span 3; }
+  .home-trainer__copy         { grid-column: 4 / span 5; }
+  .home-quote-preview__copy   { grid-column: 1 / span 8; }
+  .home-quote-widget          { grid-column: 1 / span 8; }
+  .home-faq__intro            { grid-column: 1 / span 8; position: static; }
+  .home-faq__list             { grid-column: 1 / span 8; }
+
+  .home-credibility__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem 1.5rem; }
+  /* minmax(0, 1fr), not 1fr: a bare 1fr track has an automatic minimum of
+     min-content, so a long German compound ("Feuerlöschertraining") forces the
+     track wider than its container and the page scrolls sideways at 320.
+     Chromium hid it because the blowout stayed just inside the viewport;
+     Firefox and WebKit both overflowed by 7px. */
+  .home-bento__grid { grid-template-columns: minmax(0, 1fr); }
+  .home-bento__primary { min-height: 0; }
+  .home-bento__secondary { grid-template-rows: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-industries__featured { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .home-values__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; }
+  .home-trainer__media .asset-frame { position: static; }
+}
+
+@media (max-width: 767px) {
+  /* 4-column grid below 768. */
+  .home-hero__copy,
+  .home-fact-panel,
+  .home-trainer__media,
+  .home-trainer__copy,
+  .home-quote-preview__copy,
+  .home-quote-widget,
+  .home-faq__intro,
+  .home-faq__list { grid-column: 1 / span 4; }
+
+  .home-hero__actions .btn { width: 100%; }
+  .home-hero__media { margin-top: var(--space-5); }
+  .home-fact-panel { padding: 1.5rem; }
+
+  .home-credibility__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .home-bento { padding-top: var(--space-4); }
+  .home-bento__primary { padding: 1.75rem; }
+  .home-bento__primary h3 { margin-top: 1.75rem; }
+  .home-bento__cta { align-self: stretch; }
+  .home-bento__secondary { grid-template-columns: minmax(0, 1fr); }
+  .home-industries__featured { grid-template-columns: 1fr; gap: 1.75rem; margin-top: 2.5rem; }
+  .home-values__grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .home-quote-widget { padding: 1.5rem; }
+  .home-quote-widget__options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-quote-widget__plz { max-width: none; }
+
+  /* The sticky bar overlaps the page end; keep the last section clear of it. */
+  .final-cta { padding-bottom: 6.5rem; }
+}
+
+@media (max-width: 359px) {
+  .home-quote-widget__options { grid-template-columns: 1fr; }
+  .home-industries__compact li { width: 100%; }
+}

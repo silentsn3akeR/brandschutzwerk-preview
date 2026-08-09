@@ -1,0 +1,30 @@
+/* COMPONENT — StatusNote
+   Human-readable sentence. Never renders an internal status token; that stays
+   machine-readable on data-status. */
+
+.status-note {
+  margin-top: 1.75rem;
+  padding-left: .875rem;
+  border-left: 2px solid var(--color-border-strong);
+  max-width: 45rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.55;
+}
+.surface-authority .status-note {
+  border-left-color: rgba(255, 255, 255, .24);
+  color: rgba(255, 255, 255, .55);
+}
+
+.data-placeholder {
+  display: inline-block;
+  padding: .1875rem .5625rem;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: .05em;
+  vertical-align: middle;
+}

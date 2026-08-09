@@ -1,0 +1,105 @@
+/* COMPONENT — PresentationIntro + DemoInspector.
+   Neither is mounted in normal public mode. */
+
+.presentation-intro {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: var(--color-dark);
+  color: #fff;
+}
+.presentation-intro::before {
+  content: "";
+  position: absolute;
+  width: 50rem; height: 50rem;
+  right: -20rem; bottom: -25rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(183,42,32,.28), transparent 68%);
+  pointer-events: none;
+}
+.presentation-intro__inner { position: relative; z-index: 1; width: min(100%, 68rem); }
+.presentation-intro .eyebrow { color: #ef7169; margin-bottom: 1.25rem; }
+.presentation-intro__body {
+  max-width: 44rem;
+  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, .65);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.55;
+}
+.presentation-intro .btn { min-width: 13rem; }
+.presentation-intro__note { margin-top: 1.25rem; color: rgba(255, 255, 255, .35); font-size: .72rem; }
+
+@media (max-width: 767px) {
+  .presentation-intro { place-items: end start; }
+  .presentation-intro__inner { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+.demo-inspector {
+  position: fixed;
+  z-index: var(--z-inspector);
+  top: 1rem; right: 1rem;
+  width: min(17rem, calc(100vw - 2rem));
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: .8rem;
+  background: rgba(24, 27, 31, .94);
+  color: #fff;
+  font-size: .75rem;
+  backdrop-filter: blur(14px);
+}
+.demo-inspector__title {
+  margin-bottom: .75rem;
+  color: rgba(255, 255, 255, .45);
+  font-weight: 720;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.demo-inspector__row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: .75rem;
+  padding: .45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+}
+.demo-inspector__row span { color: rgba(255, 255, 255, .42); }
+.demo-inspector__row strong { font-weight: 600; overflow-wrap: anywhere; }
+
+/* Inspector reveals the spec identity of each block — the whole point of the
+   mode. Never active without ?inspect=1. */
+body.is-inspecting [data-section-id] { position: relative; outline: 1px dashed rgba(24,27,31,.25); outline-offset: -1px; }
+body.is-inspecting [data-section-id]::after {
+  content: attr(data-section-id);
+  position: absolute;
+  z-index: 50;
+  top: .5rem; left: .5rem;
+  padding: .3rem .45rem;
+  border-radius: .3rem;
+  background: rgba(24, 27, 31, .9);
+  color: #fff;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+body.is-inspecting [data-demo] { outline: 2px dashed #d97706; outline-offset: 3px; }
+body.is-inspecting [data-status="REAL_DATA_REQUIRED"] { outline: 2px dashed #dc2626; outline-offset: 4px; }
+body.is-inspecting [data-status="FACHLICHE_FREIGABE_REQUIRED"] { outline: 2px dashed #7c3aed; outline-offset: 4px; }
+
+
+[data-inspect-only] { display: none; }
+.is-inspecting [data-inspect-only] {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .25rem .625rem;
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius-sm);
+  color: var(--color-brand);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}

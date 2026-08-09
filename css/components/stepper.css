@@ -1,0 +1,72 @@
+/* COMPONENT — RequestStepper (COMP_REQUEST_STEPPER, REUSE_TYPE=SHARED)
+   Discrete step progression only. There is no percentage bar, because the flow
+   has five real states and nothing in between; a percentage would be invented
+   precision. Progress is announced through a live status line rather than
+   inferred from colour. */
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .75rem;
+  counter-reset: step;
+}
+
+.stepper__step {
+  min-width: 0;
+  display: grid;
+  gap: .5rem;
+  padding-top: .875rem;
+  border-top: 2px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+.stepper__step[aria-current="step"] { border-top-color: var(--color-brand); color: var(--color-text); }
+.stepper__step[data-stepper-state="done"] { border-top-color: var(--color-brand); color: var(--color-text); }
+
+.stepper__marker {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  font-size: var(--font-size-xs);
+  font-weight: 720;
+  line-height: 1;
+}
+.stepper__step[aria-current="step"] .stepper__marker {
+  border-color: var(--color-brand);
+  background: var(--color-brand);
+  color: #fff;
+}
+/* Completed steps carry a check mark, not only a colour change. */
+.stepper__step[data-stepper-state="done"] .stepper__marker {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+.stepper__check { display: none; }
+.stepper__step[data-stepper-state="done"] .stepper__check { display: block; }
+.stepper__step[data-stepper-state="done"] .stepper__number { display: none; }
+
+.stepper__label {
+  font-size: var(--font-size-sm);
+  font-weight: 620;
+  line-height: 1.3;
+}
+
+.stepper__status {
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 620;
+}
+
+/* Mobile: the five labels do not fit side by side, and a horizontally
+   scrolling stepper hides progress. The markers stay as a compact row and the
+   live status line carries the wording. */
+@media (max-width: 767px) {
+  .stepper { gap: .375rem; }
+  .stepper__label { display: none; }
+  .stepper__step { padding-top: .625rem; justify-items: center; }
+  .stepper__status { margin-top: .75rem; font-size: var(--font-size-sm); }
+}

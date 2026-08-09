@@ -1,0 +1,371 @@
+
+
+body[data-page="PAGE_REQUEST"],
+body[data-page="PAGE_REQUEST_SUCCESS"] { background: var(--color-surface); }
+
+/* ------------------------------------------------------------- REQUEST_00_HEADER
+   Reduced header: brand, demo trust indicator, exit link. No marketing nav. */
+
+.request-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, .94);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.request-header__inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.request-header__brand {
+  min-height: var(--control-min-target);
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+  font-weight: 720;
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+.request-header__brand:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+.request-header__trust {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+.request-header__trust .icon { color: var(--color-success); }
+.request-header__back { color: var(--color-text-muted); white-space: nowrap; }
+.request-header__back:hover { color: var(--color-text); }
+
+/* --------------------------------------------------------------------- LAYOUT
+   Left content 7 cols, sticky summary 4 cols, one column gap. */
+
+.request-layout { padding-block: var(--space-6) var(--space-8); row-gap: var(--space-5); align-items: start; }
+.request-main    { grid-column: 1 / span 7; min-width: 0; }
+.request-summary { grid-column: 9 / span 4; position: sticky; top: calc(var(--header-height) + 1.5rem); }
+
+/* --------------------------------------------------------------- REQUEST_01_INTRO */
+
+.request-intro h1 { font-size: clamp(2rem, 3.6vw, 2.85rem); }
+.request-intro .lead { margin-top: 1rem; }
+.request-intro__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 620;
+}
+
+.request-stepper-section { margin-top: 2.5rem; }
+
+/* ----------------------------------------------------------------- STEP SHELL
+   Every step lives in the DOM; only the active one is shown. Hiding with the
+   `hidden` attribute keeps inactive steps out of the tab order and out of the
+   accessibility tree without a display:none override. */
+
+.request-form { margin-top: 2.5rem; }
+
+.request-step__question {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  letter-spacing: -.02em;
+  line-height: 1.25;
+}
+.request-step__question:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+.request-step__subquestion {
+  margin-top: 2.5rem;
+  font-size: var(--font-size-lg);
+  font-weight: 650;
+  letter-spacing: -.01em;
+}
+
+/* Step transition: crossfade + 12px translateX, inverted on back navigation.
+   The class is applied for the duration of one transition only. */
+.request-step { animation: request-step-in var(--motion-base) var(--ease-standard) both; }
+.request-form[data-direction="back"] .request-step { animation-name: request-step-in-back; }
+
+@keyframes request-step-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes request-step-in-back {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------------------------------------- OPTIONS */
+
+.request-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .875rem;
+  margin-top: 1.75rem;
+}
+.request-options--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.request-option { position: relative; padding: 1.25rem 1.375rem; gap: .375rem; }
+.request-option__badge { display: block; margin-bottom: .25rem; }
+.request-option__title { font-size: var(--font-size-base); font-weight: 650; line-height: 1.35; }
+.request-option__desc { color: var(--color-text-muted); font-size: var(--font-size-sm); line-height: 1.45; }
+.request-option .selectable-card__check { position: absolute; top: 1.25rem; right: 1.25rem; }
+.request-option[aria-pressed="true"] .request-option__desc { color: var(--color-text); }
+
+/* ----------------------------------------------------------------- FIELDS */
+
+.request-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+.request-field--postal { max-width: 11rem; }
+.request-field--wide { grid-column: 1 / -1; }
+.field__optional {
+  margin-left: .375rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+/* Errors are textual and sit directly under their field. They are reserved
+   space only when present, so a calm step does not carry empty red rows. */
+.field__error[hidden] { display: none; }
+.request-error { margin-top: 1rem; }
+
+.request-privacy, .request-contract {
+  margin-top: 1.25rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+  max-width: 42rem;
+}
+.request-privacy a { color: var(--color-brand); text-decoration: underline; text-underline-offset: 2px; }
+.request-contract {
+  margin-top: .75rem;
+  padding-left: .875rem;
+  border-left: 2px solid var(--color-border-strong);
+  color: var(--color-text);
+  font-weight: 560;
+}
+
+/* ---------------------------------------------------------------- ACTIONS
+   One dominant next action; back is deliberately secondary and sits left. */
+
+.request-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-border);
+}
+.request-actions .btn--primary { margin-left: auto; }
+.request-actions .btn[aria-busy="true"] { pointer-events: none; opacity: .7; }
+
+/* -------------------------------------------------------- REQUEST_03_SUMMARY */
+
+.request-summary {
+  padding: 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-bg);
+}
+.request-summary__title { font-size: var(--font-size-lg); font-weight: 680; letter-spacing: -.01em; }
+.request-summary__list { margin-top: 1.25rem; display: grid; gap: 0; }
+.request-summary__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: .75rem;
+  border-top: 1px solid var(--color-border);
+}
+.request-summary__row:first-child { border-top: 0; padding-top: 0; }
+.request-summary__row dt { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.request-summary__row dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 650;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.request-summary__row dd[data-empty="true"] { color: var(--color-text-muted); font-weight: 500; }
+
+.request-summary__price {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  justify-items: start;
+  gap: .375rem;
+}
+.request-summary__price-label { margin: 0; color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.request-summary__price-value {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+
+.request-trust {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: .625rem;
+}
+.request-trust li {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 560;
+}
+.request-trust .icon { color: var(--color-success); flex: 0 0 auto; }
+
+/* ==================================================== PAGE_REQUEST_SUCCESS */
+
+.success-shell { display: flex; align-items: center; padding-block: var(--space-8); }
+.success-container { max-width: 46rem; }
+
+.success-check {
+  width: 4rem;
+  height: 4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  animation: success-check-in 320ms var(--ease-standard) both;
+}
+@keyframes success-check-in {
+  from { opacity: 0; transform: scale(.88); }
+  to   { opacity: 1; transform: none; }
+}
+
+.success-copy { margin-top: 2rem; }
+.success-copy h1 { font-size: clamp(2rem, 3.6vw, 2.85rem); }
+.success-copy h1:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+.success-copy .lead { margin-top: 1.125rem; }
+
+.success-progress { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--color-border); }
+.success-progress h2 { font-size: var(--font-size-xl); letter-spacing: -.02em; }
+.success-progress > p { margin-top: .75rem; max-width: 40rem; }
+
+.success-lifecycle {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.success-lifecycle__step {
+  min-width: 0;
+  display: grid;
+  gap: .375rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--color-border);
+}
+.success-lifecycle__step[data-lifecycle-index="1"] { border-top-color: var(--color-brand); }
+.success-lifecycle__marker {
+  width: 1.5rem; height: 1.5rem;
+  display: grid; place-items: center;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs); font-weight: 720; line-height: 1;
+}
+.success-lifecycle__step[data-lifecycle-index="1"] .success-lifecycle__marker {
+  border-color: var(--color-brand); background: var(--color-brand); color: #fff;
+}
+.success-lifecycle__title { color: var(--color-text); font-weight: 650; }
+.success-lifecycle__meta { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+
+.success-recap { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--color-border); }
+.success-recap h2 { font-size: var(--font-size-xl); letter-spacing: -.02em; }
+.success-recap__list { margin-top: 1.25rem; display: grid; gap: 0; max-width: 34rem; }
+.success-recap__row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding-block: .75rem; border-top: 1px solid var(--color-border);
+}
+.success-recap__row:first-child { border-top: 0; padding-top: 0; }
+.success-recap__row dt { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.success-recap__row dd {
+  margin: 0; min-width: 0; color: var(--color-text);
+  font-size: var(--font-size-sm); font-weight: 650; text-align: right; overflow-wrap: anywhere;
+}
+.success-recap__empty { margin-top: 1rem; color: var(--color-text-muted); }
+
+.success-cta { margin-top: 3rem; display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; }
+.success-cta .link-cta { color: var(--color-text-muted); }
+.success-cta .link-cta:hover { color: var(--color-text); }
+
+/* ----------------------------------------------------------------- RESPONSIVE */
+
+@media (max-width: 1023px) {
+  /* 8-column grid below 1024 (layout.css). The summary stops being sticky and
+     moves under the form: at this width it would otherwise crowd the step. */
+  .request-main    { grid-column: 1 / span 8; }
+  .request-summary { grid-column: 1 / span 8; position: static; }
+  .success-lifecycle { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
+}
+
+@media (max-width: 767px) {
+  .request-main, .request-summary { grid-column: 1 / span 4; }
+  .request-layout { padding-block: var(--space-5) var(--space-6); }
+
+  .request-header__trust { display: none; }
+  .request-header__back { font-size: var(--font-size-sm); }
+
+  /* One decision per screen: options become a single column so no card is
+     clipped and no row scrolls horizontally. */
+  .request-options, .request-options--compact { grid-template-columns: 1fr; }
+  .request-fields { grid-template-columns: 1fr; }
+  .request-field--postal { max-width: none; }
+
+  /* Actions stack with the primary action first in reading order but visually
+     dominant; back stays reachable and clearly secondary. */
+  .request-actions { flex-direction: column-reverse; align-items: stretch; gap: .625rem; }
+  .request-actions .btn { width: 100%; }
+  .request-actions .btn--primary { margin-left: 0; }
+
+  .request-summary { padding: 1.5rem; }
+  .success-shell { padding-block: var(--space-6); }
+  .success-cta { flex-direction: column; align-items: stretch; }
+  .success-cta .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 359px) {
+  .success-lifecycle { grid-template-columns: 1fr; }
+}
+
+/* Reduced motion: the step change must still be perceivable, but it must not
+   travel. Opacity only, and the check mark does not scale. */
+@media (prefers-reduced-motion: reduce) {
+  .request-step, .success-check { animation: none; }
+}

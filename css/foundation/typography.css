@@ -1,0 +1,70 @@
+
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -.035em;
+  line-height: 1.08;
+  /* German compounds (Datenschutzhinweise, Teilnahmebescheinigung) exceed
+     narrow viewports; wrapping is a foundation contract, not a page fix.
+     overflow-wrap is the actual overflow guard — it breaks only a word that
+     cannot fit a line at all.
+
+     Display headings do NOT auto-hyphenate. `hyphens: auto` used to apply here
+     too and broke headlines mid word on words that fit unaided
+     ("aus ei-nem Handbuch" at 1440, "Mitarbei-ter" at 390), which reads as a
+     typographic defect rather than a safety net. Body copy is left at the
+     browser default and may opt into hyphenation where it genuinely helps. */
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+h1 { font-size: var(--font-size-h1); font-weight: 700; }
+h2 { font-size: var(--font-size-h2); font-weight: 680; }
+h3 { font-size: var(--font-size-h3); font-weight: 650; }
+h4 { font-size: var(--font-size-lg); font-weight: 650; line-height: 1.3; letter-spacing: -.01em; }
+
+p { color: var(--color-text-muted); }
+.surface-authority p { color: rgba(248, 249, 250, .72); }
+
+/* Display: the presentation overlay headline. Deliberately not an <h1> so no
+   page ever renders a second document-level heading (V1 defect). */
+.type-display {
+  margin: 0 0 1.75rem;
+  color: #fff;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 700;
+  line-height: .98;
+  letter-spacing: -.055em;
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  color: var(--color-brand);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.surface-authority .eyebrow { color: #ef7169; }
+
+.lead, .text-large { font-size: var(--font-size-lg); line-height: 1.55; max-width: 620px; }
+.text-small { font-size: var(--font-size-sm); }
+.text-muted { color: var(--color-text-muted); }
+.text-brand { color: var(--color-brand); }
+
+.label {
+  display: block;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 650;
+}
+
+.caption { color: var(--color-text-muted); font-size: var(--font-size-xs); line-height: 1.45; }

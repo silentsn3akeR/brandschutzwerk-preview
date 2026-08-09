@@ -1,0 +1,21 @@
+/* COMPONENT — MobileStickyCTA
+   Visibility is driven by section IDs, not scroll guesses. Hidden above 767px. */
+
+.mobile-sticky-cta { display: none; }
+
+@media (max-width: 767px) {
+  .mobile-sticky-cta {
+    position: fixed;
+    z-index: var(--z-sticky-cta);
+    left: 1rem; right: 1rem;
+    bottom: calc(.75rem + env(safe-area-inset-bottom));
+    display: block;
+    opacity: 0;
+    transform: translateY(1rem);
+    pointer-events: none;
+    transition: opacity var(--motion-base) var(--ease-standard),
+                transform var(--motion-base) var(--ease-standard);
+  }
+  .mobile-sticky-cta.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .mobile-sticky-cta .btn { width: 100%; box-shadow: 0 10px 30px rgba(16, 24, 40, .2); }
+}

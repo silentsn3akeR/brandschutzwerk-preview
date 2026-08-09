@@ -1,0 +1,23 @@
+/* COMPONENT — Badge */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding: .25rem .625rem;
+  border-radius: 999px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-size: .6875rem;
+  font-weight: 720;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+/* --color-text-muted (#667085) on the neutral tint #eef0f2 measures 4.35:1.
+   The badge is 11px/720, which is not WCAG "large text", so it needs 4.5:1 and
+   failed. --color-text-strong-muted is a shade darker and measures 5.07:1 on the
+   same tint. The tint is kept so the badge still reads as neutral rather than
+   turning into a dark chip. */
+.badge--neutral { background: #eef0f2; color: var(--color-text-strong-muted); }
+.badge--outline { background: transparent; border: 1px solid var(--color-border-strong); color: var(--color-text-muted); }
+.badge--on-dark { background: transparent; border: 1px solid rgba(255,255,255,.28); color: rgba(255,255,255,.82); }

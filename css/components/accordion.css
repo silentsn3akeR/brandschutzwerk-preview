@@ -1,0 +1,55 @@
+/* COMPONENT — FAQAccordion
+   The trigger sets its own font-size explicitly. In V1 it inherited the
+   surrounding h3 scale and had to be patched per page; that is fixed here. */
+
+.accordion { width: 100%; }
+.accordion__item { border-top: 1px solid var(--color-border); }
+.accordion__item:last-child { border-bottom: 1px solid var(--color-border); }
+.accordion__item h3 { margin: 0; }
+
+.accordion__trigger {
+  width: 100%;
+  min-height: var(--control-min-target);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  text-align: left;
+  color: var(--color-text);
+  /* explicit — must not inherit the heading scale */
+  font-size: 1.0625rem;
+  font-weight: 620;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+.accordion__trigger:hover { color: var(--color-brand); }
+.accordion__trigger:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+.accordion__icon {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  transition: transform var(--motion-base) var(--ease-standard),
+              border-color var(--motion-fast) var(--ease-standard),
+              background-color var(--motion-fast) var(--ease-standard);
+}
+.accordion__trigger[aria-expanded="true"] .accordion__icon {
+  transform: rotate(45deg);
+  border-color: var(--color-brand);
+  background: var(--color-brand);
+  color: #fff;
+}
+
+.accordion__panel { overflow: hidden; }
+.accordion__panel-inner { padding: 0 3.5rem 1.75rem 0; }
+.accordion__panel p { max-width: 40rem; font-size: var(--font-size-base); line-height: 1.65; }
+
+@media (max-width: 767px) { .accordion__panel-inner { padding-right: 0; } }

@@ -1,0 +1,301 @@
+
+
+/* ------------------------------------------------------------ TRAINING_01_HERO
+   Hero copy 7 cols + quick-facts card 4 cols. */
+
+.training-hero__grid { row-gap: var(--space-5); align-items: start; }
+.training-hero__copy { grid-column: 1 / span 7; }
+.training-quick-facts { grid-column: 9 / span 4; }
+
+.training-hero__copy .lead { margin-top: 1.25rem; }
+.training-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+.training-quick-facts {
+  padding: 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.training-quick-facts__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: .875rem;
+  border-top: 1px solid var(--color-border);
+}
+.training-quick-facts__row:first-child { border-top: 0; padding-top: 0; }
+.training-quick-facts__row dt { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.training-quick-facts__row dd {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 680;
+  text-align: right;
+}
+.training-quick-facts__footnote {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+}
+
+/* -------------------------------------------------------- TRAINING_02_META_BAR
+   Full-width functional surface, five items. 2 x 3 grid on mobile — it wraps,
+   it never scrolls horizontally. */
+
+.training-meta-bar {
+  padding-block: 1.5rem;
+  border-block: 1px solid var(--color-border);
+}
+.training-meta-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+}
+.training-meta-bar__item {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .625rem;
+  min-height: 2.75rem;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 650;
+  text-align: center;
+}
+.training-meta-bar__item .icon { color: var(--color-brand); }
+
+/* ------------------------------------------------ TRAINING_03_LEARNING_CONTENT
+   5 / 6 split. */
+
+.training-learning__grid { row-gap: var(--space-5); align-items: start; }
+.training-learning__copy { grid-column: 1 / span 5; }
+.training-checklist      { grid-column: 7 / span 6; }
+
+.training-learning__copy .lead { margin-top: 1.125rem; }
+
+.training-checklist {
+  display: grid;
+  gap: 0;
+  padding: .5rem 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+.training-checklist li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: .875rem;
+  padding-block: 1.125rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-weight: 560;
+  line-height: 1.45;
+}
+.training-checklist li:first-child { border-top: 0; }
+.training-checklist .icon { margin-top: .28rem; color: var(--color-brand); }
+
+/* ---------------------------------------------------- TRAINING_04_CURRICULUM
+   Five modules: horizontal on desktop, vertical on mobile. The switch is the
+   shared .timeline pattern's own responsive contract. */
+
+.training-curriculum__timeline { --timeline-columns: 5; }
+.training-curriculum__timeline .timeline__step { padding-right: 1.25rem; }
+.training-curriculum__timeline .timeline__step + .timeline__step { padding-left: 1.25rem; }
+.training-curriculum__timeline .timeline__step + .timeline__step::before { left: 1.25rem; }
+.training-curriculum__timeline h3 { font-size: var(--font-size-lg); letter-spacing: -.015em; }
+.training-curriculum__timeline p { font-size: var(--font-size-sm); }
+
+/* ------------------------------------------------------- TRAINING_05_PRACTICE
+   The signature section: image 7 cols, copy 5 cols, 16:10, on the authority
+   surface so it reads as the centre of the page rather than another card. */
+
+.training-practice__grid { row-gap: var(--space-5); align-items: center; }
+.training-practice__media { grid-column: 1 / span 7; }
+.training-practice__copy  { grid-column: 8 / span 5; }
+
+/* The shared AssetFrame is designed against a light surface; its 8% white
+   hairline disappears on the authority surface and the pending slot then reads
+   as an empty hole rather than a deliberate placeholder. Lifting the edge here
+   is composition, not a redefinition of the component. */
+.training-practice__media .asset-frame__stage { border-color: rgba(255, 255, 255, .16); }
+
+/* `.surface-authority p` (0,1,1) outranks `.asset-frame__label` (0,1,0), so the
+   label rendered light-on-white and was invisible — the first AssetFrame label
+   ever placed on the authority surface. Restored here; the specificity clash
+   belongs in the foundation. See report, OUT_OF_SCOPE_FINDINGS. */
+.training-practice__media .asset-frame__label { color: var(--color-text); }
+
+.training-practice__copy .lead { margin-top: 1.125rem; }
+.training-practice__highlight {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  color: var(--color-text-on-dark);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 680;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+}
+
+/* ------------------------------------------------------- TRAINING_06_DAY_FLOW
+   Vertical timeline. Every time is DEMO_DATA and the section is labelled
+   BEISPIELABLAUF, which is the visible marker COMP_DAY_FLOW_TIMELINE requires. */
+
+.training-day-flow__list {
+  margin-top: 3rem;
+  display: grid;
+  gap: 0;
+  max-width: 46rem;
+}
+.training-day-flow__step {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1.5rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.training-day-flow__step:last-child { border-bottom: 1px solid var(--color-border); }
+.training-day-flow__time {
+  color: var(--color-brand);
+  font-size: var(--font-size-sm);
+  font-weight: 720;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+.training-day-flow__step h3 {
+  margin-bottom: .3125rem;
+  font-size: var(--font-size-lg);
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.training-day-flow__step p { font-size: var(--font-size-sm); }
+
+/* ---------------------------------------------------- TRAINING_07_REQUIREMENTS
+   Four cards, no CTA inside (COMP_REQUIREMENT_CARD contract). */
+
+.training-requirements__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: 3rem;
+}
+.training-requirement-card {
+  min-width: 0;
+  padding: 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-bg);
+}
+.training-requirement-card .icon { color: var(--color-brand); }
+.training-requirement-card h3 {
+  margin-top: 1.125rem;
+  margin-bottom: .375rem;
+  font-size: var(--font-size-lg);
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.training-requirement-card p { font-size: var(--font-size-sm); }
+
+/* --------------------------------------------------- TRAINING_08_TARGET_GROUPS */
+
+.training-industries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2.5rem;
+}
+.training-industries li {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 2.75rem;
+  padding: 0 1.125rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 620;
+}
+.training-industries .icon { color: var(--color-text-muted); }
+
+/* ------------------------------------------------------------ TRAINING_09_FAQ
+   Intro 4 cols (sticky), list 6-12 — same reading rhythm as the home FAQ. */
+
+.training-faq__grid { row-gap: var(--space-4); align-items: start; }
+.training-faq__intro { grid-column: 1 / span 4; position: sticky; top: calc(var(--header-height) + 2rem); }
+.training-faq__list  { grid-column: 6 / span 7; }
+.training-faq__intro h2 { margin-bottom: 1.25rem; }
+.training-faq__intro .link-cta { color: var(--color-brand); }
+
+/* ------------------------------------------------------------ TRAINING_10_CTA
+   One dominant action (COMP_FINAL_CTA contract). The Copy Deck's secondary CTA
+   is a text link, not a second button, so the hierarchy stays unambiguous. */
+
+.training-cta__secondary { color: rgba(255, 255, 255, .72); }
+.training-cta__secondary:hover { color: #fff; }
+
+/* ----------------------------------------------------------------- RESPONSIVE */
+
+@media (max-width: 1023px) {
+  /* 8-column grid below 1024 (layout.css). */
+  .training-hero__copy       { grid-column: 1 / span 8; }
+  .training-quick-facts      { grid-column: 1 / span 8; }
+  .training-learning__copy   { grid-column: 1 / span 8; }
+  .training-checklist        { grid-column: 1 / span 8; }
+  .training-practice__media  { grid-column: 1 / span 8; }
+  .training-practice__copy   { grid-column: 1 / span 8; }
+  .training-faq__intro       { grid-column: 1 / span 8; position: static; }
+  .training-faq__list        { grid-column: 1 / span 8; }
+
+  .training-requirements__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767px) {
+  /* 4-column grid below 768. */
+  .training-hero__copy,
+  .training-quick-facts,
+  .training-learning__copy,
+  .training-checklist,
+  .training-practice__media,
+  .training-practice__copy,
+  .training-faq__intro,
+  .training-faq__list { grid-column: 1 / span 4; }
+
+  .training-hero__actions .btn { width: 100%; }
+  .training-quick-facts { padding: 1.5rem; }
+
+  /* 2 x 3 grid, per the meta bar contract. Wraps, never scrolls. */
+  .training-meta-bar__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1rem; }
+  .training-meta-bar__item { justify-content: flex-start; text-align: left; }
+
+  .training-checklist { padding-inline: 1.25rem; }
+  .training-requirements__grid { grid-template-columns: 1fr; gap: 1rem; }
+  .training-requirement-card { padding: 1.5rem; }
+
+  .training-day-flow__list { margin-top: 2.25rem; }
+  .training-day-flow__step { grid-template-columns: 4.25rem minmax(0, 1fr); gap: 1rem; }
+
+  /* The sticky bar overlaps the page end; keep the last section clear of it. */
+  .final-cta { padding-bottom: 6.5rem; }
+}
+
+@media (max-width: 359px) {
+  .training-day-flow__step { grid-template-columns: 1fr; gap: .25rem; }
+  .training-industries li { width: 100%; }
+}

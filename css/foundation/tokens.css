@@ -1,0 +1,88 @@
+/* FOUNDATION — design tokens
+   Generated from project/v2/machine/token-registry.json.
+   The registry is the authority; this file must stay in sync with it.
+   No page or component stylesheet may redefine a token. */
+
+:root {
+  /* --- Colour --- */
+  --color-bg: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-dark: #22272b;
+  --color-dark-soft: #292e33;
+  --color-text: #181b1f;
+  --color-text-muted: #667085;
+  /* Muted text that has to clear 4.5:1 on a tinted (not white) background.
+     #667085 manages 4.97:1 on white but only 4.35:1 on the neutral tint. */
+  --color-text-strong-muted: #5d6675;
+  --color-text-on-dark: #f8f9fa;
+  --color-brand: #b72a20;
+  --color-brand-hover: #9e241b;
+  --color-brand-soft: #fff1ef;
+  --color-border: #e4e7ec;
+  --color-border-strong: #cfd4dc;
+  --color-success: #18794e;
+  --color-error: #b42318;
+
+  /* --- Typography --- */
+  --font-sans: "Geist", "Inter", Arial, sans-serif;
+  --font-size-xs: 0.8125rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-h3: clamp(1.4rem, 2vw, 1.75rem);
+  --font-size-h2: clamp(2.1rem, 4vw, 2.75rem);
+  --font-size-h1: clamp(2.65rem, 5vw, 3.85rem);
+
+  /* --- Spacing --- */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-7: 5rem;
+  --space-8: 6rem;
+  --space-9: 7rem;
+  --space-10: 8rem;
+
+  /* --- Layout --- */
+  --container: 77.5rem;
+  --page-padding-desktop: 2rem;
+  --page-padding-tablet: 1.5rem;
+  --page-padding-mobile: 1.25rem;
+  --grid-gap: 1.5rem;
+  --header-height: 4.75rem;
+
+  /* --- Radius --- */
+  --radius-sm: 0.5rem;
+  --radius-input: 0.75rem;
+  --radius-button: 0.75rem;
+  --radius-card: 1.125rem;
+  --radius-image: 1.5rem;
+
+  /* --- Shadow --- */
+  --shadow-card: 0 1px 2px rgba(16,24,40,.03), 0 8px 24px rgba(16,24,40,.04);
+
+  /* --- Motion --- */
+  --motion-fast: 180ms;
+  --motion-base: 360ms;
+  --motion-reveal: 480ms;
+  --ease-standard: cubic-bezier(.2,.8,.2,1);
+
+  /* --- Focus, control sizing and z-index layers ---
+     Not in the source token list; declared here as foundation contract so no
+     component invents its own focus ring, target size or stacking value. */
+  --focus-ring-width: 3px;
+  --focus-ring-color: rgba(183, 42, 32, .28);
+  --focus-ring-offset: 3px;
+  --control-min-target: 44px;
+  --control-height: 3.25rem;
+  --z-base: 1;
+  --z-sticky-cta: 90;
+  --z-drawer: 99;
+  --z-header: 100;
+  --z-inspector: 999;
+  --z-overlay: 1000;
+  --z-skip-link: 2000;
+}

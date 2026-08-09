@@ -1,0 +1,52 @@
+/* FOUNDATION — motion system */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--motion-reveal) var(--ease-standard),
+              transform var(--motion-reveal) var(--ease-standard);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+.reveal-image {
+  opacity: 0;
+  transform: scale(.985);
+  transition: opacity var(--motion-reveal) var(--ease-standard),
+              transform var(--motion-reveal) var(--ease-standard);
+}
+.reveal-image.is-visible { opacity: 1; transform: none; }
+
+/* Declarative stagger. Never inline styles. Chain capped at 5 per the source
+   motion contract. */
+.reveal[data-delay="1"], .reveal-image[data-delay="1"] { transition-delay: 70ms; }
+.reveal[data-delay="2"], .reveal-image[data-delay="2"] { transition-delay: 140ms; }
+.reveal[data-delay="3"], .reveal-image[data-delay="3"] { transition-delay: 210ms; }
+.reveal[data-delay="4"], .reveal-image[data-delay="4"] { transition-delay: 280ms; }
+.reveal[data-delay="5"], .reveal-image[data-delay="5"] { transition-delay: 350ms; }
+
+.motion-lift {
+  transition: transform var(--motion-fast) var(--ease-standard),
+              border-color var(--motion-fast) var(--ease-standard);
+}
+.motion-lift:hover { transform: translateY(-2px); }
+
+.motion-image-zoom { overflow: hidden; }
+.motion-image-zoom img { transition: transform 520ms var(--ease-standard); }
+.motion-image-zoom:hover img { transform: scale(1.015); }
+
+/* Global reduced-motion contract. Not limited to reveal elements — this is the
+   V1 defect this foundation exists to prevent. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal, .reveal-image { opacity: 1; transform: none; }
+  .motion-lift:hover, .motion-image-zoom:hover img { transform: none; }
+}
