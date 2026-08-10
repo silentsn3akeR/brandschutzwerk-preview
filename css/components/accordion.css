@@ -48,8 +48,34 @@
   color: #fff;
 }
 
-.accordion__panel { overflow: hidden; }
-.accordion__panel-inner { padding: 0 3.5rem 1.75rem 0; }
+/* Panel expansion per the registry motion contract (height transition at
+   --motion-base). Grid-row interpolation animates to the content's intrinsic
+   height; visibility keeps the closed panel out of the accessibility tree and
+   only flips after the collapse finishes. The markup-level `hidden` attribute
+   is the no-JS fallback; scripting normalizes it and drives `is-open`. */
+.accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  overflow: hidden;
+  transition: grid-template-rows var(--motion-base) var(--ease-standard),
+              visibility 0s var(--motion-base);
+}
+.accordion__panel.is-open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows var(--motion-base) var(--ease-standard),
+              visibility 0s;
+}
+/* The inner's bottom padding would floor the collapsed 0fr track at 28px, so
+   it animates with the same duration/easing and is zero while closed. */
+.accordion__panel-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 3.5rem 0 0;
+  transition: padding-bottom var(--motion-base) var(--ease-standard);
+}
+.accordion__panel.is-open .accordion__panel-inner { padding-bottom: 1.75rem; }
 .accordion__panel p { max-width: 40rem; font-size: var(--font-size-base); line-height: 1.65; }
 
 @media (max-width: 767px) { .accordion__panel-inner { padding-right: 0; } }

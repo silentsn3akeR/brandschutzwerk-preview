@@ -12,6 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="./assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./css/foundation/fonts.css">
   <link rel="stylesheet" href="./css/foundation/tokens.css">
   <link rel="stylesheet" href="./css/foundation/reset.css">
   <link rel="stylesheet" href="./css/foundation/typography.css">
@@ -130,7 +132,7 @@
           </aside>
         </div>
 
-        <figure class="asset-frame asset-frame--16x7 home-hero__media reveal-image" data-delay="2" data-component="HeroImage" data-asset-id="ASSET_PHOTO_01_HERO_TRAINING" data-status="ASSET_PENDING">
+        <figure class="asset-frame asset-frame--16x7 home-hero__media reveal-image motion-image-zoom" data-delay="2" data-component="HeroImage" data-asset-id="ASSET_PHOTO_01_HERO_TRAINING" data-status="ASSET_PENDING">
           <div class="asset-frame__stage">
             <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Brandschutzhelfer-Schulung im Unternehmen. Das Bild wird für diese Konzeptdemo noch erstellt.">
               <span class="asset-placeholder__glow"></span>
@@ -190,12 +192,12 @@
         <h2 class="sr-only" id="bento-title">Leistungen im Überblick</h2>
         <div class="home-bento__grid">
 
-          <article class="home-bento__primary reveal" data-component="ServiceCard" data-service-id="brandschutzhelfer" data-status="FACHLICHE_FREIGABE_REQUIRED">
+          <article class="home-bento__primary reveal motion-lift" data-component="ServiceCard" data-service-id="brandschutzhelfer" data-status="FACHLICHE_FREIGABE_REQUIRED">
             <div class="home-bento__primary-head">
               <span class="badge">KERNANGEBOT</span>
               <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
             </div>
-            <figure class="asset-frame asset-frame--16x7 home-bento__media reveal-image" data-asset-id="ASSET_PHOTO_03_EXTINGUISHER_DETAIL" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--16x7 home-bento__media reveal-image motion-image-zoom" data-asset-id="ASSET_PHOTO_03_EXTINGUISHER_DETAIL" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Feuerlöscher-Detailaufnahme. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
@@ -212,14 +214,14 @@
           </article>
 
           <div class="home-bento__secondary">
-            <article class="home-bento__card reveal" data-delay="1" data-component="ServiceCard" data-service-id="extinguisher" data-status="FACHLICHE_FREIGABE_REQUIRED">
+            <article class="home-bento__card reveal motion-lift" data-delay="1" data-component="ServiceCard" data-service-id="extinguisher" data-status="FACHLICHE_FREIGABE_REQUIRED">
               <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-fire-extinguisher"></use></svg>
               <h3>Feuerlöschertraining</h3>
               <p>Den sicheren Umgang mit Feuerlöscheinrichtungen unter kontrollierten Bedingungen praktisch trainieren.</p>
               <a class="link-cta" href="./anfrage/">Mehr erfahren<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
             </article>
 
-            <article class="home-bento__card reveal" data-delay="2" data-component="ServiceCard" data-service-id="evacuation" data-status="FACHLICHE_FREIGABE_REQUIRED">
+            <article class="home-bento__card reveal motion-lift" data-delay="2" data-component="ServiceCard" data-service-id="evacuation" data-status="FACHLICHE_FREIGABE_REQUIRED">
               <div class="home-bento__card-head">
                 <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-users"></use></svg>
                 <span class="badge badge--outline">ERWEITERUNG</span>
@@ -269,7 +271,7 @@
         <div class="grid-12 home-trainer__grid">
 
           <div class="home-trainer__media reveal-image">
-            <figure class="asset-frame asset-frame--4x5" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--4x5 motion-image-zoom" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für das Porträt des Trainers. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
@@ -338,8 +340,8 @@
         </div>
 
         <ul class="home-industries__featured">
-          <li class="home-industry-card reveal" data-industry-id="production">
-            <figure class="asset-frame asset-frame--4x3" data-asset-id="ASSET_PHOTO_05_PRODUCTION" data-status="ASSET_PENDING">
+          <li class="home-industry-card reveal motion-lift" data-industry-id="production">
+            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-asset-id="ASSET_PHOTO_05_PRODUCTION" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Produktionsumgebung. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
@@ -352,8 +354,8 @@
             <h3>Produktion</h3>
             <p>Praxisnahe Schulungen für Produktions- und Fertigungsumgebungen.</p>
           </li>
-          <li class="home-industry-card reveal" data-delay="1" data-industry-id="logistics">
-            <figure class="asset-frame asset-frame--4x3" data-asset-id="ASSET_PHOTO_06_LOGISTICS" data-status="ASSET_PENDING">
+          <li class="home-industry-card reveal motion-lift" data-delay="1" data-industry-id="logistics">
+            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-asset-id="ASSET_PHOTO_06_LOGISTICS" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Logistikumgebung. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
@@ -366,8 +368,8 @@
             <h3>Logistik</h3>
             <p>Für Lager, Versand, Logistikzentren und betriebliche Verkehrsflächen.</p>
           </li>
-          <li class="home-industry-card reveal" data-delay="2" data-industry-id="craft">
-            <figure class="asset-frame asset-frame--4x3" data-asset-id="ASSET_PHOTO_07_CRAFT" data-status="ASSET_PENDING">
+          <li class="home-industry-card reveal motion-lift" data-delay="2" data-industry-id="craft">
+            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-asset-id="ASSET_PHOTO_07_CRAFT" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für einen handwerklichen Betrieb. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>

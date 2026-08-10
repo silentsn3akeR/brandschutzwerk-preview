@@ -72,6 +72,12 @@
   border-radius: var(--radius-button);
   background: var(--color-surface);
 }
+/* Open state: the plus rotates into a close mark — the same disclosure
+   language the accordion trigger already speaks. The rotation persists under
+   reduced motion (only the transition is neutralized globally), so the state
+   stays visible without movement. */
+.menu-toggle .icon { transition: transform var(--motion-fast) var(--ease-standard); }
+.menu-toggle[aria-expanded="true"] .icon { transform: rotate(45deg); }
 
 .mobile-navigation {
   position: fixed;

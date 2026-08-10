@@ -24,15 +24,32 @@
 .reveal[data-delay="4"], .reveal-image[data-delay="4"] { transition-delay: 280ms; }
 .reveal[data-delay="5"], .reveal-image[data-delay="5"] { transition-delay: 350ms; }
 
-.motion-lift {
-  transition: transform var(--motion-fast) var(--ease-standard),
-              border-color var(--motion-fast) var(--ease-standard);
+/* Hover feedback. The lift uses the separate `translate` property, not
+   `transform`, so it composes with the reveal's translateY instead of
+   fighting it. `transition` is a single property per element, so elements
+   carrying both utilities get one merged list below — reveal timing stays
+   authoritative for opacity/transform, the lift stays on the fast token. */
+.motion-lift { transition: translate var(--motion-fast) var(--ease-standard); }
+.reveal.motion-lift {
+  transition: opacity var(--motion-reveal) var(--ease-standard),
+              transform var(--motion-reveal) var(--ease-standard),
+              translate var(--motion-fast) var(--ease-standard);
 }
-.motion-lift:hover { transform: translateY(-2px); }
 
+/* The zoom animates the media inside the clipped stage — the frame itself
+   never moves. Covers today's abstract placeholder and tomorrow's real
+   photograph with the same rule. 520ms is the established expressive image
+   duration; faster would turn a barely-perceptible drift into a pop. */
 .motion-image-zoom { overflow: hidden; }
-.motion-image-zoom img { transition: transform 520ms var(--ease-standard); }
-.motion-image-zoom:hover img { transform: scale(1.015); }
+.motion-image-zoom .asset-frame__stage img,
+.motion-image-zoom .asset-placeholder { transition: transform 520ms var(--ease-standard); }
+
+/* Hover-capable devices only: a tap on touch must not leave a stuck lift. */
+@media (hover: hover) {
+  .motion-lift:hover { translate: 0 -2px; }
+  .motion-image-zoom:hover .asset-frame__stage img,
+  .motion-image-zoom:hover .asset-placeholder { transform: scale(1.015); }
+}
 
 /* Global reduced-motion contract. Not limited to reveal elements — this is the
    V1 defect this foundation exists to prevent. */
@@ -48,5 +65,8 @@
   }
 
   .reveal, .reveal-image { opacity: 1; transform: none; }
-  .motion-lift:hover, .motion-image-zoom:hover img { transform: none; }
+  .motion-lift:hover { translate: none; }
+  .motion-image-zoom:hover img,
+  .motion-image-zoom:hover .asset-frame__stage img,
+  .motion-image-zoom:hover .asset-placeholder { transform: none; }
 }

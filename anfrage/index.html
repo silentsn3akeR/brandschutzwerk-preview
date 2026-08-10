@@ -12,6 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/foundation/fonts.css">
   <link rel="stylesheet" href="../css/foundation/tokens.css">
   <link rel="stylesheet" href="../css/foundation/reset.css">
   <link rel="stylesheet" href="../css/foundation/typography.css">
@@ -312,7 +314,10 @@
 
           <div class="request-summary__price" data-status="DEMO_DATA">
             <p class="request-summary__price-label">Demo-Orientierung</p>
-            <p class="request-summary__price-value">ab 790 € netto</p>
+            <!-- The value renders from js/data/demo-pricing.js — the single
+                 demo price source — and follows the participant selection.
+                 No amount is duplicated into this markup. -->
+            <p class="request-summary__price-value" data-summary-price data-empty="true">—</p>
             <span class="badge">DEMO-PREIS</span>
           </div>
 

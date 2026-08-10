@@ -1,0 +1,21 @@
+/* FOUNDATION — self-hosted webfont delivery.
+
+   The token font stack ("Geist", "Inter", Arial) promised Geist, but nothing
+   ever loaded it: zero @font-face rules, zero font requests. Every visitor
+   without a locally installed Geist silently rendered Arial, which collapses
+   the 400–800 weight system and makes the negative display tracking look
+   cramped instead of precise.
+
+   One variable file (SIL OFL 1.1, license next to the file) covers the full
+   100–900 weight range the typography system uses. The URL is relative to
+   this stylesheet, so every page depth resolves it identically.
+   font-display: swap keeps text readable during the single ~68KB download;
+   Arial stays in the stack as the deliberate fallback. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("../../assets/fonts/geist-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

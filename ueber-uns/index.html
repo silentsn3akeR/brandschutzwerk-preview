@@ -12,6 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/foundation/fonts.css">
   <link rel="stylesheet" href="../css/foundation/tokens.css">
   <link rel="stylesheet" href="../css/foundation/reset.css">
   <link rel="stylesheet" href="../css/foundation/typography.css">
@@ -96,7 +98,7 @@
             <p class="lead">Hinter dem geplanten Angebot steht mehrjährige Erfahrung aus der Berufsfeuerwehr – verbunden mit dem Anspruch, Brandschutz verständlich, professionell und praxisnah zu vermitteln.</p>
           </div>
 
-          <figure class="asset-frame asset-frame--4x5 about-hero__portrait reveal-image" data-delay="1" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
+          <figure class="asset-frame asset-frame--4x5 about-hero__portrait reveal-image motion-image-zoom" data-delay="1" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
             <div class="asset-frame__stage">
               <div class="asset-placeholder" role="img" aria-label="Bildfläche für ein dokumentarisches Porträt des Trainers in ruhiger Arbeitssituation. Das Bild wird für diese Konzeptdemo noch erstellt.">
                 <span class="asset-placeholder__glow"></span>
@@ -148,24 +150,24 @@
         </div>
 
         <ul class="about-credentials__grid">
-          <li class="about-credential reveal" data-credential-id="CREDENTIAL_01" data-credential-state="CLAIMABLE" data-status="CONFIRMED">
+          <li class="about-credential reveal motion-lift" data-credential-id="CREDENTIAL_01" data-credential-state="CLAIMABLE" data-status="CONFIRMED">
             <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
             <h3>Berufsfeuerwehr</h3>
             <p>Mehrjährige praktische Erfahrung im Feuerwehrdienst.</p>
           </li>
-          <li class="about-credential reveal" data-delay="1" data-credential-id="CREDENTIAL_02" data-credential-state="CLAIMABLE" data-status="DEMO_DATA">
+          <li class="about-credential reveal motion-lift" data-delay="1" data-credential-id="CREDENTIAL_02" data-credential-state="CLAIMABLE" data-status="DEMO_DATA">
             <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-fire-extinguisher"></use></svg>
             <h3>Praxisorientierung</h3>
             <p>Schulungen sollen reale Situationen verständlich auf den Betriebsalltag übertragen.</p>
           </li>
-          <li class="about-credential reveal" data-delay="2" data-credential-id="CREDENTIAL_03" data-credential-state="CLAIMABLE" data-status="DEMO_DATA">
+          <li class="about-credential reveal motion-lift" data-delay="2" data-credential-id="CREDENTIAL_03" data-credential-state="CLAIMABLE" data-status="DEMO_DATA">
             <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-building-2"></use></svg>
             <h3>Inhouse-Schulung</h3>
             <p>Durchführung direkt beim Kunden und nah an der tatsächlichen Arbeitsumgebung.</p>
           </li>
 
           
-          <li class="about-credential about-credential--open reveal" data-delay="3" data-credential-id="CREDENTIAL_04" data-credential-state="OPEN" data-status="REAL_DATA_REQUIRED">
+          <li class="about-credential about-credential--open reveal motion-lift" data-delay="3" data-credential-id="CREDENTIAL_04" data-credential-state="OPEN" data-status="REAL_DATA_REQUIRED">
             <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-circle-help"></use></svg>
             <h3>Weitere Qualifikationen</h3>
             <p>Konkrete Lehrgänge und Nachweise werden hier ergänzt.</p>
@@ -215,8 +217,8 @@
         </div>
 
         <ul class="about-network__grid">
-          <li class="about-network-card reveal" data-component="TrainerNetworkCard" data-network-state="CURRENT" data-card-id="TRAINER_CARD_01">
-            <figure class="asset-frame asset-frame--4x5 about-network-card__media" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
+          <li class="about-network-card reveal motion-lift" data-component="TrainerNetworkCard" data-network-state="CURRENT" data-card-id="TRAINER_CARD_01">
+            <figure class="asset-frame asset-frame--4x5 about-network-card__media motion-image-zoom" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für das Porträt des Gründers. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
@@ -231,7 +233,7 @@
             <p data-status="FACHLICHE_FREIGABE_REQUIRED">Trainer &amp; fachlicher Ansprechpartner</p>
           </li>
 
-          <li class="about-network-card about-network-card--future reveal" data-delay="1" data-component="TrainerNetworkCard" data-network-state="FUTURE_STATE" data-card-id="TRAINER_CARD_02">
+          <li class="about-network-card about-network-card--future reveal motion-lift" data-delay="1" data-component="TrainerNetworkCard" data-network-state="FUTURE_STATE" data-card-id="TRAINER_CARD_02">
             <div class="about-network-card__mark" role="img" aria-label="Abstrakte Platzhalterfläche. Diese Karte steht für eine mögliche künftige Erweiterung, nicht für eine reale Person.">
               <span class="about-network-card__mark-ring"></span>
               <span class="about-network-card__mark-bar"></span>
@@ -241,7 +243,7 @@
             <p>Erweiterung durch entsprechend qualifizierte Feuerwehrkräfte.</p>
           </li>
 
-          <li class="about-network-card about-network-card--future reveal" data-delay="2" data-component="TrainerNetworkCard" data-network-state="FUTURE_STATE" data-card-id="TRAINER_CARD_03">
+          <li class="about-network-card about-network-card--future reveal motion-lift" data-delay="2" data-component="TrainerNetworkCard" data-network-state="FUTURE_STATE" data-card-id="TRAINER_CARD_03">
             <div class="about-network-card__mark" role="img" aria-label="Abstrakte Platzhalterfläche. Diese Karte steht für eine mögliche künftige Region, nicht für einen bestehenden Standort.">
               <span class="about-network-card__mark-ring"></span>
               <span class="about-network-card__mark-bar"></span>

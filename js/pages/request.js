@@ -1,6 +1,7 @@
 import { $, $$ } from "../core/dom.js";
 import { sessionState } from "../core/storage.js";
 import { siteUrl, ROUTES } from "../core/config.js";
+import { demoPricing } from "../data/demo-pricing.js";
 
 
 
@@ -177,6 +178,31 @@ function summaryValues() {
 
 const EMPTY_LABEL = { service: "Noch keine Schulung gewählt" };
 
+/* Demo price, from js/data/demo-pricing.js — the same single source the home
+   quote preview reads. The participant band keys match the pricing bands
+   verbatim. Before a selection, the reference band mirrors the default the
+   home widget ships preselected, so both surfaces open on the same
+   orientation value; after a selection the chosen band wins. A band without
+   a number (20+) never renders an invented amount, it renders the
+   established custom-inquiry label instead. */
+const CUSTOM_INQUIRY_LABEL = "Individuell anfragen";
+const ORIENTATION_BAND = "11-15";
+
+function formatDemoPrice(value) {
+  return `${new Intl.NumberFormat("de-DE").format(value)} €`;
+}
+
+function renderPrice() {
+  const el = $("[data-summary-price]");
+  if (!el) return;
+  const band = state.fields.FIELD_PARTICIPANTS.value || ORIENTATION_BAND;
+  const amount = demoPricing.bands[band];
+  const isCustom = amount === null || amount === undefined;
+  el.textContent = isCustom ? CUSTOM_INQUIRY_LABEL : `ab ${formatDemoPrice(amount)} netto`;
+  el.dataset.empty = "false";
+  el.dataset.state = isCustom ? "custom" : "default";
+}
+
 function renderSummary() {
   const values = summaryValues();
   Object.entries(values).forEach(([key, value]) => {
@@ -186,6 +212,7 @@ function renderSummary() {
     el.textContent = value || EMPTY_LABEL[key] || "—";
     el.dataset.empty = String(!value);
   });
+  renderPrice();
 }
 
 function renderStep() {
