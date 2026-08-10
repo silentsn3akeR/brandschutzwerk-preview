@@ -102,8 +102,9 @@
 
         <div class="media-stage media-stage--has-inset home-hero__media reveal-image" data-delay="2">
           <span class="media-stage__accent" aria-hidden="true"></span>
-          <figure class="asset-frame asset-frame--16x7 motion-image-zoom" data-component="HeroImage" data-asset-id="ASSET_PHOTO_01_HERO_TRAINING" data-status="ASSET_PENDING">
+          <figure class="asset-frame asset-frame--16x7 motion-image-zoom" data-slot-id="SLOT_HOME_HERO_ANCHOR" data-component="HeroImage" data-asset-id="ASSET_PHOTO_01_HERO_TRAINING" data-status="ASSET_PENDING">
           <div class="asset-frame__stage">
+            <!-- slot:begin SLOT_HOME_HERO_ANCHOR -->
             <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Brandschutzhelfer-Schulung im Unternehmen. Das Bild wird für diese Konzeptdemo noch erstellt.">
               <span class="asset-placeholder__glow"></span>
               <span class="asset-placeholder__grid"></span>
@@ -111,16 +112,17 @@
               <span class="asset-placeholder__rail"></span>
             </div>
             <p class="asset-frame__label">Schulungsmotiv folgt · Bildstrecke dieser Konzeptdemo wird noch erstellt</p>
+            <!-- slot:end SLOT_HOME_HERO_ANCHOR -->
           </div>
           </figure>
           <figure class="asset-frame asset-frame--4x3 media-stage__inset motion-image-zoom" data-slot-id="SLOT_HOME_HERO_DETAIL" data-status="ASSET_PENDING">
             <div class="asset-frame__stage">
-              <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Detailaufnahme der Feuerlöscher-Handhabung. Das Motiv wird für diese Konzeptdemo noch ergänzt.">
-                <span class="asset-placeholder__glow"></span>
-                <span class="asset-placeholder__grid"></span>
-                <span class="asset-placeholder__frame"></span>
-                <span class="asset-placeholder__rail"></span>
-              </div>
+              <!-- slot:begin SLOT_HOME_HERO_DETAIL -->
+              <picture>
+                <source type="image/webp" srcset="./assets/photos/BSW_EXTINGUISHER_PIN_01/BSW_EXTINGUISHER_PIN_01-400.webp 400w, ./assets/photos/BSW_EXTINGUISHER_PIN_01/BSW_EXTINGUISHER_PIN_01-760.webp 760w">
+                <img src="./assets/photos/BSW_EXTINGUISHER_PIN_01/BSW_EXTINGUISHER_PIN_01-760.jpg" alt="Hände ziehen den Sicherungsstift eines Feuerlöschers; die Plombe reißt, das Manometer steht im grünen Bereich." width="760" height="570" loading="lazy" decoding="async">
+              </picture>
+              <!-- slot:end SLOT_HOME_HERO_DETAIL -->
             </div>
           </figure>
         </div>
@@ -216,14 +218,16 @@
               <span class="badge">KERNANGEBOT</span>
               <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
             </div>
-            <figure class="asset-frame asset-frame--16x7 home-bento__media reveal-image motion-image-zoom" data-asset-id="ASSET_PHOTO_03_EXTINGUISHER_DETAIL" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--16x7 home-bento__media reveal-image motion-image-zoom" data-slot-id="SLOT_HOME_BENTO_PRIMARY" data-asset-id="ASSET_PHOTO_03_EXTINGUISHER_DETAIL" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_HOME_BENTO_PRIMARY -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Feuerlöscher-Detailaufnahme. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
                   <span class="asset-placeholder__grid"></span>
                   <span class="asset-placeholder__frame"></span>
                   <span class="asset-placeholder__rail"></span>
                 </div>
+                <!-- slot:end SLOT_HOME_BENTO_PRIMARY -->
               </div>
             </figure>
             <h3>Brandschutzhelfer-Ausbildung</h3>
@@ -290,14 +294,16 @@
         <div class="grid-12 home-trainer__grid">
 
           <div class="home-trainer__media reveal-image">
-            <figure class="asset-frame asset-frame--4x5 motion-image-zoom" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--4x5 motion-image-zoom" data-slot-id="SLOT_HOME_TRAINER_ACTION" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_HOME_TRAINER_ACTION -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für das Porträt des Trainers. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
                   <span class="asset-placeholder__grid"></span>
                   <span class="asset-placeholder__frame"></span>
                   <span class="asset-placeholder__rail"></span>
                 </div>
+                <!-- slot:end SLOT_HOME_TRAINER_ACTION -->
               </div>
               <figcaption class="asset-frame__caption" data-status="REAL_DATA_REQUIRED">Trainer &amp; fachlicher Ansprechpartner · Porträt und persönliche Angaben werden vor dem Livegang ergänzt.</figcaption>
             </figure>
@@ -360,42 +366,48 @@
 
         <ul class="home-industries__rail media-rail reveal" tabindex="0" aria-label="Branchenbeispiele — horizontal scrollbar">
           <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="production">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-asset-id="ASSET_PHOTO_05_PRODUCTION" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_PRODUCTION" data-asset-id="ASSET_PHOTO_05_PRODUCTION" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_INDUSTRY_PRODUCTION -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Produktionsumgebung. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
                   <span class="asset-placeholder__grid"></span>
                   <span class="asset-placeholder__frame"></span>
                   <span class="asset-placeholder__rail"></span>
                 </div>
+                <!-- slot:end SLOT_INDUSTRY_PRODUCTION -->
               </div>
             </figure>
             <h3>Produktion</h3>
             <p>Praxisnahe Schulungen für Produktions- und Fertigungsumgebungen.</p>
           </li>
           <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="logistics">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-asset-id="ASSET_PHOTO_06_LOGISTICS" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_LOGISTICS" data-asset-id="ASSET_PHOTO_06_LOGISTICS" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_INDUSTRY_LOGISTICS -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Logistikumgebung. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
                   <span class="asset-placeholder__grid"></span>
                   <span class="asset-placeholder__frame"></span>
                   <span class="asset-placeholder__rail"></span>
                 </div>
+                <!-- slot:end SLOT_INDUSTRY_LOGISTICS -->
               </div>
             </figure>
             <h3>Logistik</h3>
             <p>Für Lager, Versand, Logistikzentren und betriebliche Verkehrsflächen.</p>
           </li>
           <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="craft">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-asset-id="ASSET_PHOTO_07_CRAFT" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_CRAFT" data-asset-id="ASSET_PHOTO_07_CRAFT" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_INDUSTRY_CRAFT -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für einen handwerklichen Betrieb. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
                   <span class="asset-placeholder__grid"></span>
                   <span class="asset-placeholder__frame"></span>
                   <span class="asset-placeholder__rail"></span>
                 </div>
+                <!-- slot:end SLOT_INDUSTRY_CRAFT -->
               </div>
             </figure>
             <h3>Handwerk</h3>
@@ -405,12 +417,14 @@
           <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="office">
             <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_OFFICE" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_INDUSTRY_OFFICE -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Büro- und Verwaltungsumgebung. Das Motiv wird für diese Konzeptdemo noch ergänzt.">
-                <span class="asset-placeholder__glow"></span>
-                <span class="asset-placeholder__grid"></span>
-                <span class="asset-placeholder__frame"></span>
-                <span class="asset-placeholder__rail"></span>
-              </div>
+                  <span class="asset-placeholder__glow"></span>
+                  <span class="asset-placeholder__grid"></span>
+                  <span class="asset-placeholder__frame"></span>
+                  <span class="asset-placeholder__rail"></span>
+                </div>
+                <!-- slot:end SLOT_INDUSTRY_OFFICE -->
               </div>
             </figure>
             <h3>Büro &amp; Verwaltung</h3>
@@ -418,12 +432,14 @@
           <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="health">
             <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_CARE" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_INDUSTRY_CARE -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Pflege- und Gesundheitsumgebung. Das Motiv wird für diese Konzeptdemo noch ergänzt.">
-                <span class="asset-placeholder__glow"></span>
-                <span class="asset-placeholder__grid"></span>
-                <span class="asset-placeholder__frame"></span>
-                <span class="asset-placeholder__rail"></span>
-              </div>
+                  <span class="asset-placeholder__glow"></span>
+                  <span class="asset-placeholder__grid"></span>
+                  <span class="asset-placeholder__frame"></span>
+                  <span class="asset-placeholder__rail"></span>
+                </div>
+                <!-- slot:end SLOT_INDUSTRY_CARE -->
               </div>
             </figure>
             <h3>Pflege &amp; Gesundheit</h3>
@@ -431,12 +447,14 @@
           <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="hospitality">
             <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_GASTRO" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_INDUSTRY_GASTRO -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Gastronomie- und Hotellerieumgebung. Das Motiv wird für diese Konzeptdemo noch ergänzt.">
-                <span class="asset-placeholder__glow"></span>
-                <span class="asset-placeholder__grid"></span>
-                <span class="asset-placeholder__frame"></span>
-                <span class="asset-placeholder__rail"></span>
-              </div>
+                  <span class="asset-placeholder__glow"></span>
+                  <span class="asset-placeholder__grid"></span>
+                  <span class="asset-placeholder__frame"></span>
+                  <span class="asset-placeholder__rail"></span>
+                </div>
+                <!-- slot:end SLOT_INDUSTRY_GASTRO -->
               </div>
             </figure>
             <h3>Gastronomie &amp; Hotellerie</h3>

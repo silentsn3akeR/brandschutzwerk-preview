@@ -102,8 +102,9 @@
 
           <div class="media-stage about-hero__portrait reveal-image" data-delay="1">
           <span class="media-stage__accent" aria-hidden="true"></span>
-          <figure class="asset-frame asset-frame--4x5 motion-image-zoom" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
+          <figure class="asset-frame asset-frame--4x5 motion-image-zoom" data-slot-id="SLOT_ABOUT_PORTRAIT" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
             <div class="asset-frame__stage">
+              <!-- slot:begin SLOT_ABOUT_PORTRAIT -->
               <div class="asset-placeholder" role="img" aria-label="Bildfläche für ein dokumentarisches Porträt des Trainers in ruhiger Arbeitssituation. Das Bild wird für diese Konzeptdemo noch erstellt.">
                 <span class="asset-placeholder__glow"></span>
                 <span class="asset-placeholder__grid"></span>
@@ -111,6 +112,7 @@
                 <span class="asset-placeholder__rail"></span>
               </div>
               <p class="asset-frame__label">Trainer &amp; fachlicher Ansprechpartner</p>
+              <!-- slot:end SLOT_ABOUT_PORTRAIT -->
             </div>
           </figure>
           </div>
@@ -224,14 +226,16 @@
 
         <ul class="about-network__grid">
           <li class="about-network-card reveal motion-lift" data-component="TrainerNetworkCard" data-network-state="CURRENT" data-card-id="TRAINER_CARD_01">
-            <figure class="asset-frame asset-frame--4x5 about-network-card__media motion-image-zoom" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
+            <figure class="asset-frame asset-frame--4x5 about-network-card__media motion-image-zoom" data-slot-id="SLOT_ABOUT_NETWORK_CURRENT" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
               <div class="asset-frame__stage">
+                <!-- slot:begin SLOT_ABOUT_NETWORK_CURRENT -->
                 <div class="asset-placeholder" role="img" aria-label="Bildfläche für das Porträt des Gründers. Das Bild wird für diese Konzeptdemo noch erstellt.">
                   <span class="asset-placeholder__glow"></span>
                   <span class="asset-placeholder__grid"></span>
                   <span class="asset-placeholder__frame"></span>
                   <span class="asset-placeholder__rail"></span>
                 </div>
+                <!-- slot:end SLOT_ABOUT_NETWORK_CURRENT -->
               </div>
             </figure>
             <span class="badge">GRÜNDER</span>

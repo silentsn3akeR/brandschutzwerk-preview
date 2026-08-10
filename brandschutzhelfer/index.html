@@ -209,8 +209,9 @@
         <div class="grid-12 training-practice__grid">
           <div class="media-stage media-stage--has-inset training-practice__media reveal-image">
           <span class="media-stage__accent" aria-hidden="true"></span>
-          <figure class="asset-frame asset-frame--16x10 motion-image-zoom" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_04_PRACTICAL_ACTION" data-status="ASSET_PENDING">
+          <figure class="asset-frame asset-frame--16x10 motion-image-zoom" data-slot-id="SLOT_TRAINING_PRACTICE" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_04_PRACTICAL_ACTION" data-status="ASSET_PENDING">
             <div class="asset-frame__stage">
+              <!-- slot:begin SLOT_TRAINING_PRACTICE -->
               <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine kontrollierte praktische Löschübung. Das Bild wird für diese Konzeptdemo noch erstellt.">
                 <span class="asset-placeholder__glow"></span>
                 <span class="asset-placeholder__grid"></span>
@@ -218,16 +219,17 @@
                 <span class="asset-placeholder__rail"></span>
               </div>
               <p class="asset-frame__label">Übungsmotiv folgt · Bildstrecke dieser Konzeptdemo wird noch erstellt</p>
+              <!-- slot:end SLOT_TRAINING_PRACTICE -->
             </div>
           </figure>
           <figure class="asset-frame asset-frame--4x3 media-stage__inset motion-image-zoom" data-slot-id="SLOT_TRAINING_DETAIL" data-status="ASSET_PENDING">
             <div class="asset-frame__stage">
-              <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Detailaufnahme: Sicherungsstift und Griff eines Feuerlöschers. Das Motiv wird noch ergänzt.">
-                <span class="asset-placeholder__glow"></span>
-                <span class="asset-placeholder__grid"></span>
-                <span class="asset-placeholder__frame"></span>
-                <span class="asset-placeholder__rail"></span>
-              </div>
+              <!-- slot:begin SLOT_TRAINING_DETAIL -->
+              <picture>
+                <source type="image/webp" srcset="../assets/photos/BSW_EXTINGUISHER_PIN_01/BSW_EXTINGUISHER_PIN_01-400.webp 400w, ../assets/photos/BSW_EXTINGUISHER_PIN_01/BSW_EXTINGUISHER_PIN_01-760.webp 760w">
+                <img src="../assets/photos/BSW_EXTINGUISHER_PIN_01/BSW_EXTINGUISHER_PIN_01-760.jpg" alt="Hände ziehen den Sicherungsstift eines Feuerlöschers; die Plombe reißt, das Manometer steht im grünen Bereich." width="760" height="570" loading="lazy" decoding="async">
+              </picture>
+              <!-- slot:end SLOT_TRAINING_DETAIL -->
             </div>
           </figure>
           </div>

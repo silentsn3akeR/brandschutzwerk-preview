@@ -19,6 +19,20 @@
 
 .asset-frame__stage img { width: 100%; height: 100%; object-fit: cover; }
 
+/* Focal point per breakpoint. The generator emits --focal-* on the image from
+   the slot binding; one image often needs a different framing on a phone than
+   in a wide desktop crop, and an inline object-position cannot carry a media
+   query. Unset means centred. */
+.asset-frame__stage img { object-position: var(--focal-mobile, 50% 50%); }
+@media (min-width: 768px) {
+  .asset-frame__stage img { object-position: var(--focal-tablet, var(--focal-mobile, 50% 50%)); }
+}
+@media (min-width: 1024px) {
+  .asset-frame__stage img {
+    object-position: var(--focal-desktop, var(--focal-tablet, var(--focal-mobile, 50% 50%)));
+  }
+}
+
 .asset-placeholder {
   --mark: rgba(255, 255, 255, .26);
   --cell: 34px;
