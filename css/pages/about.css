@@ -15,6 +15,9 @@
    factual identity block rather than a decorative repeat. */
 
 .about-profile__grid { row-gap: var(--space-4); align-items: start; }
+/* The identity column is now an AuthorityBlock (css/patterns/authority-block.css):
+   the name, the confirmed background and the one action a visitor can take sit
+   in one bordered unit instead of floating as loose text. */
 .about-profile__identity { grid-column: 1 / span 5; }
 .about-profile__copy     { grid-column: 7 / span 6; }
 

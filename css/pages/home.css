@@ -1,12 +1,36 @@
 
 
 /* ---------------------------------------------------------------- HOME_01_HERO
-   Text cols 1-7, fact panel cols 9-12, full-width 16:7 media below. */
+   Layered composition: copy cols 1-6, media anchor cols 7-12 rising to the top
+   of the section, fact panel overlapping the anchor's lower left as the proof
+   layer. The media is the first thing in view rather than a rectangle below
+   the fold; the text hierarchy and the CTA pair are unchanged. */
 
 .home-hero__grid { row-gap: var(--space-5); align-items: start; }
 
-.home-hero__copy { grid-column: 1 / span 7; }
-.home-fact-panel { grid-column: 9 / span 4; }
+/* Desktop: headline and action block stack in the left column, the media
+   anchor holds the whole right column across both rows. Mobile inherits the
+   DOM order instead — headline, image, offer, actions — so the anchor is in
+   the first view there too. */
+.home-hero__copy { grid-column: 1 / span 6; grid-row: 1; padding-top: var(--space-2); }
+.home-hero__action-block { grid-column: 1 / span 6; grid-row: 2; align-self: start; }
+.home-hero__media { grid-column: 7 / span 6; grid-row: 1 / span 2; margin-top: 0; align-self: start; }
+/* Desktop anchor stands taller than the 16:7 the mobile crop keeps: in a
+   six-column column a 16:7 strip reads as a banner, 3:2 reads as a subject.
+   The ratio class stays 16:7 so the mobile crop and its QA contract are
+   untouched. */
+@media (min-width: 1024px) {
+  .home-hero__media > .asset-frame--16x7 .asset-frame__stage { aspect-ratio: 3 / 2; }
+}
+/* The panel is a sibling of the media in the grid, pulled up over it so the
+   verified facts sit ON the image instead of beside it. */
+.home-fact-panel {
+  grid-column: 7 / span 5;
+  grid-row: 3;
+  z-index: 3;
+  margin-top: -5.5rem;
+  margin-left: var(--space-3);
+}
 
 .home-hero__supporting { margin-top: 1.25rem; color: var(--color-text); font-weight: 560; }
 .home-hero__body { margin-top: .875rem; max-width: 34rem; }
@@ -54,8 +78,6 @@
   font-size: var(--font-size-xs);
   line-height: 1.5;
 }
-
-.home-hero__media { margin-top: var(--space-6); }
 
 /* ------------------------------------------------- HOME_02_CREDIBILITY_STRIP */
 
@@ -193,14 +215,11 @@
 }
 
 /* --------------------------------------------------------- HOME_07_INDUSTRIES
-   3 photo cards plus 3 compact labels. */
+   Six industry cards on one horizontal snap rail (css/patterns/media-rail.css).
+   The rail replaces the former 3-card grid plus 3 text chips: every industry
+   now owns an equal media slot, and the sequence reads as one continuous shelf
+   instead of two unequal tiers. */
 
-.home-industries__featured {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--grid-gap);
-  margin-top: 3.5rem;
-}
 .home-industry-card { min-width: 0; }
 .home-industry-card h3 {
   margin-top: 1.25rem;
@@ -211,27 +230,6 @@
   letter-spacing: -.01em;
 }
 .home-industry-card p { font-size: var(--font-size-sm); }
-
-.home-industries__compact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  margin-top: 2rem;
-}
-.home-industries__compact li {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  min-height: 2.75rem;
-  padding: 0 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
-  font-weight: 620;
-}
-.home-industries__compact .icon { color: var(--color-text-muted); }
 
 /* ------------------------------------------------------ HOME_08_QUOTE_PREVIEW
    Copy cols 1-5, widget cols 7-12. */
@@ -369,9 +367,18 @@
   .home-bento__grid { grid-template-columns: minmax(0, 1fr); }
   .home-bento__primary { min-height: 0; }
   .home-bento__secondary { grid-template-rows: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .home-industries__featured { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+
   .home-values__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; }
   .home-trainer__media .asset-frame { position: static; }
+
+  /* 8-column grid: copy above, media below, panel back in normal flow. */
+  .home-hero__copy,
+  .home-hero__action-block,
+  .home-hero__media,
+  .home-fact-panel { grid-column: 1 / span 8; grid-row: auto; }
+  .home-hero__copy { padding-top: 0; }
+  .home-hero__media { margin-top: var(--space-4); }
+  .home-fact-panel { margin-top: var(--space-4); margin-left: 0; }
 }
 
 @media (max-width: 767px) {
@@ -386,8 +393,13 @@
   .home-faq__list { grid-column: 1 / span 4; }
 
   .home-hero__actions .btn { width: 100%; }
-  .home-hero__media { margin-top: var(--space-5); }
-  .home-fact-panel { padding: 1.5rem; }
+  .home-hero__copy,
+  .home-hero__action-block,
+  .home-hero__media,
+  .home-fact-panel { grid-column: 1 / span 4; grid-row: auto; }
+  .home-hero__copy { padding-top: 0; }
+  .home-hero__media { margin-top: var(--space-3); }
+  .home-fact-panel { margin-top: var(--space-4); margin-left: 0; padding: 1.5rem; }
 
   .home-credibility__grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .home-bento { padding-top: var(--space-4); }
@@ -407,5 +419,4 @@
 
 @media (max-width: 359px) {
   .home-quote-widget__options { grid-template-columns: 1fr; }
-  .home-industries__compact li { width: 100%; }
 }

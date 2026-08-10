@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="../css/patterns/split-layout.css">
   <link rel="stylesheet" href="../css/patterns/micro-trust.css">
   <link rel="stylesheet" href="../css/patterns/timeline.css">
+  <link rel="stylesheet" href="../css/patterns/media-stage.css">
   <link rel="stylesheet" href="../css/patterns/final-cta.css">
   <link rel="stylesheet" href="../css/pages/training.css">
 </head>
@@ -206,7 +207,9 @@
     <section class="section surface-authority training-practice" data-section-id="TRAINING_05_PRACTICE" data-component="PracticeFeature">
       <div class="container">
         <div class="grid-12 training-practice__grid">
-          <figure class="asset-frame asset-frame--16x10 training-practice__media reveal-image motion-image-zoom" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_04_PRACTICAL_ACTION" data-status="ASSET_PENDING">
+          <div class="media-stage media-stage--has-inset training-practice__media reveal-image">
+          <span class="media-stage__accent" aria-hidden="true"></span>
+          <figure class="asset-frame asset-frame--16x10 motion-image-zoom" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_04_PRACTICAL_ACTION" data-status="ASSET_PENDING">
             <div class="asset-frame__stage">
               <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine kontrollierte praktische Löschübung. Das Bild wird für diese Konzeptdemo noch erstellt.">
                 <span class="asset-placeholder__glow"></span>
@@ -217,6 +220,17 @@
               <p class="asset-frame__label">Übungsmotiv folgt · Bildstrecke dieser Konzeptdemo wird noch erstellt</p>
             </div>
           </figure>
+          <figure class="asset-frame asset-frame--4x3 media-stage__inset motion-image-zoom" data-slot-id="SLOT_TRAINING_DETAIL" data-status="ASSET_PENDING">
+            <div class="asset-frame__stage">
+              <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Detailaufnahme: Sicherungsstift und Griff eines Feuerlöschers. Das Motiv wird noch ergänzt.">
+                <span class="asset-placeholder__glow"></span>
+                <span class="asset-placeholder__grid"></span>
+                <span class="asset-placeholder__frame"></span>
+                <span class="asset-placeholder__rail"></span>
+              </div>
+            </div>
+          </figure>
+          </div>
 
           <div class="training-practice__copy reveal">
             <p class="eyebrow">PRAXISÜBUNG</p>

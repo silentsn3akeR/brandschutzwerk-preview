@@ -1,0 +1,19 @@
+/* PATTERN — AuthorityBlock
+   Reusable identity/trust card: who stands behind the offer. Renders only
+   fields that hold real content — the governance status attributes on the
+   children stay authoritative. The red top edge is the brand's authority
+   marker; everything else stays quiet. */
+
+.authority-block {
+  position: relative;
+  padding: 2rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-brand);
+  border-radius: var(--radius-card);
+}
+.authority-block__cta { margin-top: 1.75rem; }
+
+@media (max-width: 767px) {
+  .authority-block { padding: 1.5rem; }
+}

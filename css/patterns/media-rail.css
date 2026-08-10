@@ -1,0 +1,37 @@
+/* PATTERN — MediaRail
+   Horizontal snap rail for a uniform media-card sequence. Native scrolling
+   only: no JS, no scroll hijacking. The rail itself is focusable so keyboard
+   users can scroll it; snap is proximity, never mandatory, so no position is
+   forced on the reader. A trailing card peeks into view at every width as
+   the scroll affordance. */
+
+.media-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(15rem, 26vw, 21.5rem);
+  gap: var(--grid-gap);
+  margin-top: 3.5rem;
+  padding: .25rem .25rem 1.25rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: .25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+.media-rail > * { scroll-snap-align: start; min-width: 0; }
+
+/* The rail carries the entrance reveal, never its cards: a card parked outside
+   the horizontal scroll position never intersects the viewport, so a per-card
+   observer would leave the trailing cards permanently at opacity 0 for anyone
+   who does not scroll the rail. Revealing the shelf as one unit is also the
+   truer reading — it is one sequence, not six separate arrivals. */
+.media-rail:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 767px) {
+  .media-rail { grid-auto-columns: min(74vw, 19rem); margin-top: 2.5rem; }
+}

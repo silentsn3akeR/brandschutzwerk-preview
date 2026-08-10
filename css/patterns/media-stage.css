@@ -1,0 +1,67 @@
+/* PATTERN — MediaStage
+   Layered image stage: a primary anchor frame, an offset brand accent plane
+   and an optional overlapping detail inset. This prepares the slot system
+   for the coming photography (see BRANDSCHUTZWERK_IMAGE_DIRECTION_V1.md in
+   the repository root): content drops in later without structural change.
+   The wrapper carries the reveal so accent, anchor and inset enter as one
+   composed unit. */
+
+.media-stage { position: relative; }
+/* :not() keeps this off the inset — a bare `.media-stage > .asset-frame` is
+   (0,2,0) and would outrank the inset's own (0,1,0) absolute positioning. */
+.media-stage > .asset-frame:not(.media-stage__inset) { position: relative; z-index: 1; margin: 0; }
+
+/* Brand accent: an offset red plane behind the anchor's top-right corner.
+   Sized and clipped so it reads as intent, never as a rendering error. */
+.media-stage__accent {
+  position: absolute;
+  z-index: 0;
+  top: -0.875rem;
+  right: -0.875rem;
+  width: min(38%, 22rem);
+  height: min(46%, 12rem);
+  border-radius: var(--radius-image);
+  background: linear-gradient(135deg, var(--color-brand) 0%, #8f1f17 100%);
+  opacity: .92;
+}
+
+/* Detail inset: a small secondary frame hanging over the anchor's bottom-left
+   edge. Breaks the single-rectangle look and reserves the close-up slot. */
+.media-stage__inset {
+  position: absolute;
+  z-index: 2;
+  left: clamp(1rem, 4vw, 3rem);
+  bottom: -2.5rem;
+  width: clamp(11rem, 22%, 17rem);
+  border-radius: var(--radius-image);
+  box-shadow: var(--shadow-card);
+}
+.media-stage__inset .asset-frame__stage { border: 1px solid rgba(255, 255, 255, .18); }
+
+/* Reserve flow room for the hanging inset, and move the anchor's caption bar
+   to the top edge so the inset owns the bottom region without collision. The
+   bar also stops spanning the full width there — at the top of a composed
+   stage a full-width plate reads as a banner, not as a caption. */
+.media-stage--has-inset { margin-bottom: 3.25rem; }
+.media-stage--has-inset > .asset-frame .asset-frame__label {
+  bottom: auto;
+  top: 1.25rem;
+  right: auto;
+  max-width: calc(100% - 2.5rem);
+  width: fit-content;
+}
+
+@media (max-width: 767px) {
+  .media-stage__accent { top: -.625rem; right: -.5rem; width: 44%; height: 38%; }
+  /* Mobile puts the inset bottom-RIGHT: the caption bar owns the top-left on a
+     narrow stage, and a left-hanging inset would sit under it. */
+  .media-stage__inset { width: 34%; min-width: 7rem; left: auto; right: .875rem; bottom: -1.5rem; }
+  .media-stage--has-inset { margin-bottom: 2.5rem; }
+  /* must match the shared component's mobile label rule (0,2,0) and win on order */
+  .media-stage--has-inset > .asset-frame .asset-frame__label {
+    bottom: auto;
+    top: .875rem;
+    right: auto;
+    max-width: calc(100% - 1.75rem);
+  }
+}

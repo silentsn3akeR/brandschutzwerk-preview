@@ -32,6 +32,8 @@
   <link rel="stylesheet" href="../css/components/mobile-sticky-cta.css">
   <link rel="stylesheet" href="../css/components/demo-mode.css">
   <link rel="stylesheet" href="../css/patterns/section-heading.css">
+  <link rel="stylesheet" href="../css/patterns/media-stage.css">
+  <link rel="stylesheet" href="../css/patterns/authority-block.css">
   <link rel="stylesheet" href="../css/patterns/split-layout.css">
   <link rel="stylesheet" href="../css/patterns/micro-trust.css">
   <link rel="stylesheet" href="../css/patterns/timeline.css">
@@ -98,7 +100,9 @@
             <p class="lead">Hinter dem geplanten Angebot steht mehrjährige Erfahrung aus der Berufsfeuerwehr – verbunden mit dem Anspruch, Brandschutz verständlich, professionell und praxisnah zu vermitteln.</p>
           </div>
 
-          <figure class="asset-frame asset-frame--4x5 about-hero__portrait reveal-image motion-image-zoom" data-delay="1" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
+          <div class="media-stage about-hero__portrait reveal-image" data-delay="1">
+          <span class="media-stage__accent" aria-hidden="true"></span>
+          <figure class="asset-frame asset-frame--4x5 motion-image-zoom" data-component="ImageFrame" data-asset-id="ASSET_PHOTO_02_TRAINER_PORTRAIT" data-status="ASSET_PENDING">
             <div class="asset-frame__stage">
               <div class="asset-placeholder" role="img" aria-label="Bildfläche für ein dokumentarisches Porträt des Trainers in ruhiger Arbeitssituation. Das Bild wird für diese Konzeptdemo noch erstellt.">
                 <span class="asset-placeholder__glow"></span>
@@ -109,6 +113,7 @@
               <p class="asset-frame__label">Trainer &amp; fachlicher Ansprechpartner</p>
             </div>
           </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -117,7 +122,7 @@
     <section class="section surface-functional about-profile" data-section-id="ABOUT_02_PROFILE" data-component="TrainerProfile">
       <div class="container">
         <div class="grid-12 about-profile__grid">
-          <div class="about-profile__identity reveal">
+          <div class="authority-block about-profile__identity reveal" data-component="AuthorityBlock">
             <h2 class="about-profile__name" data-trainer-field="name" data-status="CONFIRMED">Michael Gruber</h2>
             <p class="about-profile__role" data-trainer-field="role" data-status="FACHLICHE_FREIGABE_REQUIRED">Berufsfeuerwehr · Trainer · Fachlicher Ansprechpartner</p>
             <dl class="about-profile__facts">
@@ -130,6 +135,7 @@
                 <dd>Trainer &amp; fachlicher Ansprechpartner</dd>
               </div>
             </dl>
+            <a class="btn btn--primary authority-block__cta" href="../anfrage/">Schulung anfragen<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
           </div>
 
           <div class="about-profile__copy reveal" data-delay="1">
