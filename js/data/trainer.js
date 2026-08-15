@@ -1,4 +1,14 @@
+/* DATA — trainer truth. Declared owner per OBSCURA_PROJECT_MAP_V2.
+   Nothing here may be invented.
 
+   Status is tracked per field, not once for the whole record: the name and the
+   registry-backed Berufsfeuerwehr-Erfahrung are CONFIRMED, while additional
+   qualifications remain REAL_DATA_REQUIRED. A single record-level status would
+   have flattened that distinction and made the page unable to tell them apart.
+
+   Confirming the name confirms nothing else — no years of service, no rank, no
+   Gruppenführer course, no teaching certification, no accreditation, and no
+   legal form, address or service radius for BrandschutzWerk. */
 
 export const trainer = Object.freeze({
   name: "Michael Gruber",
@@ -15,6 +25,11 @@ export const trainer = Object.freeze({
   yearsExperience: null,
   yearsExperienceStatus: "REAL_DATA_REQUIRED",
 
+  fireServiceQualification: Object.freeze({
+    id: "TRAINER_QUALIFICATION_FIRE_SERVICE",
+    label: "Berufsfeuerwehr-Erfahrung",
+    status: "CONFIRMED"
+  }),
   qualifications: Object.freeze([]),
   qualificationsStatus: "REAL_DATA_REQUIRED",
 

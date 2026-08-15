@@ -50,7 +50,6 @@
   <link rel="stylesheet" href="./css/patterns/micro-trust.css">
   <link rel="stylesheet" href="./css/patterns/timeline.css">
   <link rel="stylesheet" href="./css/patterns/media-stage.css">
-  <link rel="stylesheet" href="./css/patterns/media-rail.css">
   <link rel="stylesheet" href="./css/patterns/final-cta.css">
   <link rel="stylesheet" href="./css/pages/home.css">
   <script type="application/ld+json">
@@ -198,10 +197,10 @@
         <ul class="site-header__links">
           <li><a href="./brandschutzhelfer/">Schulungen</a></li>
           <li><a href="#ablauf">Ablauf</a></li>
-          <li><a href="./ueber-uns/">Über uns</a></li>
+          <li><a href="./ueber-uns/" data-value-route="VALUE_03 VALUE_04">Über uns</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
-        <a class="btn btn--primary site-header__cta" href="./anfrage/">Schulung anfragen</a>
+        <a class="btn btn--primary site-header__cta" href="./anfrage/" data-value-route="VALUE_03">Schulung anfragen</a>
       </nav>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menü öffnen" data-menu-toggle>
         <svg class="icon" aria-hidden="true"><use href="#icon-plus"></use></svg>
@@ -213,16 +212,16 @@
     <div class="container mobile-navigation__inner">
     <a href="./brandschutzhelfer/">Schulungen<svg class="icon icon--sm" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
     <a href="#ablauf">Ablauf<svg class="icon icon--sm" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
-    <a href="./ueber-uns/">Über uns<svg class="icon icon--sm" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+    <a href="./ueber-uns/" data-value-route="VALUE_03 VALUE_04">Über uns<svg class="icon icon--sm" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
     <a href="#faq">FAQ<svg class="icon icon--sm" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
-      <a class="btn btn--primary mobile-navigation__cta" href="./anfrage/">Schulung anfragen</a>
+      <a class="btn btn--primary mobile-navigation__cta" href="./anfrage/" data-value-route="VALUE_03">Schulung anfragen</a>
     </div>
   </nav>
 
   <main id="main-content">
 
     <!-- HOME_01_HERO -->
-    <section class="section section--large surface-editorial home-hero" data-section-id="HOME_01_HERO" data-component="HomeHero">
+    <section class="section section--large surface-editorial home-hero" data-section-id="HOME_01_HERO" data-component="HomeHero" data-value-route="VALUE_01 VALUE_02">
       <div class="container">
         <div class="grid-12 home-hero__grid">
           <div class="home-hero__copy reveal">
@@ -271,27 +270,24 @@
             </ul>
           </div>
 
-          <aside class="home-fact-panel reveal" data-delay="1" data-component="HeroFactPanel" aria-labelledby="fact-panel-title">
-            <h2 class="sr-only" id="fact-panel-title">Eckdaten der Demo-Schulung</h2>
+          <aside class="home-fact-panel reveal" data-delay="1" data-component="HeroFactPanel" data-value-route="VALUE_01 VALUE_02" data-status="PLANNED" aria-labelledby="fact-panel-title">
+            <h2 class="sr-only" id="fact-panel-title">Geplante Angebotsdefinitionen</h2>
+            <p class="home-fact-panel__status">GEPLANTES ANGEBOT</p>
             <dl class="home-fact-panel__list">
-              <div class="home-fact-panel__row" data-status="CONFIRMED">
-                <dt>Durchführung</dt>
-                <dd>Direkt bei Ihnen</dd>
+              <div class="home-fact-panel__row" data-offer-definition="format" data-status="PLANNED">
+                <dt>FORMAT</dt>
+                <dd>INHOUSE</dd>
               </div>
-              <div class="home-fact-panel__row" data-demo="participant-limit" data-status="DEMO_DATA">
-                <dt>Teilnehmer</dt>
-                <dd>Bis 20 Personen*</dd>
+              <div class="home-fact-panel__row" data-offer-definition="approach" data-status="PLANNED">
+                <dt>ANSATZ</dt>
+                <dd>THEORIE + PRAXIS</dd>
               </div>
-              <div class="home-fact-panel__row" data-demo="training-duration" data-status="DEMO_DATA">
-                <dt>Dauer</dt>
-                <dd>ca. 3–4 Stunden*</dd>
-              </div>
-              <div class="home-fact-panel__row" data-demo="service-region" data-status="DEMO_DATA">
-                <dt>Region</dt>
-                <dd>Stuttgart &amp; Umgebung*</dd>
+              <div class="home-fact-panel__row" data-offer-definition="delivery" data-status="PLANNED">
+                <dt>DURCHFÜHRUNG</dt>
+                <dd>VOR ORT</dd>
               </div>
             </dl>
-            <p class="home-fact-panel__footnote">* Beispielangaben für diese Konzeptdemo. Der finale Leistungsumfang wird vor dem Marktstart festgelegt.</p>
+            <p class="home-fact-panel__footnote">Planungsstand dieser Konzeptdemo – noch keine bestätigte Leistungszusage.</p>
           </aside>
         </div>
 
@@ -306,7 +302,7 @@
           <li class="home-credibility__item reveal" data-component="CredibilityItem" data-credibility-id="CREDIBILITY_FIRE_SERVICE">
             <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
             <h3>Berufsfeuerwehr-Erfahrung</h3>
-            <p>Praxiswissen aus mehreren Jahren Feuerwehrdienst.</p>
+            <p>Praxiswissen aus der Berufsfeuerwehr.</p>
           </li>
           <li class="home-credibility__item reveal" data-delay="1" data-component="CredibilityItem" data-credibility-id="CREDIBILITY_INHOUSE">
             <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-building-2"></use></svg>
@@ -328,7 +324,7 @@
     </section>
 
     <!-- HOME_03_SERVICE_INTRO -->
-    <section class="section surface-editorial home-service-intro" id="leistungen" data-section-id="HOME_03_SERVICE_INTRO" data-component="ServiceIntro">
+    <section class="section surface-editorial home-service-intro" id="leistungen" data-section-id="HOME_03_SERVICE_INTRO" data-component="ServiceIntro" data-value-route="VALUE_01 VALUE_02">
       <div class="container">
         <div class="section-heading reveal">
           <p class="eyebrow">LEISTUNGEN</p>
@@ -344,7 +340,7 @@
         <h2 class="sr-only" id="bento-title">Leistungen im Überblick</h2>
         <div class="home-bento__grid">
 
-          <article class="home-bento__primary reveal motion-lift" data-component="ServiceCard" data-service-id="brandschutzhelfer" data-status="FACHLICHE_FREIGABE_REQUIRED">
+          <article class="home-bento__primary reveal motion-lift" data-component="ServiceCard" data-service-id="brandschutzhelfer" data-value-route="VALUE_01 VALUE_02" data-status="FACHLICHE_FREIGABE_REQUIRED">
             <div class="home-bento__primary-head">
               <span class="badge">KERNANGEBOT</span>
               <svg class="icon icon--feature" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
@@ -420,7 +416,7 @@
     </section>
 
     <!-- HOME_06_TRAINER_AUTHORITY -->
-    <section class="section surface-editorial home-trainer" data-section-id="HOME_06_TRAINER_AUTHORITY" data-component="TrainerAuthority">
+    <section class="section surface-editorial home-trainer" data-section-id="HOME_06_TRAINER_AUTHORITY" data-component="TrainerAuthority" data-value-route="VALUE_03 VALUE_04">
       <div class="container">
         <div class="grid-12 home-trainer__grid">
 
@@ -443,13 +439,13 @@
           <div class="home-trainer__copy reveal">
             <p class="eyebrow">PRAXIS AUS ERSTER HAND</p>
             <h2>Einsatzpraxis lässt sich nicht aus einem Handbuch lernen.</h2>
-            <p class="lead">Die Schulungen verbinden fachliche Grundlagen mit Erfahrung aus mehreren Jahren Berufsfeuerwehr. Im Mittelpunkt stehen klare Abläufe, verständliche Erklärungen und Situationen, die im Betriebsalltag tatsächlich relevant sind.</p>
+            <p class="lead">Die Schulungen verbinden fachliche Grundlagen mit Erfahrung aus der Berufsfeuerwehr. Im Mittelpunkt stehen klare Abläufe, verständliche Erklärungen und Situationen, die im Betriebsalltag tatsächlich relevant sind.</p>
 
             <ul class="home-qualifications">
               <li data-qualification-id="QUAL_01">
                 <svg class="icon icon--sm" aria-hidden="true"><use href="#icon-check"></use></svg>
                 <div>
-                  <h3>Mehrjährige Berufsfeuerwehr-Erfahrung</h3>
+                  <h3>Berufsfeuerwehr-Erfahrung</h3>
                   <p>Praktische Erfahrung als Grundlage der Schulungen.</p>
                 </div>
               </li>
@@ -480,117 +476,48 @@
               <blockquote>„Brandschutz muss im Ernstfall funktionieren – nicht nur auf dem Papier.“</blockquote>
               <figcaption><span class="home-quote__label">Demo-Leitsatz</span></figcaption>
             </figure>
+            <p class="status-note home-trainer__route-note" data-status="PLANNED">Das Modell kann später um weitere entsprechend qualifizierte Trainer und Regionen erweitert werden. Aktuell führt eine Person die Schulungen durch. <a href="./ueber-uns/" data-value-route="VALUE_04">Mehr zum geplanten Modell</a></p>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- HOME_07_INDUSTRIES -->
-    <section class="section surface-functional home-industries" data-section-id="HOME_07_INDUSTRIES" data-component="IndustryGrid">
+    <!-- HOME_07_AUDIENCE_FIT -->
+    <section class="section surface-functional home-audience-fit" data-section-id="HOME_07_AUDIENCE_FIT" data-status="PLANNED" data-projection-scope="PAGE_LOCAL" data-taxonomy-authority="NONE">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">FÜR UNTERNEHMEN</p>
-          <h2>Dort schulen, wo gearbeitet wird.</h2>
-          <p class="lead">Das Inhouse-Modell lässt sich auf unterschiedliche Betriebsumgebungen und Unternehmensgrößen übertragen.</p>
+          <p class="eyebrow">FÜR WELCHE BETRIEBE?</p>
+          <h2>Passt BrandschutzWerk zu einem Betrieb wie unserem?</h2>
+          <p class="lead">Drei beispielhafte Gruppen zeigen, in welchen betrieblichen Umgebungen das geplante Inhouse-Angebot grundsätzlich anschlussfähig sein kann.</p>
         </div>
-
-        <ul class="home-industries__rail media-rail reveal" tabindex="0" aria-label="Branchenbeispiele — horizontal scrollbar">
-          <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="production">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_PRODUCTION" data-asset-id="ASSET_PHOTO_05_PRODUCTION" data-status="ASSET_PENDING">
-              <div class="asset-frame__stage">
-                <!-- slot:begin SLOT_INDUSTRY_PRODUCTION -->
-                <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Produktionsumgebung. Das Bild wird für diese Konzeptdemo noch erstellt.">
-                  <span class="asset-placeholder__glow"></span>
-                  <span class="asset-placeholder__grid"></span>
-                  <span class="asset-placeholder__frame"></span>
-                  <span class="asset-placeholder__rail"></span>
-                </div>
-                <!-- slot:end SLOT_INDUSTRY_PRODUCTION -->
-              </div>
-            </figure>
-            <h3>Produktion</h3>
-            <p>Praxisnahe Schulungen für Produktions- und Fertigungsumgebungen.</p>
+        <ul class="home-audience-fit__list reveal" aria-label="Beispielhafte Gruppen betrieblicher Umgebungen">
+          <li data-audience-group="01" data-status="PLANNED">
+            <h3>Betrieb &amp; Technik</h3>
+            <p>Produktion · Logistik · Handwerk</p>
           </li>
-          <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="logistics">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_LOGISTICS" data-asset-id="ASSET_PHOTO_06_LOGISTICS" data-status="ASSET_PENDING">
-              <div class="asset-frame__stage">
-                <!-- slot:begin SLOT_INDUSTRY_LOGISTICS -->
-                <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Logistikumgebung. Das Bild wird für diese Konzeptdemo noch erstellt.">
-                  <span class="asset-placeholder__glow"></span>
-                  <span class="asset-placeholder__grid"></span>
-                  <span class="asset-placeholder__frame"></span>
-                  <span class="asset-placeholder__rail"></span>
-                </div>
-                <!-- slot:end SLOT_INDUSTRY_LOGISTICS -->
-              </div>
-            </figure>
-            <h3>Logistik</h3>
-            <p>Für Lager, Versand, Logistikzentren und betriebliche Verkehrsflächen.</p>
-          </li>
-          <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="craft">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_CRAFT" data-asset-id="ASSET_PHOTO_07_CRAFT" data-status="ASSET_PENDING">
-              <div class="asset-frame__stage">
-                <!-- slot:begin SLOT_INDUSTRY_CRAFT -->
-                <div class="asset-placeholder" role="img" aria-label="Bildfläche für einen handwerklichen Betrieb. Das Bild wird für diese Konzeptdemo noch erstellt.">
-                  <span class="asset-placeholder__glow"></span>
-                  <span class="asset-placeholder__grid"></span>
-                  <span class="asset-placeholder__frame"></span>
-                  <span class="asset-placeholder__rail"></span>
-                </div>
-                <!-- slot:end SLOT_INDUSTRY_CRAFT -->
-              </div>
-            </figure>
-            <h3>Handwerk</h3>
-            <p>Für Werkstätten, Lagerbereiche und handwerkliche Betriebe.</p>
-          </li>
-
-          <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="office">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_OFFICE" data-status="ASSET_PENDING">
-              <div class="asset-frame__stage">
-                <!-- slot:begin SLOT_INDUSTRY_OFFICE -->
-                <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Büro- und Verwaltungsumgebung. Das Motiv wird für diese Konzeptdemo noch ergänzt.">
-                  <span class="asset-placeholder__glow"></span>
-                  <span class="asset-placeholder__grid"></span>
-                  <span class="asset-placeholder__frame"></span>
-                  <span class="asset-placeholder__rail"></span>
-                </div>
-                <!-- slot:end SLOT_INDUSTRY_OFFICE -->
-              </div>
-            </figure>
+          <li data-audience-group="02" data-status="PLANNED">
             <h3>Büro &amp; Verwaltung</h3>
+            <p>Büro · Dienstleistung</p>
           </li>
-          <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="health">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_CARE" data-status="ASSET_PENDING">
-              <div class="asset-frame__stage">
-                <!-- slot:begin SLOT_INDUSTRY_CARE -->
-                <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Pflege- und Gesundheitsumgebung. Das Motiv wird für diese Konzeptdemo noch ergänzt.">
-                  <span class="asset-placeholder__glow"></span>
-                  <span class="asset-placeholder__grid"></span>
-                  <span class="asset-placeholder__frame"></span>
-                  <span class="asset-placeholder__rail"></span>
-                </div>
-                <!-- slot:end SLOT_INDUSTRY_CARE -->
-              </div>
-            </figure>
-            <h3>Pflege &amp; Gesundheit</h3>
-          </li>
-          <li class="home-industry-card home-industry-card--slot motion-lift" data-industry-id="hospitality">
-            <figure class="asset-frame asset-frame--4x3 motion-image-zoom" data-slot-id="SLOT_INDUSTRY_GASTRO" data-status="ASSET_PENDING">
-              <div class="asset-frame__stage">
-                <!-- slot:begin SLOT_INDUSTRY_GASTRO -->
-                <div class="asset-placeholder" role="img" aria-label="Bildfläche für eine Gastronomie- und Hotellerieumgebung. Das Motiv wird für diese Konzeptdemo noch ergänzt.">
-                  <span class="asset-placeholder__glow"></span>
-                  <span class="asset-placeholder__grid"></span>
-                  <span class="asset-placeholder__frame"></span>
-                  <span class="asset-placeholder__rail"></span>
-                </div>
-                <!-- slot:end SLOT_INDUSTRY_GASTRO -->
-              </div>
-            </figure>
-            <h3>Gastronomie &amp; Hotellerie</h3>
+          <li data-audience-group="03" data-status="PLANNED">
+            <h3>Publikum &amp; Versorgung</h3>
+            <p>Pflege · Gastronomie · weitere Betriebe</p>
           </li>
         </ul>
+        <p class="status-note">Diese Gruppierung dient nur der Orientierung und beschreibt keine bestätigte Marktsegmentierung.</p>
+        <!-- slot:begin SLOT_INDUSTRY_PRODUCTION -->
+        <!-- slot:end SLOT_INDUSTRY_PRODUCTION -->
+        <!-- slot:begin SLOT_INDUSTRY_LOGISTICS -->
+        <!-- slot:end SLOT_INDUSTRY_LOGISTICS -->
+        <!-- slot:begin SLOT_INDUSTRY_CRAFT -->
+        <!-- slot:end SLOT_INDUSTRY_CRAFT -->
+        <!-- slot:begin SLOT_INDUSTRY_OFFICE -->
+        <!-- slot:end SLOT_INDUSTRY_OFFICE -->
+        <!-- slot:begin SLOT_INDUSTRY_CARE -->
+        <!-- slot:end SLOT_INDUSTRY_CARE -->
+        <!-- slot:begin SLOT_INDUSTRY_GASTRO -->
+        <!-- slot:end SLOT_INDUSTRY_GASTRO -->
       </div>
     </section>
 
@@ -648,39 +575,6 @@
           </div>
 
         </div>
-      </div>
-    </section>
-
-    <!-- HOME_09_VALUE_PROPOSITION -->
-    <section class="section surface-functional home-values" data-section-id="HOME_09_VALUE_PROPOSITION" data-component="ValueGrid">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">EINFACH ORGANISIERT</p>
-          <h2>Warum Unternehmen es einfach halten können.</h2>
-        </div>
-        <ul class="home-values__grid">
-          <li class="home-values__item reveal" data-value-id="VALUE_01">
-            <span class="home-values__marker" aria-hidden="true"></span>
-            <h3>Vor Ort statt Reiseaufwand</h3>
-            <p>Die Schulung kommt direkt zum Unternehmen.</p>
-          </li>
-          <li class="home-values__item reveal" data-delay="1" data-value-id="VALUE_02">
-            <span class="home-values__marker" aria-hidden="true"></span>
-            <h3>Praxis statt Theorie-only</h3>
-            <p>Inhalte werden nicht nur erklärt, sondern praktisch angewendet.</p>
-          </li>
-          <li class="home-values__item reveal" data-delay="2" data-value-id="VALUE_03">
-            <span class="home-values__marker" aria-hidden="true"></span>
-            <h3>Direkter Ansprechpartner</h3>
-            <p>Persönliche Abstimmung statt anonymer Kursplattform.</p>
-          </li>
-          <li class="home-values__item reveal" data-delay="3" data-value-id="VALUE_04" data-status="DEMO_STRATEGY">
-            <span class="home-values__marker" aria-hidden="true"></span>
-            <h3>Mitwachsendes Trainer-Netzwerk</h3>
-            <p>Das Modell kann später um weitere entsprechend qualifizierte Trainer und Regionen erweitert werden.</p>
-          </li>
-        </ul>
-        <p class="status-note">Das Trainer-Netzwerk beschreibt die geplante Entwicklung des Modells. Aktuell führt eine Person die Schulungen durch.</p>
       </div>
     </section>
 
@@ -775,7 +669,7 @@
     </section>
 
     <!-- HOME_11_FINAL_CTA -->
-    <section class="final-cta surface-authority" data-section-id="HOME_11_FINAL_CTA" data-component="FinalCTA">
+    <section class="final-cta surface-authority" data-section-id="HOME_11_FINAL_CTA" data-component="FinalCTA" data-value-route="VALUE_03">
       <div class="container">
         <div class="final-cta__inner reveal">
           <div class="section-heading section-heading--light">
@@ -784,7 +678,7 @@
             <p>Teilnehmerzahl, Standort und gewünschter Zeitraum reichen für den ersten Schritt.</p>
           </div>
           <div class="final-cta__action">
-            <a class="btn btn--light" href="./anfrage/">Anfrage starten<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+            <a class="btn btn--light" href="./anfrage/" data-value-route="VALUE_03">Anfrage starten<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
             <p class="final-cta__note">Demo-Anfrage in weniger als einer Minute.</p>
           </div>
         </div>
@@ -815,8 +709,8 @@
         </nav>
         <nav class="site-footer__column" aria-label="Unternehmen">
           <h2>Unternehmen</h2>
-          <a href="./ueber-uns/">Über uns</a>
-          <a href="./anfrage/">Anfrage</a>
+          <a href="./ueber-uns/" data-value-route="VALUE_03 VALUE_04">Über uns</a>
+          <a href="./anfrage/" data-value-route="VALUE_03">Anfrage</a>
           <a href="#ablauf">Ablauf</a>
         </nav>
         <nav class="site-footer__column" aria-label="Rechtliches">

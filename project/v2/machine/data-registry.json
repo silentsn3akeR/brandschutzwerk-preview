@@ -7,6 +7,13 @@
     "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
   },
   {
+    "DATA_ID": "PLANNED",
+    "CATEGORY": "STATUS MODEL",
+    "VALUE": "Chosen direction for the concept/target offer, not yet a confirmed operational capability or commercial promise.",
+    "STATUS": "UNSPECIFIED",
+    "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
+  },
+  {
     "DATA_ID": "DEMO_DATA",
     "CATEGORY": "STATUS MODEL",
     "VALUE": "UNSPECIFIED",
@@ -312,6 +319,27 @@
     "CATEGORY": "TRAINING CONTENT DATA",
     "VALUE": "Defined in Copy Deck V1.",
     "STATUS": "FACHLICHE_FREIGABE_REQUIRED",
+    "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
+  },
+  {
+    "DATA_ID": "OFFER_DEFINITION_FORMAT",
+    "CATEGORY": "OFFER DEFINITION DATA",
+    "VALUE": "INHOUSE",
+    "STATUS": "PLANNED",
+    "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
+  },
+  {
+    "DATA_ID": "OFFER_DEFINITION_APPROACH",
+    "CATEGORY": "OFFER DEFINITION DATA",
+    "VALUE": "THEORIE + PRAXIS",
+    "STATUS": "PLANNED",
+    "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
+  },
+  {
+    "DATA_ID": "OFFER_DEFINITION_DELIVERY",
+    "CATEGORY": "OFFER DEFINITION DATA",
+    "VALUE": "VOR ORT",
+    "STATUS": "PLANNED",
     "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
   },
   {
@@ -653,8 +681,22 @@
   {
     "DATA_ID": "SUCCESS_LIFECYCLE_STEPS",
     "CATEGORY": "SUCCESS FLOW DATA",
-    "VALUE": "1. Anfrage · 2. Prüfung · 3. Abstimmung · 4. Schulung",
+    "VALUE": "1. Anfrage übermitteln · 2. Prüfung · 3. Abstimmung · 4. Schulung",
     "STATUS": "DEMO_PROCESS_MODEL",
+    "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
+  },
+  {
+    "DATA_ID": "SUCCESS_TRANSPORT_EVENT",
+    "CATEGORY": "SUCCESS FLOW DATA",
+    "VALUE": "NOT_OCCURRED",
+    "STATUS": "CONFIRMED",
+    "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
+  },
+  {
+    "DATA_ID": "SUCCESS_BUSINESS_EVENT",
+    "CATEGORY": "SUCCESS FLOW DATA",
+    "VALUE": "NOT_OCCURRED",
+    "STATUS": "CONFIRMED",
     "PUBLIC_VISIBILITY": "PUBLIC_ALLOWED"
   },
   {

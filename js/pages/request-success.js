@@ -1,9 +1,9 @@
-import { $ } from "../core/dom.js";
+import { $, $$ } from "../core/dom.js";
 import { sessionState } from "../core/storage.js";
 
-
-
 const STORAGE_SCHEMA_VERSION = 1;
+const COMPLETION_STATE = Object.freeze({ INCOMPLETE: "NOT_COMPLETED", COMPLETE: "DEMO_COMPLETED" });
+const NOT_OCCURRED = "NOT_OCCURRED";
 
 const SERVICE_LABELS = {
   brandschutzhelfer: "Brandschutzhelfer-Ausbildung",
@@ -20,9 +20,44 @@ const TIMING_LABELS = {
   "1-3-monate": "In 1–3 Monaten", offen: "Noch offen"
 };
 
+function isPlausibleEmail(raw) {
+  const value = String(raw).trim();
+  if (/\s/.test(value)) return false;
+  const parts = value.split("@");
+  if (parts.length !== 2) return false;
+  const [local, domain] = parts;
+  if (!local || local.length > 64) return false;
+  if (!domain || domain.length > 255 || !domain.includes(".")) return false;
+  if (domain.startsWith(".") || domain.endsWith(".") || domain.includes("..")) return false;
+  const tld = domain.split(".").pop();
+  return tld.length >= 2 && /^[A-Za-z]+$/.test(tld);
+}
+
+function isCompletePayload(stored) {
+  if (!stored || typeof stored !== "object") return false;
+  if (stored.schemaVersion !== STORAGE_SCHEMA_VERSION || stored.step !== 5) return false;
+  if (stored.completionState !== COMPLETION_STATE.COMPLETE) return false;
+  const values = stored.values;
+  if (!values || typeof values !== "object") return false;
+
+  return !!SERVICE_LABELS[values.FIELD_SERVICE] &&
+    !!PARTICIPANT_LABELS[values.FIELD_PARTICIPANTS] &&
+    /^\d{5}$/.test(String(values.FIELD_POSTAL_CODE || "").trim()) &&
+    !!String(values.FIELD_CITY || "").trim() &&
+    !!TIMING_LABELS[values.FIELD_TIMING] &&
+    !!String(values.FIELD_COMPANY || "").trim() &&
+    !!String(values.FIELD_CONTACT_NAME || "").trim() &&
+    isPlausibleEmail(values.FIELD_EMAIL || "");
+}
+
+function readCompletedState() {
+  let stored = null;
+  try { stored = sessionState.read(); } catch { return null; }
+  return isCompletePayload(stored) ? stored.values : null;
+}
+
 /* Deliberately narrow: the recap shows what was configured, not who configured
-   it. Company, contact name, e-mail, phone and the free-text note are stored
-   for the flow but are never re-displayed here. */
+   it. Personal contact fields remain stored locally but are never displayed. */
 function recapRows(values) {
   const place = [values.FIELD_POSTAL_CODE, values.FIELD_CITY].filter(Boolean).join(" ");
   return [
@@ -30,31 +65,21 @@ function recapRows(values) {
     ["Teilnehmer", PARTICIPANT_LABELS[values.FIELD_PARTICIPANTS]],
     ["Ort", place],
     ["Zeitraum", TIMING_LABELS[values.FIELD_TIMING]]
-  ].filter(([, value]) => !!value);
+  ];
 }
 
-function readState() {
-  let stored = null;
-  try { stored = sessionState.read(); } catch { return null; }
-  if (!stored || typeof stored !== "object") return null;
-  if (stored.schemaVersion !== STORAGE_SCHEMA_VERSION) return null;
-  if (!stored.values || typeof stored.values !== "object") return null;
-  return stored.values;
-}
-
-function renderRecap(rows) {
+function renderRecap(rows, completed) {
   const list = $("[data-success-recap]");
   const empty = $("[data-success-recap-empty]");
   if (!list || !empty) return 0;
+  list.replaceChildren();
 
-  if (!rows.length) {
+  if (!completed) {
     list.hidden = true;
-    empty.hidden = false;
+    empty.hidden = true;
     return 0;
   }
 
-  /* Built with createElement/textContent — stored user input is never written
-     as markup. */
   rows.forEach(([label, value]) => {
     const row = document.createElement("div");
     row.className = "success-recap__row";
@@ -70,17 +95,34 @@ function renderRecap(rows) {
   return rows.length;
 }
 
-export function init() {
-  const values = readState();
-  const rows = values ? recapRows(values) : [];
-  const rendered = renderRecap(rows);
+function renderCompletionState(completed) {
+  const completionState = completed ? COMPLETION_STATE.COMPLETE : COMPLETION_STATE.INCOMPLETE;
+  document.body.dataset.uiEvent = completed ? "COMPLETED" : "NOT_COMPLETED";
+  document.body.dataset.transportEvent = NOT_OCCURRED;
+  document.body.dataset.businessEvent = NOT_OCCURRED;
 
-  /* Starting a new demo enquiry clears the session so the next run begins from
-     a clean state rather than inheriting the previous one. */
+  $$('[data-success-completed-only]').forEach((element) => { element.hidden = !completed; });
+  const empty = $("[data-success-empty-state]");
+  if (empty) empty.hidden = completed;
+
+  const heading = $("[data-success-heading]");
+  if (heading) heading.textContent = completed ? "Demo abgeschlossen" : "Keine abgeschlossene Demo-Anfrage";
+  document.title = completed
+    ? "Demo abgeschlossen | BrandschutzWerk"
+    : "Demo nicht abgeschlossen | BrandschutzWerk";
+
+  return completionState;
+}
+
+export function init() {
+  const values = readCompletedState();
+  const completed = !!values;
+  const rows = completed ? recapRows(values) : [];
+  const rendered = renderRecap(rows, completed);
+  const completionState = renderCompletionState(completed);
+
   const restart = $("[data-success-restart]");
-  if (restart) {
-    restart.addEventListener("click", () => { sessionState.clear(); });
-  }
+  if (restart) restart.addEventListener("click", () => { sessionState.clear(); });
 
   const heading = $("[data-success-heading]");
   if (heading) heading.focus();
@@ -88,7 +130,9 @@ export function init() {
   return {
     page: "PAGE_REQUEST_SUCCESS",
     implemented: true,
-    hasStoredState: !!values,
+    completionState,
+    transportState: NOT_OCCURRED,
+    businessState: NOT_OCCURRED,
     recapRows: rendered,
     transmitted: false
   };

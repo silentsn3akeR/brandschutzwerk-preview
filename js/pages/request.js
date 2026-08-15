@@ -7,6 +7,7 @@ import { demoPricing } from "../data/demo-pricing.js";
 
 const STORAGE_SCHEMA_VERSION = 1;
 const STEP_COUNT = 5;
+const COMPLETION_STATE = Object.freeze({ INCOMPLETE: "NOT_COMPLETED", COMPLETE: "DEMO_COMPLETED" });
 const STEP_LABELS = ["Leistung", "Teilnehmer", "Standort", "Zeitraum", "Kontakt"];
 
 /* Copy Deck error strings. The three selection prompts have no Copy Deck record
@@ -76,6 +77,7 @@ const state = {
   step: 1,
   direction: "forward",
   submitting: false,
+  completionState: COMPLETION_STATE.INCOMPLETE,
   fields: Object.fromEntries(FIELD_IDS.map((id) => [id, blankField(id)]))
 };
 
@@ -88,6 +90,7 @@ function persist() {
   const payload = {
     schemaVersion: STORAGE_SCHEMA_VERSION,
     step: state.step,
+    completionState: state.completionState,
     values: Object.fromEntries(FIELD_IDS.map((id) => [id, state.fields[id].value]))
   };
   const okWrite = sessionState.write(payload);
@@ -111,6 +114,9 @@ function restore() {
 
   const step = Number(stored.step);
   state.step = Number.isInteger(step) && step >= 1 && step <= STEP_COUNT ? step : 1;
+  state.completionState = stored.completionState === COMPLETION_STATE.COMPLETE && state.step === STEP_COUNT
+    ? COMPLETION_STATE.COMPLETE
+    : COMPLETION_STATE.INCOMPLETE;
   return true;
 }
 
@@ -263,6 +269,7 @@ function focusInvalid(id) {
 function goToStep(next, direction) {
   state.direction = direction;
   state.step = Math.min(Math.max(next, 1), STEP_COUNT);
+  state.completionState = COMPLETION_STATE.INCOMPLETE;
   state.machine = "STEP_ACTIVE";
   render();
   persist();
@@ -314,6 +321,7 @@ function handleSubmit(button) {
 
   /* The recap on the success route reads this state, so it is written, not
      cleared, here. Nothing is transmitted: this is a local route change. */
+  state.completionState = COMPLETION_STATE.COMPLETE;
   persist();
   state.machine = "SUCCESS_REDIRECT";
   window.location.assign(siteUrl(ROUTES.PAGE_REQUEST_SUCCESS));
@@ -331,6 +339,7 @@ function bindChoice(group) {
       f.value = option.dataset.value;
       f.touched = true;
       f.dirty = true;
+      state.completionState = COMPLETION_STATE.INCOMPLETE;
       validateField(id);
       renderFieldError(id);
       renderSummary();
@@ -357,6 +366,7 @@ function bindInput(group) {
     const f = state.fields[id];
     f.value = control.value;
     f.dirty = true;
+    state.completionState = COMPLETION_STATE.INCOMPLETE;
     /* While typing, only clear an existing error — never introduce one. */
     if (f.touched) { validateField(id); renderFieldError(id); }
     renderSummary();

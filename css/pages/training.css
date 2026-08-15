@@ -211,28 +211,23 @@
 }
 .training-requirement-card p { font-size: var(--font-size-sm); }
 
-/* --------------------------------------------------- TRAINING_08_TARGET_GROUPS */
+/* ----------------------------------------------- TRAINING_08_QUALIFICATION_FIT */
 
-.training-industries {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
+.training-qualification-fit__list {
+  display: grid;
+  max-width: 52rem;
   margin-top: 2.5rem;
 }
-.training-industries li {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  min-height: 2.75rem;
-  padding: 0 1.125rem;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
-  font-weight: 620;
+.training-qualification-fit__list li {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) minmax(0, 2fr);
+  gap: 1.5rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--color-border-strong);
 }
-.training-industries .icon { color: var(--color-text-muted); }
+.training-qualification-fit__list strong { color: var(--color-text); font-weight: 680; }
+.training-qualification-fit__list span { color: var(--color-text-muted); }
+.training-qualification-fit .status-note { margin-top: 1.5rem; }
 
 /* ------------------------------------------------------------ TRAINING_09_FAQ
    Intro 4 cols (sticky), list 6-12 — same reading rhythm as the home FAQ. */
@@ -287,6 +282,7 @@
   .training-checklist { padding-inline: 1.25rem; }
   .training-requirements__grid { grid-template-columns: 1fr; gap: 1rem; }
   .training-requirement-card { padding: 1.5rem; }
+  .training-qualification-fit__list li { grid-template-columns: 1fr; gap: .375rem; }
 
   .training-day-flow__list { margin-top: 2.25rem; }
   .training-day-flow__step { grid-template-columns: 4.25rem minmax(0, 1fr); gap: 1rem; }
@@ -297,5 +293,4 @@
 
 @media (max-width: 359px) {
   .training-day-flow__step { grid-template-columns: 1fr; gap: .25rem; }
-  .training-industries li { width: 100%; }
 }

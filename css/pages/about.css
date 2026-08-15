@@ -57,7 +57,7 @@
 
 .about-credentials__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
   gap: var(--grid-gap);
   margin-top: 3rem;
 }
@@ -153,12 +153,11 @@
 .about-philosophy__pillar p { color: rgba(248, 249, 250, .72); font-size: var(--font-size-base); }
 
 /* --------------------------------------------------------- ABOUT_05_NETWORK
-   Three cards. Card 01 is the current state; cards 02 and 03 are explicitly
-   future and must never look like real people. */
+   One current trainer and one compact, explicitly future perspective. */
 
 .about-network__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr);
   gap: var(--grid-gap);
   margin-top: 3rem;
 }
@@ -179,35 +178,12 @@
 }
 .about-network-card p { font-size: var(--font-size-sm); }
 
-/* Abstract mark, not a silhouette: a person shape would still read as a person.
-   Two geometric elements on the same 4:5 stage as the real portrait, so the
-   cards align without implying a photograph exists. */
-.about-network-card--future { border-style: dashed; border-color: var(--color-border-strong); background: transparent; }
-.about-network-card__mark {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  margin-bottom: 1.25rem;
-  border-radius: var(--radius-image);
-  background:
-    repeating-linear-gradient(135deg, rgba(24, 27, 31, .04) 0 8px, transparent 8px 16px),
-    var(--color-bg);
-  border: 1px dashed var(--color-border-strong);
-  overflow: hidden;
-}
-.about-network-card__mark-ring {
-  position: absolute;
-  top: 34%; left: 50%;
-  width: 30%; aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border: 2px dashed var(--color-border-strong);
-  border-radius: 50%;
-}
-.about-network-card__mark-bar {
-  position: absolute;
-  left: 50%; bottom: 24%;
-  width: 46%; height: 2px;
-  transform: translateX(-50%);
-  background: var(--color-border-strong);
+.about-network-card--future {
+  align-self: start;
+  padding-block: 2rem;
+  border-style: dashed;
+  border-color: var(--color-border-strong);
+  background: transparent;
 }
 
 .about-network__supporting {
@@ -227,29 +203,6 @@
   font-weight: 720;
   letter-spacing: .06em;
 }
-
-/* ---------------------------------------------------------- ABOUT_06_VALUES
-   Four simple items. "Keine großen Cards" — a rule list, not a card grid. */
-
-.about-values__list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 var(--space-6);
-  margin-top: 1rem;
-}
-.about-values__item {
-  display: grid;
-  gap: .375rem;
-  padding-block: 1.75rem;
-  border-top: 1px solid var(--color-border);
-}
-.about-values__item dt {
-  color: var(--color-text);
-  font-size: var(--font-size-lg);
-  font-weight: 650;
-  letter-spacing: -.01em;
-}
-.about-values__item dd { margin: 0; color: var(--color-text-muted); }
 
 /* --------------------------------------------------------- ABOUT_08_FOOTER
    `.badge--neutral` is --color-text-muted (#667085) on #eef0f2 = 4.35:1, just
@@ -271,7 +224,7 @@
 
   .about-philosophy__pillars { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
   .about-philosophy__index { margin-bottom: .75rem; }
-  .about-network__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .about-network__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   .about-network-card { padding: 1.25rem; }
 }
 
@@ -286,9 +239,7 @@
   .about-credentials__grid { grid-template-columns: 1fr; gap: 1rem; }
   .about-credential { padding: 1.5rem; }
   .about-network__grid { grid-template-columns: 1fr; gap: 1rem; }
-  .about-network-card__media,
-  .about-network-card__mark { max-width: 13rem; }
-  .about-values__list { grid-template-columns: 1fr; gap: 0; }
+  .about-network-card__media { max-width: 13rem; }
   .about-network__supporting { font-size: var(--font-size-base); }
 
   /* The sticky bar overlaps the page end; keep the last section clear of it. */
@@ -296,6 +247,5 @@
 }
 
 @media (max-width: 359px) {
-  .about-network-card__media,
-  .about-network-card__mark { max-width: none; }
+  .about-network-card__media { max-width: none; }
 }
