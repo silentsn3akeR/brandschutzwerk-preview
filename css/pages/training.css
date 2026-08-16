@@ -301,7 +301,7 @@
 .training-bedarf__lead { font-size: 1.125rem; }
 .training-bedarf__conditions { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1rem; }
 .training-bedarf__conditions > li { display: grid; gap: .25rem; padding: 1rem 1.125rem;
-  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3); }
+  background: var(--color-surface-sunken); border-left: 3px solid var(--color-border, #cfd5d3); }
 .training-bedarf__conditions strong { font-size: 1rem; }
 .training-bedarf__conditions span { color: var(--color-text-muted, #55605c); }
 
@@ -331,11 +331,11 @@
 .training-bedarf .field__choice input:focus-visible {
   outline: 2px solid var(--color-text, #171d1c); outline-offset: 2px; }
 
-.training-bedarf__result { padding: 1.125rem 1.25rem; background: var(--color-surface-sunken, #f2f3f2);
+.training-bedarf__result { padding: 1.125rem 1.25rem; background: var(--color-surface-sunken);
   border-left: 3px solid var(--color-border, #cfd5d3); display: grid; gap: .625rem; }
 /* State is carried by an authored headline in each block, never by colour
    alone — the border is reinforcement, not the message. */
-.training-bedarf__result[data-state="REVIEW_RECOMMENDED"] { border-left-color: var(--color-warning, #8c3b1e); }
+.training-bedarf__result[data-state="REVIEW_RECOMMENDED"] { border-left-color: var(--color-attention); }
 .training-bedarf__result[data-state="ORIENTATION_AVAILABLE"] { border-left-color: var(--color-brand, #35543f); }
 .training-bedarf__result-body { display: grid; gap: .625rem; }
 .training-bedarf__result-headline { margin: 0; font-weight: 600; }
@@ -366,15 +366,15 @@
   border: 1px solid currentColor; border-radius: 2px; white-space: nowrap; vertical-align: .05em; }
 .duty[data-duty="REQUIRED"] { color: var(--color-brand, #35543f); }
 .duty[data-duty="RECOMMENDED"] { color: var(--color-text-muted, #55605c); }
-.duty[data-duty="CLARIFY"] { color: var(--color-warning, #8c3b1e); }
+.duty[data-duty="CLARIFY"] { color: var(--color-attention); }
 
 .training-checklists__grid { display: grid; gap: 1.5rem; }
 .training-checklists__list { border: 1px solid var(--color-border, #cfd5d3); margin: 0;
   padding: 1.5rem; background: var(--color-surface, #fff); }
 .training-checklists__legend-title { padding: 0 .5rem; font-size: 1.125rem; font-weight: 600; }
 .training-checklists__phase { display: inline-block; margin-right: .5rem; padding: .125rem .5rem;
-  background: var(--color-surface-sunken, #f2f3f2); border: 1px solid var(--color-border, #cfd5d3);
-  font-family: var(--font-mono, ui-monospace, monospace); font-size: .75rem; text-transform: uppercase;
+  background: var(--color-surface-sunken); border: 1px solid var(--color-border, #cfd5d3);
+  font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase;
   letter-spacing: .06em; }
 .training-checklists__intro { margin: .5rem 0 1rem; color: var(--color-text-muted, #55605c); }
 .training-checklists__items { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
@@ -397,7 +397,7 @@
 .training-checklists__text em { display: block; margin-top: .125rem; font-style: normal;
   font-size: .875rem; color: var(--color-text-muted, #55605c); }
 .training-checklists__note { margin: 1rem 0 0; padding: .75rem .875rem; font-size: .875rem;
-  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3);
+  background: var(--color-surface-sunken); border-left: 3px solid var(--color-border, #cfd5d3);
   color: var(--color-text-muted, #55605c); }
 .training-checklists__next { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.25rem 0 0; }
 .training-checklists__actions { margin: 1.5rem 0 0; }
@@ -447,7 +447,7 @@
 .training-auffrischung__rule h3 { margin: 0 0 .5rem; font-size: 1.0625rem; }
 .training-auffrischung__rule p { margin: 0; color: var(--color-text-muted, #55605c); }
 .training-auffrischung__note { margin: 0 0 1.75rem; padding: .875rem 1rem; font-size: .9375rem;
-  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3); }
+  background: var(--color-surface-sunken); border-left: 3px solid var(--color-border, #cfd5d3); }
 
 .training-auffrischung__check { padding: 1.5rem; display: grid; gap: 1.25rem;
   background: var(--color-surface, #fff); border: 1px solid var(--color-border, #cfd5d3); }
@@ -471,10 +471,10 @@
   outline: 2px solid var(--color-text, #171d1c); outline-offset: 2px; }
 
 .training-auffrischung__result { padding: 1.125rem 1.25rem; display: grid; gap: .625rem;
-  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3); }
+  background: var(--color-surface-sunken); border-left: 3px solid var(--color-border, #cfd5d3); }
 /* Reinforcement only — the strength is stated in the badge next to it. */
 .training-auffrischung__result[data-state="EARLIER_REPETITION_REQUIRED"] { border-left-color: var(--color-brand, #35543f); }
-.training-auffrischung__result[data-state="REVIEW_INFORMATION"] { border-left-color: var(--color-warning, #8c3b1e); }
+.training-auffrischung__result[data-state="REVIEW_INFORMATION"] { border-left-color: var(--color-attention); }
 .training-auffrischung__result-body { display: grid; gap: .625rem; }
 .training-auffrischung__result-head { margin: 0; font-weight: 600; }
 .training-auffrischung__next { display: flex; flex-wrap: wrap; gap: .75rem; margin: .375rem 0 0; }
@@ -491,4 +491,123 @@
   .training-auffrischung__check, .training-auffrischung__next { display: none !important; }
   .training-auffrischung__rules { grid-template-columns: 1fr; }
   .training-auffrischung__rule { border: 1px solid #000; break-inside: avoid; }
+}
+
+/* ── TOOL VOCABULARY ────────────────────────────────────────────────────────
+   The three decision aids grew one at a time and each brought its own duty
+   badge, result surface and source block. Same job, three implementations, and
+   they had started to drift apart visually. Consolidated here by grouping the
+   selectors rather than by adding a parallel system: one vocabulary, three
+   sections, no new class layer in the markup.
+
+   The governing idea is that emphasis must track normative strength. A
+   requirement earns a solid brand rule; a recommendation stays quiet; an open
+   question is marked, not alarmed. Colour only ever reinforces the word already
+   printed in the badge. */
+
+/* Duty badges — one treatment, now on real tokens rather than invented hexes. */
+.duty {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: .02em;
+  text-transform: none;
+  font-weight: 600;
+  padding: .125rem .5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid currentColor;
+}
+.duty[data-duty="REQUIRED"]    { color: var(--color-brand); background: var(--color-brand-soft); }
+.duty[data-duty="RECOMMENDED"] { color: var(--color-text-strong-muted); background: transparent; }
+.duty[data-duty="CLARIFY"]     { color: var(--color-attention); background: transparent; }
+
+/* Result surfaces — inset, not carded. A result is the consequence of the form
+   above it, so it reads as recessed rather than as a separate object. */
+.training-bedarf__result,
+.training-auffrischung__result {
+  background: var(--color-surface-sunken);
+  border: 0;
+  border-left: 3px solid var(--color-border-strong);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: var(--space-3);
+}
+.training-bedarf__result[data-state="ORIENTATION_AVAILABLE"],
+.training-auffrischung__result[data-state="EARLIER_REPETITION_REQUIRED"] {
+  border-left-color: var(--color-brand);
+}
+.training-bedarf__result[data-state="REVIEW_RECOMMENDED"],
+.training-auffrischung__result[data-state="REVIEW_INFORMATION"] {
+  border-left-color: var(--color-attention);
+}
+/* The withheld-number states are the intelligent ones, so they get the same
+   structural weight as an answer — never a thinner, error-ish treatment. */
+.training-bedarf__result-headline,
+.training-auffrischung__result-head { font-size: var(--font-size-lg); letter-spacing: -.01em; }
+
+/* The figure is the only place a large number is justified, and it is still an
+   orientation — so it is set once, clearly, and not scaled up further. */
+.training-bedarf__figure strong {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--color-text);
+}
+.training-bedarf__assumptions,
+.training-auffrischung__result-body p { color: var(--color-text-strong-muted); }
+
+/* Source disclosure — evidence available when wanted, not a disclaimer box. */
+.training-bedarf__sources,
+.training-checklists__sources,
+.training-auffrischung__sources {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-2);
+}
+.training-bedarf__sources summary,
+.training-checklists__sources summary,
+.training-auffrischung__sources summary {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-strong-muted);
+  letter-spacing: .01em;
+}
+.training-bedarf__sources p,
+.training-checklists__sources p,
+.training-auffrischung__sources p {
+  font-size: var(--font-size-sm);
+  max-width: 62ch;
+}
+
+/* Interactive surfaces — one border, one radius, one rhythm across all three. */
+.training-bedarf__check,
+.training-auffrischung__check,
+.training-checklists__list {
+  border-radius: var(--radius-card);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+/* U4: the two rules must be separable before a word is read. The requirement
+   carries a solid brand rule, the recommendation a quiet neutral one — the
+   difference is structural, not a colour alarm. */
+.training-auffrischung__rule { border-radius: var(--radius-card); box-shadow: none; }
+.training-auffrischung__rule[data-rule="CHANGE"] {
+  border-left-width: 3px; border-left-color: var(--color-brand);
+  background: var(--color-surface);
+}
+.training-auffrischung__rule[data-rule="TIME"] {
+  border-left-width: 3px; border-left-color: var(--color-border-strong);
+  background: transparent;
+}
+/* "3–5 Jahre" must not become the loudest thing on the page: it is the weaker
+   of the two rules and is set at body scale on purpose. */
+.training-auffrischung__rule h3 { font-size: var(--font-size-lg); letter-spacing: -.01em; }
+
+/* Phase markers and eyebrow-ish labels share the metadata voice. */
+.training-checklists__phase { font-family: var(--font-mono); border-radius: var(--radius-sm); }
+.training-checklists__note,
+.training-auffrischung__note {
+  background: var(--color-surface-sunken);
+  border-left: 3px solid var(--color-border-strong);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  max-width: 72ch;
 }

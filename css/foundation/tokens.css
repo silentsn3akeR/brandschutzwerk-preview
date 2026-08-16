@@ -18,6 +18,11 @@
   --color-brand: #b72a20;
   --color-brand-hover: #9e241b;
   --color-brand-soft: #fff1ef;
+  /* One step below --color-bg: lets a result or note read as inset without
+     needing a border, which is what turns a page into card soup. */
+  --color-surface-sunken: #f1f1ee;
+  /* An open question is not an error, so it must not borrow the brand red. */
+  --color-attention: #8a5312;
   --color-border: #e4e7ec;
   --color-border-strong: #cfd4dc;
   --color-success: #18794e;
@@ -25,6 +30,7 @@
 
   /* --- Typography --- */
   --font-sans: "Geist", "Inter", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
   --font-size-xs: 0.8125rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
