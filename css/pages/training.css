@@ -354,3 +354,83 @@
   .training-bedarf__conditions { grid-template-columns: 1fr 1fr; }
   .training-bedarf__check { padding: 2rem; }
 }
+
+/* TRAINING_10_CHECKLISTS — lifecycle checklists (U2 before, U3 after).
+   Duty is carried by a written badge, never by colour alone: the distinction
+   between "erforderlich" and "empfohlen" is the honest part of this section
+   and must survive greyscale, print and a screen reader. */
+.training-checklists__legend { margin: 0 0 1.5rem; font-size: .9375rem;
+  color: var(--color-text-muted, #55605c); }
+.duty { display: inline-block; margin-left: .375rem; padding: .0625rem .4375rem;
+  font-size: .6875rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  border: 1px solid currentColor; border-radius: 2px; white-space: nowrap; vertical-align: .05em; }
+.duty[data-duty="REQUIRED"] { color: var(--color-brand, #35543f); }
+.duty[data-duty="RECOMMENDED"] { color: var(--color-text-muted, #55605c); }
+.duty[data-duty="CLARIFY"] { color: var(--color-warning, #8c3b1e); }
+
+.training-checklists__grid { display: grid; gap: 1.5rem; }
+.training-checklists__list { border: 1px solid var(--color-border, #cfd5d3); margin: 0;
+  padding: 1.5rem; background: var(--color-surface, #fff); }
+.training-checklists__legend-title { padding: 0 .5rem; font-size: 1.125rem; font-weight: 600; }
+.training-checklists__phase { display: inline-block; margin-right: .5rem; padding: .125rem .5rem;
+  background: var(--color-surface-sunken, #f2f3f2); border: 1px solid var(--color-border, #cfd5d3);
+  font-family: var(--font-mono, ui-monospace, monospace); font-size: .75rem; text-transform: uppercase;
+  letter-spacing: .06em; }
+.training-checklists__intro { margin: .5rem 0 1rem; color: var(--color-text-muted, #55605c); }
+.training-checklists__items { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
+.training-checklists__item { display: flex; gap: .625rem; align-items: flex-start;
+  padding: .5rem .25rem; min-height: 44px; cursor: pointer; }
+/* Same native-control-with-a-real-hit-area treatment as the Bedarfscheck. */
+.training-checklists__item input {
+  appearance: none; -webkit-appearance: none; margin: 0; flex: none;
+  width: 24px; min-height: 44px; display: grid; place-content: center;
+  background: none; border: 0; cursor: pointer; }
+.training-checklists__item input::before {
+  content: ""; width: 20px; height: 20px; box-sizing: border-box;
+  border: 2px solid var(--color-text-muted, #55605c); background: var(--color-surface, #fff); }
+.training-checklists__item input:checked::before {
+  background: var(--color-brand, #35543f); border-color: var(--color-brand, #35543f);
+  box-shadow: inset 0 0 0 3px var(--color-surface, #fff); }
+.training-checklists__item input:focus-visible {
+  outline: 2px solid var(--color-text, #171d1c); outline-offset: 2px; }
+.training-checklists__text { display: block; }
+.training-checklists__text em { display: block; margin-top: .125rem; font-style: normal;
+  font-size: .875rem; color: var(--color-text-muted, #55605c); }
+.training-checklists__note { margin: 1rem 0 0; padding: .75rem .875rem; font-size: .875rem;
+  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3);
+  color: var(--color-text-muted, #55605c); }
+.training-checklists__next { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.25rem 0 0; }
+.training-checklists__actions { margin: 1.5rem 0 0; }
+.training-checklists__sources { margin: 1.5rem 0 0; }
+.training-checklists__sources summary { cursor: pointer; min-height: 44px; display: flex;
+  align-items: center; font-weight: 600; }
+.training-checklists__sources p { margin: .5rem 0 0; color: var(--color-text-muted, #55605c); }
+
+@media (min-width: 900px) {
+  .training-checklists__grid { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* Print: the checklist is meant to leave the screen. Keep the items, the duty
+   labels and the basis; drop the chrome and anything that cannot be acted on
+   with a pen. Boxes are drawn as outlines so they are tickable on paper. */
+@media print {
+  .site-header, .site-footer, [data-component="MobileStickyCTA"],
+  .training-checklists__actions, .training-checklists__next { display: none !important; }
+  .training-checklists .btn { display: none !important; }
+  .training-checklists { padding: 0 !important; background: #fff !important; }
+  .training-checklists__grid { grid-template-columns: 1fr; gap: 1rem; }
+  .training-checklists__list { border: 1px solid #000; break-inside: avoid;
+    page-break-inside: avoid; background: #fff !important; padding: 1rem; }
+  .training-checklists__item { min-height: 0; padding: .25rem 0; }
+  .training-checklists__item input { min-height: 0; height: 18px; width: 18px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .training-checklists__item input::before { width: 16px; height: 16px;
+    border: 1.5px solid #000; background: #fff; box-shadow: none; }
+  .training-checklists__item input:checked::before { background: #fff; }
+  .duty { border-color: #000; color: #000 !important; }
+  /* The basis must print with the checklist — a page of obligations without
+     its source is the artefact this whole project exists to avoid. */
+  .training-checklists__sources { display: block !important; }
+  .training-checklists__sources[open] p, .training-checklists__sources p { display: block !important; }
+  .training-checklists__text em { color: #333 !important; }
+}

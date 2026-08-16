@@ -1,6 +1,7 @@
 import { $, $$ } from "../core/dom.js";
 import { faq } from "../data/faq.js";
 import { initBedarfscheck } from "../components/bedarfscheck.js";
+import { initChecklistPrint } from "../components/checklist-print.js";
 
 
 
@@ -37,5 +38,9 @@ export function init() {
      is the model's and the copy is the markup's, so this is a mount call. */
   const bedarf = initBedarfscheck();
 
-  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck, bedarf };
+  /* TRAINING_10_CHECKLISTS. Only reveals the print control — the checklists
+     themselves are markup and native controls, and need no script. */
+  const checklists = initChecklistPrint();
+
+  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck, bedarf, checklists };
 }
