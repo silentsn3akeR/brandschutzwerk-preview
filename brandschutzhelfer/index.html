@@ -673,8 +673,101 @@
       </div>
     </section>
 
-    <!-- TRAINING_11_FAQ -->
-    <section class="section surface-functional training-faq" id="faq" data-section-id="TRAINING_11_FAQ">
+    <!-- TRAINING_11_AUFFRISCHUNG -->
+    <section class="section surface-functional training-auffrischung" id="auffrischung" data-section-id="TRAINING_11_AUFFRISCHUNG" data-status="PLANNED">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">PRÜFEN UND AUFFRISCHEN</p>
+          <h2>Wann sollte die Ausbildung wiederholt werden?</h2>
+          <p class="lead">Dazu gibt es zwei verschiedene Aussagen – und sie sind nicht dasselbe. Die eine ist eine Empfehlung, die andere greift nach betrieblichen Änderungen.</p>
+        </div>
+
+        <!-- the two rules, kept visibly apart -->
+        <div class="training-auffrischung__rules reveal" data-delay="1">
+          <div class="training-auffrischung__rule" data-rule="TIME">
+            <p class="training-auffrischung__rule-head"><span class="duty" data-duty="RECOMMENDED">Empfehlung</span></p>
+            <h3>Alle 3 bis 5 Jahre auffrischen</h3>
+            <p>Zur Auffrischung der Kenntnisse empfiehlt es sich, die Ausbildung in Abständen von drei bis fünf Jahren zu wiederholen. Das ist eine Empfehlung – keine gesetzlich festgelegte Frist und kein Ablaufdatum.</p>
+          </div>
+          <div class="training-auffrischung__rule" data-rule="CHANGE">
+            <p class="training-auffrischung__rule-head"><span class="duty" data-duty="REQUIRED">Erforderlich bei Änderungen</span></p>
+            <h3>Nach wesentlichen betrieblichen Änderungen früher</h3>
+            <p>Bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich. Diese Regel hängt nicht am Kalender: Sie kann auch dann greifen, wenn die letzte Schulung noch nicht lange zurückliegt.</p>
+          </div>
+        </div>
+
+        <p class="training-auffrischung__note">Warum das auseinandergehalten wird: <q data-antipattern>alle drei bis fünf Jahre Pflicht</q> wäre in beide Richtungen falsch. Es macht aus einer Empfehlung eine Frist – und es verdeckt den Fall, der tatsächlich verbindlich ist.</p>
+
+        <!-- U4 -->
+        <form class="training-auffrischung__check reveal" data-delay="2" data-component="Auffrischungscheck" novalidate>
+          <h3 class="training-auffrischung__check-title">Änderungs- und Auffrischungscheck</h3>
+          <p class="training-auffrischung__check-intro">Zwei Fragen. Der Check nennt Ihnen, welche der beiden Aussagen bei Ihnen greift – und warum. Es wird nichts gespeichert und kein Termin berechnet.</p>
+
+          <fieldset class="field field--group">
+            <legend class="field__label">Wie lange liegt die letzte Brandschutzhelfer-Ausbildung zurück?</legend>
+            <label class="field__choice"><input type="radio" name="since" value="UNDER_3" data-auff-input="since"> <span>Weniger als 3 Jahre</span></label>
+            <label class="field__choice"><input type="radio" name="since" value="BETWEEN_3_AND_5" data-auff-input="since"> <span>3 bis 5 Jahre</span></label>
+            <label class="field__choice"><input type="radio" name="since" value="OVER_5" data-auff-input="since"> <span>Mehr als 5 Jahre</span></label>
+            <label class="field__choice"><input type="radio" name="since" value="UNKNOWN" data-auff-input="since"> <span>Das ist mir nicht bekannt</span></label>
+          </fieldset>
+
+          <fieldset class="field field--group">
+            <legend class="field__label">Hat sich seitdem etwas davon im Betrieb geändert?</legend>
+            <label class="field__choice"><input type="checkbox" name="change" value="GEFAEHRDUNGSBEURTEILUNG_GEAENDERT" data-auff-input="change"> <span>Die Gefährdungsbeurteilung wurde geändert</span></label>
+            <label class="field__choice"><input type="checkbox" name="change" value="NEUE_VERFAHREN_ANDERE_BRANDGEFAHREN" data-auff-input="change"> <span>Neue Verfahren mit veränderten Brandgefahren</span></label>
+            <label class="field__choice"><input type="checkbox" name="change" value="PERSONEN_IN_ANDERE_BEREICHE" data-auff-input="change"> <span>Personen arbeiten jetzt in Bereichen mit anderen Löschbedingungen</span></label>
+            <label class="field__choice"><input type="checkbox" name="changesUnknown" value="1" data-auff-input="changesUnknown"> <span>Das kann ich nicht sicher sagen</span></label>
+          </fieldset>
+
+          <div class="training-auffrischung__result" data-auff-result role="status" aria-live="polite" data-state="IDLE">
+            <p data-auff-slot="idle">Das Ergebnis erscheint hier, sobald beide Fragen beantwortet sind.</p>
+
+            <div class="training-auffrischung__result-body" data-auff-slot="review" hidden>
+              <p class="training-auffrischung__result-head"><span class="duty" data-duty="CLARIFY">Zu klären</span> Angaben unvollständig</p>
+              <p>Offen ist noch: <span data-auff-slot="missing"></span></p>
+              <p>Solange das nicht geklärt ist, gilt hier bewusst kein Ergebnis. „Nicht bekannt" heißt nicht „nichts passiert".</p>
+            </div>
+
+            <div class="training-auffrischung__result-body" data-auff-slot="required" hidden>
+              <p class="training-auffrischung__result-head"><span class="duty" data-duty="REQUIRED">Erforderlich</span> Frühere Wiederholung</p>
+              <p>Bei Ihnen greift die Änderungsregel, nicht der Zeitabstand. Ausschlaggebend: <span data-auff-slot="triggers"></span>.</p>
+              <p data-auff-slot="override"></p>
+              <p>Bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich. Welcher Abstand für Ihren Betrieb angemessen ist, ergibt sich aus Ihrer Gefährdungsbeurteilung.</p>
+              <p class="training-auffrischung__next"><a class="btn btn--primary" href="../anfrage/">Situation gemeinsam klären</a></p>
+            </div>
+
+            <div class="training-auffrischung__result-body" data-auff-slot="recommended" hidden>
+              <p class="training-auffrischung__result-head"><span class="duty" data-duty="RECOMMENDED">Empfehlung</span> Auffrischung sinnvoll</p>
+              <p>Der empfohlene Auffrischungszeitraum von drei bis fünf Jahren ist erreicht. Das ist eine Empfehlung zur Auffrischung der Kenntnisse – keine abgelaufene Frist und kein Verstoß.</p>
+              <p>Änderungsbedingte Gründe für eine frühere Wiederholung haben Sie nicht angegeben.</p>
+              <p class="training-auffrischung__next"><a class="btn btn--primary" href="../anfrage/">Auffrischung anfragen</a></p>
+            </div>
+
+            <div class="training-auffrischung__result-body" data-auff-slot="none" hidden>
+              <p class="training-auffrischung__result-head"><span class="duty" data-duty="RECOMMENDED">Kein Anlass aus Zeit oder Änderung</span></p>
+              <p>Die letzte Ausbildung liegt weniger als drei Jahre zurück und Sie haben keine der genannten betrieblichen Änderungen angegeben. Aus diesen beiden Angaben ergibt sich derzeit kein Anlass für eine Wiederholung.</p>
+              <p>Das ist keine Aussage über Ihre gesamte Brandschutzorganisation. Ändert sich etwas Wesentliches im Betrieb, gilt wieder die Änderungsregel – unabhängig davon, wie lange die Schulung zurückliegt.</p>
+            </div>
+          </div>
+
+          <script type="application/json" data-auff-labels>{"missing":{"since":"wie lange die letzte Ausbildung zurückliegt","changes":"ob sich etwas Wesentliches geändert hat"},"triggers":{"GEFAEHRDUNGSBEURTEILUNG_GEAENDERT":"die geänderte Gefährdungsbeurteilung","NEUE_VERFAHREN_ANDERE_BRANDGEFAHREN":"neue Verfahren mit veränderten Brandgefahren","PERSONEN_IN_ANDERE_BEREICHE":"Personen in Bereichen mit anderen Löschbedingungen"},"override":"Das gilt auch, obwohl die letzte Ausbildung weniger als drei Jahre zurückliegt: Die Änderungsregel hängt nicht am Zeitabstand."}</script>
+          <noscript>
+            <p class="status-note">Der interaktive Check benötigt JavaScript. Die beiden Regeln oben gelten unabhängig davon: drei bis fünf Jahre sind eine Empfehlung zur Auffrischung, und bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich.</p>
+          </noscript>
+        </form>
+
+        <details class="training-auffrischung__sources reveal" data-delay="3">
+          <summary>Grundlage dieser Angaben</summary>
+          <p>Die Auffrischungsempfehlung von drei bis fünf Jahren und die Regel zu wesentlichen betrieblichen Änderungen stammen aus <strong>DGUV Information 205-023 „Brandschutzhelfer", Abschnitt 5</strong> (aktualisierte Fassung 2019.11). Die Angaben zur Anzahl der Brandschutzhelfer weiter oben stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong>. Maßgeblich für den konkreten Betrieb bleibt die Gefährdungsbeurteilung.</p>
+        </details>
+
+        <p class="status-note">Orientierungshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine Terminüberwachung. Ihre Angaben werden nicht gespeichert.</p>
+        <p class="training-auffrischung__next"><a class="btn btn--secondary" href="#checklisten">Was danach im Betrieb zu tun ist</a> <a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
+      </div>
+    </section>
+
+    <!-- TRAINING_12_FAQ -->
+    <section class="section surface-functional training-faq" id="faq" data-section-id="TRAINING_12_FAQ">
       <div class="container">
         <div class="grid-12 training-faq__grid">
           <div class="training-faq__intro reveal">
@@ -748,8 +841,8 @@
       </div>
     </section>
 
-    <!-- TRAINING_12_CTA -->
-    <section class="final-cta surface-authority" data-section-id="TRAINING_12_CTA" data-component="FinalCTA">
+    <!-- TRAINING_13_CTA -->
+    <section class="final-cta surface-authority" data-section-id="TRAINING_13_CTA" data-component="FinalCTA">
       <div class="container">
         <div class="final-cta__inner reveal">
           <div class="section-heading section-heading--light">
@@ -767,12 +860,12 @@
   </main>
 
   <!-- TRAINING_GLOBAL_MOBILE_STICKY_CTA -->
-  <div class="mobile-sticky-cta" data-component="MobileStickyCTA" data-after-section="TRAINING_01_HERO" data-hide-near="TRAINING_12_CTA,TRAINING_13_FOOTER" hidden>
+  <div class="mobile-sticky-cta" data-component="MobileStickyCTA" data-after-section="TRAINING_01_HERO" data-hide-near="TRAINING_13_CTA,TRAINING_14_FOOTER" hidden>
     <a class="btn btn--primary" href="../anfrage/">Schulung anfragen<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
   </div>
 
-  <!-- TRAINING_13_FOOTER -->
-  <footer class="site-footer" data-component="SiteFooter" data-section-id="TRAINING_13_FOOTER">
+  <!-- TRAINING_14_FOOTER -->
+  <footer class="site-footer" data-component="SiteFooter" data-section-id="TRAINING_14_FOOTER">
     <div class="container">
       <div class="site-footer__grid">
         <div class="site-footer__brand">

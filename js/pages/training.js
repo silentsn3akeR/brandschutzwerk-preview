@@ -2,6 +2,7 @@ import { $, $$ } from "../core/dom.js";
 import { faq } from "../data/faq.js";
 import { initBedarfscheck } from "../components/bedarfscheck.js";
 import { initChecklistPrint } from "../components/checklist-print.js";
+import { initAuffrischungscheck } from "../components/auffrischungscheck.js";
 
 
 
@@ -42,5 +43,9 @@ export function init() {
      themselves are markup and native controls, and need no script. */
   const checklists = initChecklistPrint();
 
-  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck, bedarf, checklists };
+  /* TRAINING_11_AUFFRISCHUNG. Mount only: which of the two rules applies is
+     the model's decision, and every sentence is authored in the markup. */
+  const auffrischung = initAuffrischungscheck();
+
+  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck, bedarf, checklists, auffrischung };
 }

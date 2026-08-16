@@ -434,3 +434,61 @@
   .training-checklists__sources[open] p, .training-checklists__sources p { display: block !important; }
   .training-checklists__text em { color: #333 !important; }
 }
+
+/* TRAINING_11_AUFFRISCHUNG — the two rules, and the check that says which one
+   applies. The layout exists to keep them apart: side by side at width, never
+   merged, each carrying its own written strength label. */
+.training-auffrischung__rules { display: grid; gap: 1rem; margin: 0 0 1.25rem; }
+.training-auffrischung__rule { padding: 1.25rem; background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #cfd5d3); }
+.training-auffrischung__rule[data-rule="CHANGE"] { border-left: 3px solid var(--color-brand, #35543f); }
+.training-auffrischung__rule[data-rule="TIME"] { border-left: 3px solid var(--color-text-muted, #55605c); }
+.training-auffrischung__rule-head { margin: 0 0 .5rem; }
+.training-auffrischung__rule h3 { margin: 0 0 .5rem; font-size: 1.0625rem; }
+.training-auffrischung__rule p { margin: 0; color: var(--color-text-muted, #55605c); }
+.training-auffrischung__note { margin: 0 0 1.75rem; padding: .875rem 1rem; font-size: .9375rem;
+  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3); }
+
+.training-auffrischung__check { padding: 1.5rem; display: grid; gap: 1.25rem;
+  background: var(--color-surface, #fff); border: 1px solid var(--color-border, #cfd5d3); }
+.training-auffrischung__check-title { margin: 0; font-size: 1.25rem; }
+.training-auffrischung__check-intro { margin: -.75rem 0 0; color: var(--color-text-muted, #55605c); }
+.training-auffrischung .field--group { border: 0; margin: 0; padding: 0; }
+.training-auffrischung .field__choice { display: flex; gap: .625rem; align-items: flex-start;
+  padding: .5rem .25rem; min-height: 44px; cursor: pointer; }
+.training-auffrischung .field__choice input {
+  appearance: none; -webkit-appearance: none; margin: 0; flex: none;
+  width: 24px; min-height: 44px; display: grid; place-content: center;
+  background: none; border: 0; cursor: pointer; }
+.training-auffrischung .field__choice input::before {
+  content: ""; width: 20px; height: 20px; box-sizing: border-box;
+  border: 2px solid var(--color-text-muted, #55605c); background: var(--color-surface, #fff); }
+.training-auffrischung .field__choice input[type="radio"]::before { border-radius: 50%; }
+.training-auffrischung .field__choice input:checked::before {
+  background: var(--color-brand, #35543f); border-color: var(--color-brand, #35543f);
+  box-shadow: inset 0 0 0 3px var(--color-surface, #fff); }
+.training-auffrischung .field__choice input:focus-visible {
+  outline: 2px solid var(--color-text, #171d1c); outline-offset: 2px; }
+
+.training-auffrischung__result { padding: 1.125rem 1.25rem; display: grid; gap: .625rem;
+  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3); }
+/* Reinforcement only — the strength is stated in the badge next to it. */
+.training-auffrischung__result[data-state="EARLIER_REPETITION_REQUIRED"] { border-left-color: var(--color-brand, #35543f); }
+.training-auffrischung__result[data-state="REVIEW_INFORMATION"] { border-left-color: var(--color-warning, #8c3b1e); }
+.training-auffrischung__result-body { display: grid; gap: .625rem; }
+.training-auffrischung__result-head { margin: 0; font-weight: 600; }
+.training-auffrischung__next { display: flex; flex-wrap: wrap; gap: .75rem; margin: .375rem 0 0; }
+.training-auffrischung__sources { margin: 1.5rem 0 0; }
+.training-auffrischung__sources summary { cursor: pointer; min-height: 44px; display: flex;
+  align-items: center; font-weight: 600; }
+.training-auffrischung__sources p { margin: .5rem 0 0; color: var(--color-text-muted, #55605c); }
+
+@media (min-width: 900px) {
+  .training-auffrischung__rules { grid-template-columns: 1fr 1fr; }
+  .training-auffrischung__check { padding: 2rem; }
+}
+@media print {
+  .training-auffrischung__check, .training-auffrischung__next { display: none !important; }
+  .training-auffrischung__rules { grid-template-columns: 1fr; }
+  .training-auffrischung__rule { border: 1px solid #000; break-inside: avoid; }
+}
