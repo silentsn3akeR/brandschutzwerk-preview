@@ -294,3 +294,63 @@
 @media (max-width: 359px) {
   .training-day-flow__step { grid-template-columns: 1fr; gap: .25rem; }
 }
+
+/* TRAINING_09_BEDARF — Bedarfscheck.
+   Deliberately quiet: the figure is an orientation, and type-scaling it like a
+   headline would tell the eye something the sentence next to it denies. */
+.training-bedarf__lead { font-size: 1.125rem; }
+.training-bedarf__conditions { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1rem; }
+.training-bedarf__conditions > li { display: grid; gap: .25rem; padding: 1rem 1.125rem;
+  background: var(--color-surface-sunken, #f2f3f2); border-left: 3px solid var(--color-border, #cfd5d3); }
+.training-bedarf__conditions strong { font-size: 1rem; }
+.training-bedarf__conditions span { color: var(--color-text-muted, #55605c); }
+
+.training-bedarf__check { margin: 2.25rem 0 0; padding: 1.5rem; display: grid; gap: 1.25rem;
+  background: var(--color-surface, #fff); border: 1px solid var(--color-border, #cfd5d3); }
+.training-bedarf__check-title { margin: 0; font-size: 1.25rem; }
+.training-bedarf__check-intro { margin: -.75rem 0 0; color: var(--color-text-muted, #55605c); }
+.training-bedarf .field--group { border: 0; margin: 0; padding: 0; }
+.training-bedarf .field__choice { display: flex; gap: .625rem; align-items: flex-start;
+  padding: .625rem .25rem; min-height: 44px; cursor: pointer; }
+/* Native radio/checkbox kept — semantics, keyboard and grouping come free.
+   Only the painting is custom, so the control can own a 24x44 hit area while
+   still drawing as a 20px box. Checked state changes shape and fill, never
+   colour alone. */
+.training-bedarf .field__choice input {
+  appearance: none; -webkit-appearance: none; margin: 0; flex: none;
+  width: 24px; min-height: 44px; display: grid; place-content: center;
+  background: none; border: 0; cursor: pointer; }
+.training-bedarf .field__choice input::before {
+  content: ""; width: 20px; height: 20px; box-sizing: border-box;
+  border: 2px solid var(--color-text-muted, #55605c);
+  background: var(--color-surface, #fff); }
+.training-bedarf .field__choice input[type="radio"]::before { border-radius: 50%; }
+.training-bedarf .field__choice input:checked::before {
+  background: var(--color-brand, #35543f); border-color: var(--color-brand, #35543f);
+  box-shadow: inset 0 0 0 3px var(--color-surface, #fff); }
+.training-bedarf .field__choice input:focus-visible {
+  outline: 2px solid var(--color-text, #171d1c); outline-offset: 2px; }
+
+.training-bedarf__result { padding: 1.125rem 1.25rem; background: var(--color-surface-sunken, #f2f3f2);
+  border-left: 3px solid var(--color-border, #cfd5d3); display: grid; gap: .625rem; }
+/* State is carried by an authored headline in each block, never by colour
+   alone — the border is reinforcement, not the message. */
+.training-bedarf__result[data-state="REVIEW_RECOMMENDED"] { border-left-color: var(--color-warning, #8c3b1e); }
+.training-bedarf__result[data-state="ORIENTATION_AVAILABLE"] { border-left-color: var(--color-brand, #35543f); }
+.training-bedarf__result-body { display: grid; gap: .625rem; }
+.training-bedarf__result-headline { margin: 0; font-weight: 600; }
+.training-bedarf__figure { margin: 0; font-size: 1.5rem; line-height: 1.2; }
+.training-bedarf__figure strong { font-size: 2rem; }
+.training-bedarf__assumptions { margin: 0; font-size: .9375rem; color: var(--color-text-muted, #55605c); }
+.training-bedarf__next { display: flex; flex-wrap: wrap; gap: .75rem; margin: .375rem 0 0; }
+
+.training-bedarf__sources { margin: 1.5rem 0 0; }
+.training-bedarf__sources summary { cursor: pointer; min-height: 44px; display: flex; align-items: center;
+  font-weight: 600; }
+.training-bedarf__sources p { margin: .5rem 0 0; color: var(--color-text-muted, #55605c); }
+.training-bedarf__bridge { margin: 1rem 0 0; }
+
+@media (min-width: 768px) {
+  .training-bedarf__conditions { grid-template-columns: 1fr 1fr; }
+  .training-bedarf__check { padding: 2rem; }
+}

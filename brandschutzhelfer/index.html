@@ -499,8 +499,117 @@
       </div>
     </section>
 
-    <!-- TRAINING_09_FAQ -->
-    <section class="section surface-functional training-faq" id="faq" data-section-id="TRAINING_09_FAQ">
+    <!-- TRAINING_09_BEDARF -->
+    <section class="section surface-functional training-bedarf" id="bedarf" data-section-id="TRAINING_09_BEDARF" data-status="PLANNED">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">BEDARF EINSCHÄTZEN</p>
+          <h2>Wie viele Brandschutzhelfer braucht mein Betrieb?</h2>
+        </div>
+
+        <!-- A · direct answer -->
+        <div class="training-bedarf__answer reveal" data-delay="1">
+          <p class="training-bedarf__lead">Bei <strong>normaler Brandgefährdung</strong> ist ein Anteil von <strong>5 % der Beschäftigten</strong> in der Regel ausreichend. Maßgeblich ist aber die Gefährdungsbeurteilung Ihres Betriebs, nicht der Prozentwert.</p>
+          <p>Die 5 % sind ein Orientierungswert, keine gesetzlich festgelegte Stückzahl. Ob er für Sie trägt, hängt davon ab, wie viele Menschen gleichzeitig anwesend sind, wie Ihre Schichten laufen und ob besondere Brandgefahren bestehen.</p>
+        </div>
+
+        <!-- B/C/D/E · why the baseline alone is not the answer -->
+        <ul class="training-bedarf__conditions reveal" data-delay="2">
+          <li data-bedarf-condition="baseline">
+            <strong>Warum 5 % allein nicht reicht</strong>
+            <span>Die Regel nennt vier Situationen, in denen mehr erforderlich sein können: erhöhte Brandgefährdung, die Anwesenheit vieler Personen, Personen mit eingeschränkter Mobilität und eine große räumliche Ausdehnung der Arbeitsstätte. Eine feste Erhöhung ist dafür nicht angegeben.</span>
+          </li>
+          <li data-bedarf-condition="shifts">
+            <strong>Schichtbetrieb</strong>
+            <span>Der Anteil muss während der Betriebszeiten tatsächlich verfügbar sein. In jeder Schicht müssen genügend ausgebildete Personen anwesend sein – nicht nur rechnerisch im gesamten Unternehmen.</span>
+          </li>
+          <li data-bedarf-condition="absence">
+            <strong>Urlaub, Krankheit, Fortbildung</strong>
+            <span>Abwesenheiten sind ausdrücklich zu berücksichtigen. Ein fester Zuschlag ist dafür nicht vorgegeben – die Planung muss zum Betrieb passen.</span>
+          </li>
+          <li data-bedarf-condition="hazard">
+            <strong>Erhöhte oder unklare Brandgefährdung</strong>
+            <span>Liegt eine erhöhte Brandgefährdung vor oder ist sie nicht sicher eingeschätzt, trägt der einfache Orientierungswert nicht. Dann ist eine individuelle Betrachtung der richtige nächste Schritt.</span>
+          </li>
+        </ul>
+
+        <!-- F · the check -->
+        <form class="training-bedarf__check reveal" data-delay="3" data-component="Bedarfscheck" novalidate>
+          <h3 class="training-bedarf__check-title">Bedarfscheck</h3>
+          <p class="training-bedarf__check-intro">Eine Orientierung für das Gespräch – keine Gefährdungsbeurteilung und keine rechtliche Feststellung.</p>
+
+          <div class="field">
+            <label class="field__label" for="bedarf-present">Wie viele Beschäftigte sind gleichzeitig anwesend?</label>
+            <p class="field__help" id="bedarf-present-hint">Nicht die Gesamtzahl aller Mitarbeitenden, sondern die Zahl je Schicht bzw. Betriebszeit.</p>
+            <input class="field__control" type="number" id="bedarf-present" name="present" min="1" step="1" inputmode="numeric" aria-describedby="bedarf-present-hint" data-bedarf-input="presentPerShift">
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="bedarf-shifts">Wie viele Schichten sollen abgedeckt sein?</label>
+            <input class="field__control" type="number" id="bedarf-shifts" name="shifts" min="1" step="1" value="1" inputmode="numeric" data-bedarf-input="shifts">
+          </div>
+
+          <fieldset class="field field--group">
+            <legend class="field__label">Wie schätzen Sie die Brandgefährdung ein?</legend>
+            <label class="field__choice"><input type="radio" name="hazard" value="NORMAL" data-bedarf-input="hazard"> <span>Normal – z. B. Büronutzung</span></label>
+            <label class="field__choice"><input type="radio" name="hazard" value="ELEVATED" data-bedarf-input="hazard"> <span>Erhöht – z. B. brennbare Stoffe, besondere Verfahren</span></label>
+            <label class="field__choice"><input type="radio" name="hazard" value="UNCLEAR" data-bedarf-input="hazard"> <span>Das kann ich nicht sicher einschätzen</span></label>
+          </fieldset>
+
+          <fieldset class="field field--group">
+            <legend class="field__label">Trifft eines davon auf Ihren Betrieb zu?</legend>
+            <label class="field__choice"><input type="checkbox" name="condition" value="MANY_PERSONS" data-bedarf-input="condition"> <span>Regelmäßig viele Personen anwesend, z. B. Besuchs- oder Publikumsverkehr</span></label>
+            <label class="field__choice"><input type="checkbox" name="condition" value="LIMITED_MOBILITY" data-bedarf-input="condition"> <span>Personen mit eingeschränkter Mobilität</span></label>
+            <label class="field__choice"><input type="checkbox" name="condition" value="LARGE_EXTENT" data-bedarf-input="condition"> <span>Große räumliche Ausdehnung oder mehrere Gebäude</span></label>
+          </fieldset>
+
+          <div class="training-bedarf__result" data-bedarf-result role="status" aria-live="polite" data-state="IDLE">
+            <p class="training-bedarf__result-idle" data-bedarf-slot="idle">Ergebnis erscheint hier, sobald die Angaben vollständig sind.</p>
+
+            <div class="training-bedarf__result-body" data-bedarf-slot="incomplete" hidden>
+              <p class="training-bedarf__result-headline">Angaben unvollständig</p>
+              <p>Für eine Einschätzung fehlen noch: <span data-bedarf-slot="missing"></span></p>
+            </div>
+
+            <div class="training-bedarf__result-body" data-bedarf-slot="review" hidden>
+              <p class="training-bedarf__result-headline">Individuelle Betrachtung empfohlen</p>
+              <p data-bedarf-slot="review-reason"></p>
+              <p>Für diese Situation nennt die Regel keine feste Erhöhung. Ein Orientierungswert wäre hier eine Scheingenauigkeit – deshalb wird bewusst keine Zahl ausgegeben.</p>
+              <p class="training-bedarf__next"><a class="btn btn--primary" href="../anfrage/">Situation gemeinsam klären</a></p>
+            </div>
+
+            <div class="training-bedarf__result-body" data-bedarf-slot="orientation" hidden>
+              <p class="training-bedarf__result-headline">Orientierungswert unter Ihren Angaben</p>
+              <p class="training-bedarf__figure"><strong data-bedarf-slot="figure"></strong> <span data-bedarf-slot="figure-unit">Brandschutzhelfer je Schicht</span></p>
+              <p data-bedarf-slot="total"></p>
+              <p class="training-bedarf__assumptions">Angenommen wurde: <span data-bedarf-slot="assumptions"></span></p>
+              <p>Das ist ein Planungswert für das Gespräch, keine rechtliche Feststellung. Verbindlich ist die Gefährdungsbeurteilung Ihres Betriebs.</p>
+              <p class="training-bedarf__assumptions">Zusätzlich einzuplanen: Abwesenheiten durch Urlaub, Krankheit und Fortbildung sowie die Verfügbarkeit je Schicht.</p>
+              <p class="training-bedarf__assumptions">Mehr können erforderlich sein bei: erhöhter Brandgefährdung, Anwesenheit vieler Personen, eingeschränkter Mobilität, großer räumlicher Ausdehnung.</p>
+              <p class="training-bedarf__next"><a class="btn btn--secondary" href="#inhalte">Ausbildung ansehen</a> <a class="btn btn--primary" href="../anfrage/">Anfrage stellen</a></p>
+            </div>
+          </div>
+
+          <script type="application/json" data-bedarf-labels>{"missing":{"presentPerShift":"Anzahl gleichzeitig anwesender Beschäftigter","shifts":"Anzahl der Schichten","hazard":"Einschätzung der Brandgefährdung"},"reasons":{"ERHOEHTE_BRANDGEFAEHRDUNG":"erhöhte Brandgefährdung","BRANDGEFAEHRDUNG_UNKLAR":"die Brandgefährdung ist nicht sicher eingeschätzt","ANWESENHEIT_VIELER_PERSONEN":"regelmäßig viele anwesende Personen","EINGESCHRAENKTE_MOBILITAET":"Personen mit eingeschränkter Mobilität","GROSSE_RAEUMLICHE_AUSDEHNUNG":"große räumliche Ausdehnung oder mehrere Gebäude"},"assumptions":{"BRANDGEFAEHRDUNG_NORMAL":"normale Brandgefährdung","ANTEIL_FUENF_PROZENT":"ein Anteil von 5 %","BEZUG_GLEICHZEITIG_ANWESENDE":"bezogen auf die gleichzeitig anwesenden Beschäftigten","SCHICHTEN":"{n} Schicht(en)"},"total":"Bei {shifts} Schichten müssen insgesamt {total} ausgebildete Personen verfügbar sein, damit der Anteil in jeder Schicht tatsächlich besetzt ist."}</script>
+          <noscript>
+            <p class="status-note">Der interaktive Bedarfscheck benötigt JavaScript. Die Einschätzung oben gilt unabhängig davon: bei normaler Brandgefährdung sind in der Regel etwa 5 % der gleichzeitig anwesenden Beschäftigten ein sinnvoller Orientierungswert, maßgeblich bleibt die Gefährdungsbeurteilung.</p>
+          </noscript>
+        </form>
+
+        <!-- G/H · basis and related questions -->
+        <details class="training-bedarf__sources reveal" data-delay="4">
+          <summary>Grundlage dieser Angaben</summary>
+          <p>Der Anteil von 5 % bei normaler Brandgefährdung, die genannten erhöhenden Bedingungen sowie die Berücksichtigung von Schichtbetrieb und Abwesenheiten stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong> (Technische Regeln für Arbeitsstätten). Maßgeblich für den konkreten Betrieb bleibt die Gefährdungsbeurteilung.</p>
+        </details>
+
+        <p class="status-note">Orientierungshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine verbindliche Feststellung.</p>
+        <p class="training-bedarf__bridge">Häufige Fragen dazu – etwa zu Schichtbetrieb, Urlaub und erhöhter Brandgefährdung – beantworten wir weiter unten.</p>
+        <p class="training-bedarf__next"><a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
+      </div>
+    </section>
+
+    <!-- TRAINING_10_FAQ -->
+    <section class="section surface-functional training-faq" id="faq" data-section-id="TRAINING_10_FAQ">
       <div class="container">
         <div class="grid-12 training-faq__grid">
           <div class="training-faq__intro reveal">
@@ -574,8 +683,8 @@
       </div>
     </section>
 
-    <!-- TRAINING_10_CTA -->
-    <section class="final-cta surface-authority" data-section-id="TRAINING_10_CTA" data-component="FinalCTA">
+    <!-- TRAINING_11_CTA -->
+    <section class="final-cta surface-authority" data-section-id="TRAINING_11_CTA" data-component="FinalCTA">
       <div class="container">
         <div class="final-cta__inner reveal">
           <div class="section-heading section-heading--light">
@@ -593,12 +702,12 @@
   </main>
 
   <!-- TRAINING_GLOBAL_MOBILE_STICKY_CTA -->
-  <div class="mobile-sticky-cta" data-component="MobileStickyCTA" data-after-section="TRAINING_01_HERO" data-hide-near="TRAINING_10_CTA,TRAINING_11_FOOTER" hidden>
+  <div class="mobile-sticky-cta" data-component="MobileStickyCTA" data-after-section="TRAINING_01_HERO" data-hide-near="TRAINING_11_CTA,TRAINING_12_FOOTER" hidden>
     <a class="btn btn--primary" href="../anfrage/">Schulung anfragen<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
   </div>
 
-  <!-- TRAINING_11_FOOTER -->
-  <footer class="site-footer" data-component="SiteFooter" data-section-id="TRAINING_11_FOOTER">
+  <!-- TRAINING_12_FOOTER -->
+  <footer class="site-footer" data-component="SiteFooter" data-section-id="TRAINING_12_FOOTER">
     <div class="container">
       <div class="site-footer__grid">
         <div class="site-footer__brand">

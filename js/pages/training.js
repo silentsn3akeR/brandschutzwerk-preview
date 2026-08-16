@@ -1,5 +1,6 @@
 import { $, $$ } from "../core/dom.js";
 import { faq } from "../data/faq.js";
+import { initBedarfscheck } from "../components/bedarfscheck.js";
 
 
 
@@ -32,5 +33,9 @@ export function init() {
     console.warn("PAGE_TRAINING FAQ mirror mismatch", faqCheck.mismatches);
   }
 
-  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck };
+  /* TRAINING_09_BEDARF. The page still has no logic of its own: the decision
+     is the model's and the copy is the markup's, so this is a mount call. */
+  const bedarf = initBedarfscheck();
+
+  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck, bedarf };
 }
