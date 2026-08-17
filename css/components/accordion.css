@@ -2,50 +2,73 @@
    The trigger sets its own font-size explicitly. In V1 it inherited the
    surrounding h3 scale and had to be patched per page; that is fixed here. */
 
+/* Editorial disclosure rows. The question carries the size, the rule carries the
+   state, and there is no container: a bordered card per question would make
+   twelve boxes out of what is really one list. */
+
 .accordion { width: 100%; }
-.accordion__item { border-top: 1px solid var(--color-border); }
-.accordion__item:last-child { border-bottom: 1px solid var(--color-border); }
+
+.accordion__item {
+  position: relative;
+  border-top: 1px solid var(--ctx-border, var(--color-border));
+}
+.accordion__item:last-child { border-bottom: 1px solid var(--ctx-border, var(--color-border)); }
 .accordion__item h3 { margin: 0; }
+
+/* The heat segment. It grows along the rule above the open row, which is the
+   same left-to-right direction every other state change on the site uses. */
+.accordion__item::before {
+  content: "";
+  position: absolute;
+  inset: -1px auto auto 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--ctx-brand, var(--color-brand)), var(--ctx-attention, var(--color-attention)));
+  transition: width var(--motion-reveal) var(--ease-entrance);
+}
+.accordion__item:has(.accordion__trigger[aria-expanded="true"])::before { width: 100%; }
 
 .accordion__trigger {
   width: 100%;
   min-height: var(--control-min-target);
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
+  align-items: start;
+  gap: 2rem;
+  padding: 1.75rem 0;
   text-align: left;
-  color: var(--color-text);
+  color: var(--ctx-text, var(--color-text));
   /* explicit — must not inherit the heading scale */
-  font-size: 1.0625rem;
-  font-weight: 620;
-  line-height: 1.4;
-  letter-spacing: normal;
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-weight: 540;
+  line-height: 1.32;
+  letter-spacing: var(--tracking-tight);
+  transition: color var(--motion-fast) var(--ease-standard);
 }
-.accordion__trigger:hover { color: var(--color-brand); }
+.accordion__trigger:hover { color: var(--ctx-brand, var(--color-brand)); }
 .accordion__trigger:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-offset);
   border-radius: var(--radius-sm);
 }
+.accordion__trigger[aria-expanded="true"] { font-weight: 600; }
 
+/* A bare morphing mark rather than a circled button. The ring read as a second
+   control next to a question that is already the control. */
 .accordion__icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: .125rem;
   display: grid;
   place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-  transition: transform var(--motion-base) var(--ease-standard),
-              border-color var(--motion-fast) var(--ease-standard),
-              background-color var(--motion-fast) var(--ease-standard);
+  color: var(--ctx-steel, var(--color-steel));
+  transition: transform var(--motion-base) var(--ease-entrance),
+              color var(--motion-fast) var(--ease-standard);
 }
+.accordion__trigger:hover .accordion__icon { color: var(--ctx-brand, var(--color-brand)); }
 .accordion__trigger[aria-expanded="true"] .accordion__icon {
-  transform: rotate(45deg);
-  border-color: var(--color-brand);
-  background: var(--color-brand);
-  color: #fff;
+  transform: rotate(135deg);
+  color: var(--ctx-brand, var(--color-brand));
 }
 
 /* Panel expansion per the registry motion contract (height transition at

@@ -45,15 +45,19 @@ p { color: var(--color-text-muted); }
   letter-spacing: -.055em;
 }
 
+/* The eyebrow follows its plane. It used to take --color-brand with a hardcoded
+   lift for .surface-authority only; once sections could also be .plane-ink or
+   .plane-deep, the paper flame stayed on the ink plane and measured 2.83:1.
+   Reading the plane context instead of naming one surface class fixes it for
+   every plane there will ever be. */
 .eyebrow {
   margin-bottom: 1rem;
-  color: var(--color-brand);
+  color: var(--ctx-brand, var(--color-brand));
   font-size: var(--font-size-xs);
   font-weight: 700;
   letter-spacing: .11em;
   text-transform: uppercase;
 }
-.surface-authority .eyebrow { color: #ef7169; }
 
 .lead, .text-large { font-size: var(--font-size-lg); line-height: 1.55; max-width: 620px; }
 .text-small { font-size: var(--font-size-sm); }

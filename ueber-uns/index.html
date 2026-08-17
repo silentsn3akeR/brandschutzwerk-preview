@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="Praxis aus der Berufsfeuerwehr trifft moderne betriebliche Brandschutzschulung. Lernen Sie das Konzept hinter BrandschutzWerk kennen.">
   <meta name="twitter:image" content="https://silentsn3aker.github.io/brandschutzwerk-preview/assets/brand/og-card.jpg">
   <meta name="twitter:image:alt" content="Vorschaukarte der BrandschutzWerk-Konzeptdemo: Schriftzug, Leitsatz „Im Ernstfall zählt, was Ihre Mitarbeiter wirklich können.“ und die Kennzeichnung Konzeptdemo.">
-  <meta name="theme-color" content="#f7f7f5">
+  <meta name="theme-color" content="#0d1113">
   <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
   <link rel="preload" href="../assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="../css/foundation/reset.css">
   <link rel="stylesheet" href="../css/foundation/typography.css">
   <link rel="stylesheet" href="../css/foundation/layout.css">
+  <link rel="stylesheet" href="../css/foundation/planes.css">
   <link rel="stylesheet" href="../css/foundation/utilities.css">
   <link rel="stylesheet" href="../css/foundation/motion.css">
   <link rel="stylesheet" href="../css/components/icon.css">
@@ -47,10 +48,13 @@
   <link rel="stylesheet" href="../css/components/demo-mode.css">
   <link rel="stylesheet" href="../css/patterns/section-heading.css">
   <link rel="stylesheet" href="../css/patterns/media-stage.css">
-  <link rel="stylesheet" href="../css/patterns/authority-block.css">
   <link rel="stylesheet" href="../css/patterns/split-layout.css">
   <link rel="stylesheet" href="../css/patterns/micro-trust.css">
   <link rel="stylesheet" href="../css/patterns/timeline.css">
+  <link rel="stylesheet" href="../css/patterns/process.css">
+  <link rel="stylesheet" href="../css/patterns/scene.css">
+  <link rel="stylesheet" href="../css/patterns/truth-rail.css">
+  <link rel="stylesheet" href="../css/patterns/stage-set.css">
   <link rel="stylesheet" href="../css/patterns/final-cta.css">
   <link rel="stylesheet" href="../css/pages/about.css">
   <script type="application/ld+json">
@@ -145,7 +149,7 @@
 </svg>
   <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
 
-  <header class="site-header" data-component="SiteHeader" data-section-id="ABOUT_00_HEADER">
+  <header class="site-header site-header--over-scene" data-component="SiteHeader" data-section-id="ABOUT_00_HEADER">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="../" aria-label="BrandschutzWerk Startseite">
         <img src="../assets/brand/brand-mark.svg" alt="" width="28" height="28">
@@ -179,12 +183,12 @@
   <main id="main-content">
 
     <!-- ABOUT_01_HERO — EDITORIAL_SURFACE -->
-    <section class="section section--large surface-editorial about-hero" data-section-id="ABOUT_01_HERO" data-component="AboutHero">
+    <section class="section section--large plane plane-ink about-hero" data-section-id="ABOUT_01_HERO" data-component="AboutHero">
       <div class="container">
         <div class="grid-12 about-hero__grid">
           <div class="about-hero__copy reveal">
             <p class="eyebrow">ÜBER UNS</p>
-            <h1>Menschen aus der Praxis. Schulungen für den Betriebsalltag.</h1>
+            <h1 class="about-hero__display reveal reveal--mask">Menschen aus der Praxis. Schulungen für den Betriebsalltag.</h1>
             <p class="lead">Hinter dem geplanten Angebot steht Erfahrung aus der Berufsfeuerwehr – verbunden mit dem Anspruch, Brandschutz verständlich, professionell und praxisnah zu vermitteln.</p>
           </div>
 
@@ -212,20 +216,21 @@
     <section class="section surface-functional about-profile" data-section-id="ABOUT_02_PROFILE" data-component="TrainerProfile">
       <div class="container">
         <div class="grid-12 about-profile__grid">
-          <div class="authority-block about-profile__identity reveal">
+          <div class="about-profile__identity reveal">
             <h2 class="about-profile__name" data-trainer-field="name" data-status="CONFIRMED">Michael Gruber</h2>
-            <p class="about-profile__role" data-trainer-field="role" data-status="FACHLICHE_FREIGABE_REQUIRED">Berufsfeuerwehr · Trainer · Fachlicher Ansprechpartner</p>
-            <dl class="about-profile__facts">
-              <div class="about-profile__fact" data-status="CONFIRMED">
-                <dt>Fachlicher Hintergrund</dt>
-                <dd data-trainer-field="experienceType" data-status="CONFIRMED">Berufsfeuerwehr</dd>
+            <p class="about-profile__role" data-status="FACHLICHE_FREIGABE_REQUIRED">Berufsfeuerwehr · Trainer · Fachlicher Ansprechpartner</p>
+            <dl class="truth-rail about-profile__facts">
+              <div class="truth-rail__entry" data-status="CONFIRMED">
+                <dt class="truth-rail__label">Fachlicher Hintergrund</dt>
+                <dd class="truth-rail__value" data-trainer-field="experienceType" data-status="CONFIRMED">Berufsfeuerwehr</dd>
               </div>
-              <div class="about-profile__fact" data-status="FACHLICHE_FREIGABE_REQUIRED">
-                <dt>Rolle</dt>
-                <dd>Trainer &amp; fachlicher Ansprechpartner</dd>
+              <div class="truth-rail__entry" data-status="FACHLICHE_FREIGABE_REQUIRED">
+                <dt class="truth-rail__label">Rolle</dt>
+                <dd class="truth-rail__value" data-trainer-field="role" data-status="FACHLICHE_FREIGABE_REQUIRED">Trainer &amp; fachlicher Ansprechpartner</dd>
+                <dd class="truth-rail__state">Vor dem Marktstart zu belegen</dd>
               </div>
             </dl>
-            <a class="btn btn--primary authority-block__cta" href="../anfrage/">Schulung anfragen<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+            <a class="btn btn--primary about-profile__cta" href="../anfrage/">Schulung anfragen<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
           </div>
 
           <div class="about-profile__copy reveal" data-delay="1">
@@ -267,7 +272,7 @@
     </section>
 
     <!-- ABOUT_04_PHILOSOPHY — AUTHORITY_SURFACE, rhythm break -->
-    <section class="section section--large surface-authority about-philosophy" data-section-id="ABOUT_04_PHILOSOPHY" data-component="TrainingPhilosophy">
+    <section class="section section--large plane plane-ink about-philosophy" data-section-id="ABOUT_04_PHILOSOPHY" data-component="TrainingPhilosophy">
       <div class="container">
         <div class="section-heading section-heading--light reveal">
           <p class="eyebrow">UNSER SCHULUNGSPRINZIP</p>
@@ -294,7 +299,7 @@
     </section>
 
     <!-- ABOUT_05_NETWORK — FUNCTIONAL_SURFACE, attention recovery after the dark block -->
-    <section class="section surface-functional about-network" data-section-id="ABOUT_05_NETWORK" data-component="TrainerNetwork" data-network-exists="false" data-network-primary-state="CURRENT" data-current-trainer-count="1" data-additional-trainer-count="0" data-future-model-status="DEMO_STRATEGY">
+    <section class="section plane plane-smoked about-network" data-section-id="ABOUT_05_NETWORK" data-component="TrainerNetwork" data-network-exists="false" data-network-primary-state="CURRENT" data-current-trainer-count="1" data-additional-trainer-count="0" data-future-model-status="DEMO_STRATEGY">
       <div class="container">
         <div class="section-heading reveal">
           <p class="eyebrow">AKTUELLES MODELL</p>
@@ -333,7 +338,7 @@
     </section>
 
     <!-- ABOUT_07_CTA — AUTHORITY_SURFACE -->
-    <section class="final-cta surface-authority" data-section-id="ABOUT_07_CTA" data-component="FinalCTA">
+    <section class="final-cta plane plane-deep plane-edge-rise" data-section-id="ABOUT_07_CTA" data-component="FinalCTA">
       <div class="container">
         <div class="final-cta__inner reveal">
           <div class="section-heading section-heading--light">

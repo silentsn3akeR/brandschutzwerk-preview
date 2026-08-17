@@ -1,0 +1,266 @@
+/* PATTERN — local scenes.
+
+   Replaces the global five-phase sticky instrument. That pattern kept one
+   visual alive across a very long chapter, which meant a reader was often
+   looking at a diagram belonging to text they had already left — and on a
+   phone the visual sat at the top and scrolled away from everything it
+   explained.
+
+   The rule now: A VISUAL STAYS WITH THE CONTENT IT EXPLAINS. Each scene lives
+   inside its own section, appears with its text, and stops existing when the
+   topic does. Nothing is sticky, nothing spans sections, and no scene adds
+   scroll — each is sized by what it draws.
+
+   The drawing vocabulary is unchanged from the instrument it replaces: grid,
+   branch, node, anchor, media, track, arrow. The layers themselves are the same
+   markup, moved rather than rewritten, so the five states still read as one
+   visual language across the route. */
+
+.scene,
+.signature {
+  position: relative;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  border: 1px solid var(--ctx-border-strong);
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(var(--glass-tint-steel), var(--glass-tint-steel)),
+    linear-gradient(var(--color-ink-raised), var(--color-ink-raised));
+  box-shadow: var(--shadow-raised);
+  /* The chamfer the buttons and the old instrument share, so a scene reads as
+     part of the same built world. */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0 100%);
+}
+.scene::before,
+.signature::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-brand-on-dark), var(--color-attention-on-dark));
+  opacity: .55;
+}
+
+.scene__core { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
+.signature__core { width: 100%; height: auto; }
+.signature__core--wide { display: block; aspect-ratio: 900 / 320; }
+
+/* Each field states its own ratio. Left at the 4/3 default, a wide drawing is
+   letterboxed inside a box that is much taller than anything it draws — the
+   transfer scene ran 1190x893 with the drawing in a central band and the rest
+   empty. */
+.scene--auffrischung .scene__core--wide { aspect-ratio: 620 / 260; }
+.scene--betrieb .scene__core--wide { aspect-ratio: 620 / 220; }
+
+/* Every scene has two projections of one drawing. The wide field holds its
+   labels down to tablet width; below that it renders them between 3 and 8px,
+   which leaves a shape that carries structure and no information. The phone
+   gets the vertical composition instead, at the breakpoint the site already
+   treats as "phone" — the same one the sticky CTA uses.
+
+   The stacked field is capped rather than stretched: its type is sized in user
+   units, so an uncapped 700px box would blow the labels up to 35px. Capped, the
+   whole mobile band lands between 12 and 17px. */
+.scene__core--stack,
+.signature__core--stack { display: none; max-width: 20rem; margin-inline: auto; }
+.scene--auffrischung .scene__core--stack { aspect-ratio: 230 / 228; }
+.scene--bedarf .scene__core--stack { aspect-ratio: 230 / 248; }
+.scene--vorbereitung .scene__core--stack { aspect-ratio: 230 / 206; }
+.scene--betrieb .scene__core--stack { aspect-ratio: 230 / 258; }
+.signature__core--stack { aspect-ratio: 230 / 306; }
+
+.scene__core--stack .core-caption,
+.scene__core--stack .core-strength,
+.scene__core--stack .core-node,
+.signature__core--stack .core-caption,
+.signature__core--stack .core-node { font-size: 12px; }
+.scene__core--stack .core-anchor,
+.signature__core--stack .core-anchor { font-size: 13px; }
+.scene__core--stack .core-figure { font-size: 30px; }
+
+@media (max-width: 767px) {
+  .scene__core--wide,
+  .signature__core--wide { display: none; }
+  .scene__core--stack,
+  .signature__core--stack { display: block; }
+}
+
+/* --- drawing vocabulary, shared by every scene --------------------------- */
+.core-grid path { stroke: var(--color-border-on-dark); stroke-width: 1; fill: none; }
+.core-branch { fill: none; stroke: var(--color-steel-on-dark); stroke-width: 1.5; }
+.core-track { stroke: var(--color-border-on-dark-strong); stroke-width: 2; }
+.core-track--change { stroke: var(--color-brand-on-dark); }
+.core-tick { stroke: var(--color-steel-on-dark); stroke-width: 1.5; fill: none; }
+.core-arrow { fill: none; stroke: var(--color-brand-on-dark); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.core-media { fill: var(--color-ink); stroke: var(--color-border-on-dark-strong); }
+.core-corner { fill: none; stroke: var(--color-brand-on-dark); stroke-width: 1.5; }
+.core-escape { stroke-dasharray: 4 4; }
+
+.core-figure { fill: var(--color-text-on-dark); font-family: var(--font-mono); font-size: 34px; font-weight: 300; opacity: .5; }
+.core-caption, .core-node, .core-anchor, .core-strength {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+}
+.core-caption { fill: var(--color-steel-on-dark); }
+.core-caption--left, .core-caption--end { text-anchor: start; }
+.core-node { fill: var(--color-text-muted-on-dark); }
+.core-anchor { fill: var(--color-text-on-dark); font-size: 11px; }
+.core-strength { fill: var(--color-success-on-dark); }
+.core-strength--required { fill: var(--color-brand-on-dark); }
+/* The rule line is a statement about the rule, not about the reader's case, so
+   it carries no duty colour. */
+.core-strength--rule { fill: var(--color-text-muted-on-dark); }
+
+/* --- the signature scene ------------------------------------------------- */
+
+.signature { margin-block: var(--space-4) var(--space-5); }
+.signature .core-anchor { font-size: 13px; }
+
+/* The one place on the route where motion carries progression rather than
+   arrival: theory assembles, the centre becomes active, and the trace leaves
+   toward the business. It runs once when the scene is reached — it is not tied
+   to scroll position, so it cannot be stretched by scrolling and cannot make
+   the section taller than what it draws. */
+@media (prefers-reduced-motion: no-preference) {
+  .signature .sig-band,
+  .signature .sig-core,
+  .signature .sig-transfer { opacity: 0; }
+
+  .signature.is-visible .sig-band[data-band="theorie"] { animation: sig-in var(--motion-reveal) var(--ease-entrance) 120ms both; }
+  .signature.is-visible .sig-core { animation: sig-core-in var(--motion-stage) var(--ease-entrance) 380ms both; }
+  .signature.is-visible .sig-band[data-band="praxis"] { animation: sig-in var(--motion-reveal) var(--ease-entrance) 760ms both; }
+  .signature.is-visible .sig-transfer { animation: sig-in var(--motion-reveal) var(--ease-entrance) 1080ms both; }
+
+  /* Theory recedes as practice takes over — but only after it has been read as
+     a full statement. The earlier version started it at .55, so the resting
+     screenshot already argued that theory was secondary before the transition
+     had said anything. It now holds at full strength for most of the sequence
+     and settles at .7, which is a shift in emphasis rather than a dismissal. */
+  .signature.is-visible .sig-band[data-band="theorie"] { animation-name: sig-recede; }
+}
+
+@keyframes sig-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sig-core-in {
+  from { opacity: 0; transform: scale(.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sig-recede {
+  0% { opacity: 0; transform: translateY(8px); }
+  20% { opacity: 1; transform: none; }
+  70% { opacity: 1; transform: none; }
+  100% { opacity: .7; transform: none; }
+}
+
+/* --- U4 precedence, driven by the section's mirrored state ----------------
+
+   BOTH concepts exist at rest. The section's subject is that these are two
+   different kinds of statement, so a resting visual showing only the clock
+   explains half of it — and the earlier version literally had no change track
+   in its markup. Neither reads as a result until U4 has authoritative state;
+   they are simply both present.
+
+   State comes from js/pages/training.js mirroring [data-auff-result]. Nothing
+   here decides anything. */
+
+.core-time, .core-change {
+  transition: opacity var(--motion-reveal) var(--ease-standard),
+              transform var(--motion-stage) var(--ease-entrance);
+}
+/* At rest both are legible, neither is asserted. */
+.core-time, .core-change { opacity: .82; }
+
+/* The change track has two mutually exclusive statements in the same position.
+   Before U4 has a result, only the rule is shown — the earlier version printed
+   "ERFORDERLICH" in every state, which announced the mandatory outcome to a
+   reader who had answered nothing. The result wording appears only for the one
+   state that authority actually produces it for.
+
+   The inactive statement is not rendered rather than turned transparent: text
+   sitting at opacity 0 is still text on the page, and CROSS_BROWSER_QA counts
+   it as an invisible text node at every width — correctly, because that is how
+   unreadable copy hides. Only one of the two is ever drawn. */
+.core-strength--required { display: none; }
+[data-u4="EARLIER_REPETITION_REQUIRED"] .core-strength--required { display: inline; }
+[data-u4="EARLIER_REPETITION_REQUIRED"] .core-strength--rule { display: none; }
+/* The recommended window, marked on the track rather than shouted. */
+.core-window { stroke: var(--color-success-on-dark); stroke-width: 3; fill: none; }
+
+/* Time governs: the clock is dominant, the change rule stays visible. */
+[data-u4="REFRESH_RECOMMENDED"] .core-time,
+[data-u4="NO_TIME_BASED_ACTION_YET"] .core-time { opacity: 1; }
+[data-u4="REFRESH_RECOMMENDED"] .core-change,
+[data-u4="NO_TIME_BASED_ACTION_YET"] .core-change { opacity: .5; }
+
+/* Change outranks time: it comes forward, the clock recedes without vanishing. */
+[data-u4="EARLIER_REPETITION_REQUIRED"] .core-change { opacity: 1; transform: translateY(-6px); }
+[data-u4="EARLIER_REPETITION_REQUIRED"] .core-time { opacity: .38; transform: translateY(5px); }
+
+/* Information still missing: neither rule is claimed, both stay even. */
+[data-u4="REVIEW_INFORMATION"] .core-time,
+[data-u4="REVIEW_INFORMATION"] .core-change { opacity: .6; }
+
+/* --- local scene placement ----------------------------------------------- */
+
+/* On a wide viewport a scene sits beside the text it explains, in the same
+   section, so the pair reads as one statement. Below that it stacks directly
+   above its own content — never above someone else's. */
+@media (min-width: 1024px) {
+  /* Bedarf and Auffrischung sit in ordinary flow containers, so a float genuinely
+     puts them beside their prose. */
+  .scene--bedarf { float: right; width: 46%; margin: 0 0 var(--space-3) var(--space-4); }
+  .scene--auffrischung { float: none; width: 100%; margin: 0 0 var(--space-4); }
+  .training-auffrischung__rules { clear: both; }
+
+  /* U2 and U3 are children of a grid, where float is ignored — which is why
+     both read as "diagram, then list". They get an explicit two-column
+     composition instead, and each phase keeps its own spatial logic:
+     preparation assembles into a frame beside its items, transfer runs
+     horizontally across the full width above its items. */
+  .workbench { grid-template-columns: minmax(0, 1fr); }
+
+  .workbench__phase--with-scene {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 32rem);
+    column-gap: var(--space-5);
+    align-items: start;
+  }
+  .workbench__phase--with-scene > .workbench__phase-head,
+  .workbench__phase--with-scene > .workbench__intro,
+  .workbench__phase--with-scene > .workbench__items,
+  .workbench__phase--with-scene > .training-checklists__next { grid-column: 1; }
+  /* At 22rem the frame drew its labels at 7px and left the column empty beside
+     eight rows — a long list with a small diagram parked next to it. At 32rem it
+     renders at the same size as the other desktop scenes and reads as the
+     list's counterpart, and centring it against the rows makes the remaining
+     space a margin rather than an abandoned corner. */
+  .workbench__phase--with-scene > .scene {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: center;
+    margin: 0;
+  }
+
+  /* Transfer is a continuation, not an assembly: it spans the phase and the
+     items dock beneath the trace it draws. */
+  .workbench__phase--transfer { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .workbench__phase--transfer > .scene { margin-bottom: var(--space-4); }
+}
+
+/* Below desktop every scene is full width and directly above the content it
+   explains — the relationship the rejected global stage could not hold on a
+   phone, where one visual sat at the top and scrolled away from everything. */
+@media (max-width: 1023px) {
+  .scene { float: none; width: auto; margin-inline: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The stable composition is all three at full strength: Verstehen, Schulung
+     and Anwenden are equally true statements when nothing is animating. */
+  .signature .sig-band,
+  .signature .sig-core,
+  .signature .sig-transfer { opacity: 1; animation: none; }
+}

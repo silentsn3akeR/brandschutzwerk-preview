@@ -1,8 +1,7 @@
+import { initStageSet } from "../components/stage-set.js";
 import { $, $$ } from "../core/dom.js";
 import { demoPricing } from "../data/demo-pricing.js";
 import { faq } from "../data/faq.js";
-
-
 
 /* ------------------------------------------------------- HOME_08_QUOTE_PREVIEW
    COMP_QUOTE_PREVIEW: DEFAULT / SELECTED / POSTAL_INVALID / CUSTOM_INQUIRY.
@@ -97,6 +96,10 @@ function verifyFaqMirror() {
 }
 
 export function init() {
+  /* HOME_05_PROCESS. Marks the current step of the pinned stage set; the
+     section is a complete linear composition without it. */
+  const stageSet = initStageSet();
+
   const quote = initQuotePreview();
   const faqCheck = verifyFaqMirror();
 
@@ -104,5 +107,5 @@ export function init() {
     console.warn("PAGE_HOME FAQ mirror mismatch", faqCheck.mismatches);
   }
 
-  return { page: "PAGE_HOME", implemented: true, quote, faq: faqCheck };
+  return { stageSet, page: "PAGE_HOME", implemented: true, quote, faq: faqCheck };
 }

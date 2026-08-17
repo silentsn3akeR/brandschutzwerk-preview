@@ -1,45 +1,159 @@
-/* FOUNDATION — motion system */
+/* FOUNDATION — motion system.
+
+   Motion here is a grammar, not an effect. The rule is that motion intensity
+   tracks information importance, so the reveal an element gets tells you what
+   kind of thing it is:
+
+     headline        masked vertical reveal, crisp finish, no fade   M3
+     supporting copy short upward reveal                             M3 short
+     fact / proof    lateral entrance, from the side it belongs on   M3 short
+     call to action  last and shortest                               M2
+     source / note   opacity only, almost nothing                    M1
+
+   The previous system used one opacity-and-16px-translate for all of it, which
+   is why the page read as decorated rather than choreographed.
+
+   Levels: M1 feedback (--motion-micro/fast), M2 component state
+   (--motion-base), M3 narrative reveal (--motion-reveal), M4 scroll-linked
+   ambient movement, which is driven from js/core/motion.js and never from a
+   scroll event handler that writes layout. */
+
+/* ------------------------------------------------------------ M3 · reveals */
 
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity var(--motion-reveal) var(--ease-standard),
-              transform var(--motion-reveal) var(--ease-standard);
+  transform: translateY(22px);
+  transition: opacity var(--motion-reveal) var(--ease-entrance),
+              transform var(--motion-reveal) var(--ease-entrance);
 }
 .reveal.is-visible { opacity: 1; transform: none; }
 
+/* Headline. The type is clipped rather than faded, so it arrives at full weight
+   instead of resolving out of grey — a fade on large display type is the single
+   clearest tell of a generic reveal system. */
+.reveal--mask {
+  opacity: 1;
+  clip-path: inset(-0.25em 0 100% 0);
+  transform: translateY(.32em);
+  transition: clip-path var(--motion-stage) var(--ease-entrance),
+              transform var(--motion-stage) var(--ease-entrance);
+}
+.reveal--mask.is-visible {
+  clip-path: inset(-0.25em 0 -0.25em 0);
+  transform: none;
+}
+
+/* Evidence enters from the side it sits on, so the composition assembles
+   inward instead of everything drifting up together. */
+.reveal--from-start { transform: translateX(-32px); }
+.reveal--from-end { transform: translateX(32px); }
+.reveal--from-start.is-visible,
+.reveal--from-end.is-visible { transform: none; }
+
+/* The lateral entrance is a desktop device and stops at the same breakpoint the
+   grid does. Below 1024px the layout is already single column, so there is no
+   "side it sits on" for evidence to arrive from — and the 32px offset becomes a
+   real horizontal overflow, because every not-yet-revealed element below the
+   fold sits outside the viewport and widens the scroll area. That is a
+   responsive regression rather than a cosmetic one, so the cause is removed
+   here rather than clipped further up. */
+@media (max-width: 1023px) {
+  .reveal--from-start,
+  .reveal--from-end { transform: translateY(22px); }
+}
+
+/* The action is last and quickest: it should feel like it was already there. */
+.reveal--cta {
+  transform: translateY(10px);
+  transition: opacity var(--motion-base) var(--ease-standard),
+              transform var(--motion-base) var(--ease-standard);
+}
+
+/* A source disclosure is the lowest-value movement on the page. */
+.reveal--quiet {
+  transform: none;
+  transition: opacity var(--motion-base) var(--ease-standard);
+}
+
 .reveal-image {
   opacity: 0;
-  transform: scale(.985);
-  transition: opacity var(--motion-reveal) var(--ease-standard),
-              transform var(--motion-reveal) var(--ease-standard);
+  clip-path: inset(0 0 0 0);
+  transform: scale(1.04);
+  transition: opacity var(--motion-reveal) var(--ease-entrance),
+              transform var(--motion-stage) var(--ease-entrance);
 }
 .reveal-image.is-visible { opacity: 1; transform: none; }
 
 /* Declarative stagger. Never inline styles. Chain capped at 5 per the source
    motion contract. */
-.reveal[data-delay="1"], .reveal-image[data-delay="1"] { transition-delay: 70ms; }
-.reveal[data-delay="2"], .reveal-image[data-delay="2"] { transition-delay: 140ms; }
-.reveal[data-delay="3"], .reveal-image[data-delay="3"] { transition-delay: 210ms; }
-.reveal[data-delay="4"], .reveal-image[data-delay="4"] { transition-delay: 280ms; }
-.reveal[data-delay="5"], .reveal-image[data-delay="5"] { transition-delay: 350ms; }
+.reveal[data-delay="1"], .reveal-image[data-delay="1"] { transition-delay: 80ms; }
+.reveal[data-delay="2"], .reveal-image[data-delay="2"] { transition-delay: 160ms; }
+.reveal[data-delay="3"], .reveal-image[data-delay="3"] { transition-delay: 240ms; }
+.reveal[data-delay="4"], .reveal-image[data-delay="4"] { transition-delay: 320ms; }
+.reveal[data-delay="5"], .reveal-image[data-delay="5"] { transition-delay: 400ms; }
 
-/* Hover feedback. The lift uses the separate `translate` property, not
-   `transform`, so it composes with the reveal's translateY instead of
-   fighting it. `transition` is a single property per element, so elements
-   carrying both utilities get one merged list below — reveal timing stays
-   authoritative for opacity/transform, the lift stays on the fast token. */
+/* --------------------------------------------------------- M4 · scroll-linked
+
+   One custom property, written by js/core/motion.js from a rAF loop, read here.
+   Nothing else may animate on scroll. Transform only — no top, no margin, no
+   width — so the compositor does the work and the main thread stays free. */
+
+.parallax-layer {
+  will-change: transform;
+  transform: translate3d(0, calc(var(--parallax, 0) * 1px), 0);
+}
+.parallax-layer--deep { transform: translate3d(0, calc(var(--parallax, 0) * 2.2px), 0); }
+.parallax-layer--near { transform: translate3d(0, calc(var(--parallax, 0) * -.6px), 0); }
+
+/* ----------------------------------------------------------- M2 · transitions
+
+   A surface that changes what it says rather than being replaced. Used by the
+   Bedarfscheck and the Auffrischungscheck, where the result plane persists and
+   the content inside it morphs. The outgoing state is removed from the
+   accessibility tree by the component, not hidden by opacity alone, so a
+   screen reader never reads a stale answer. */
+
+.morph-surface {
+  transition: background-color var(--motion-base) var(--ease-standard),
+              border-color var(--motion-base) var(--ease-standard),
+              box-shadow var(--motion-base) var(--ease-standard);
+}
+
+.morph-content {
+  animation: morph-in var(--motion-base) var(--ease-entrance) both;
+}
+
+@keyframes morph-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Directional step transition for the request flow. Forward comes from the
+   right, back from the left, matching the direction of travel. */
+.slide-step { animation: slide-from-end var(--motion-base) var(--ease-entrance) both; }
+[data-direction="back"] .slide-step { animation-name: slide-from-start; }
+
+@keyframes slide-from-end {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slide-from-start {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ------------------------------------------------------------- M1 · feedback */
+
 .motion-lift { transition: translate var(--motion-fast) var(--ease-standard); }
 .reveal.motion-lift {
-  transition: opacity var(--motion-reveal) var(--ease-standard),
-              transform var(--motion-reveal) var(--ease-standard),
+  transition: opacity var(--motion-reveal) var(--ease-entrance),
+              transform var(--motion-reveal) var(--ease-entrance),
               translate var(--motion-fast) var(--ease-standard);
 }
 
 /* The zoom animates the media inside the clipped stage — the frame itself
    never moves. Covers today's abstract placeholder and tomorrow's real
-   photograph with the same rule. 520ms is the established expressive image
-   duration; faster would turn a barely-perceptible drift into a pop. */
+   photograph with the same rule. */
 .motion-image-zoom { overflow: hidden; }
 .motion-image-zoom .asset-frame__stage img,
 .motion-image-zoom .asset-placeholder { transition: transform 520ms var(--ease-standard); }
@@ -48,11 +162,16 @@
 @media (hover: hover) {
   .motion-lift:hover { translate: 0 -2px; }
   .motion-image-zoom:hover .asset-frame__stage img,
-  .motion-image-zoom:hover .asset-placeholder { transform: scale(1.015); }
+  .motion-image-zoom:hover .asset-placeholder { transform: scale(1.03); }
 }
 
-/* Global reduced-motion contract. Not limited to reveal elements — this is the
-   V1 defect this foundation exists to prevent. */
+/* ------------------------------------------------------------ reduced motion
+
+   Hard contract. Everything above either stops or collapses to its end state.
+   Content order and meaning are unaffected because no reveal ever carries
+   information — a reveal only ever changes when something becomes visible, not
+   whether it exists. */
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
@@ -65,8 +184,15 @@
   }
 
   .reveal, .reveal-image { opacity: 1; transform: none; }
+  .reveal--mask { clip-path: none; transform: none; }
   .motion-lift:hover { translate: none; }
   .motion-image-zoom:hover img,
   .motion-image-zoom:hover .asset-frame__stage img,
   .motion-image-zoom:hover .asset-placeholder { transform: none; }
+
+  /* M4 is removed outright rather than shortened: a parallax layer with a
+     0.01ms transition still tracks scroll. */
+  .parallax-layer,
+  .parallax-layer--deep,
+  .parallax-layer--near { transform: none !important; will-change: auto; }
 }

@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="Unverbindliche Anfrage für eine Brandschutzhelfer-Schulung in fünf kurzen Schritten.">
   <meta name="twitter:image" content="https://silentsn3aker.github.io/brandschutzwerk-preview/assets/brand/og-card.jpg">
   <meta name="twitter:image:alt" content="Vorschaukarte der BrandschutzWerk-Konzeptdemo: Schriftzug, Leitsatz „Im Ernstfall zählt, was Ihre Mitarbeiter wirklich können.“ und die Kennzeichnung Konzeptdemo.">
-  <meta name="theme-color" content="#f7f7f5">
+  <meta name="theme-color" content="#0d1113">
   <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
   <link rel="preload" href="../assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="../css/foundation/reset.css">
   <link rel="stylesheet" href="../css/foundation/typography.css">
   <link rel="stylesheet" href="../css/foundation/layout.css">
+  <link rel="stylesheet" href="../css/foundation/planes.css">
   <link rel="stylesheet" href="../css/foundation/utilities.css">
   <link rel="stylesheet" href="../css/foundation/motion.css">
   <link rel="stylesheet" href="../css/components/icon.css">
@@ -42,6 +43,10 @@
   <link rel="stylesheet" href="../css/components/stepper.css">
   <link rel="stylesheet" href="../css/components/demo-mode.css">
   <link rel="stylesheet" href="../css/patterns/section-heading.css">
+  <link rel="stylesheet" href="../css/patterns/process.css">
+  <link rel="stylesheet" href="../css/patterns/scene.css">
+  <link rel="stylesheet" href="../css/patterns/truth-rail.css">
+  <link rel="stylesheet" href="../css/patterns/stage-set.css">
   <link rel="stylesheet" href="../css/pages/request.css">
   <script type="application/ld+json">
     {
@@ -150,7 +155,7 @@
     </div>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" class="request-scene plane plane-ink">
     <div class="container">
       <div class="grid-12 request-layout">
 
@@ -191,10 +196,31 @@
             <p class="stepper__status" data-stepper-status role="status">Schritt 1 von 5 · Leistung</p>
           </section>
 
-          <form class="request-form" novalidate data-request-form>
+          <!-- The phone's view of the dossier. On a desktop the full aside sits
+               beside the form and fills while the visitor chooses; on a phone it
+               is a screen and a half below the choices, so the request appears
+               to build in a place nobody is looking. This is the same state,
+               written by the same renderer, close enough to the controls to be
+               seen changing. It is not a second source: every value here is the
+               same [data-summary-value] the aside carries, and the aside keeps
+               the semantics — this projection is aria-hidden so the values are
+               not announced twice. -->
+          <aside class="request-mini glass glass--ember" data-component="RequestMiniSummary" aria-hidden="true">
+            <p class="request-mini__title">Ihre Anfrage</p>
+            <dl class="request-mini__list">
+              <div class="request-mini__row"><dt>Schulung</dt><dd data-summary-value="service" data-empty="true">—</dd></div>
+              <div class="request-mini__row"><dt>Teilnehmer</dt><dd data-summary-value="participants" data-empty="true">—</dd></div>
+              <div class="request-mini__row"><dt>Standorte</dt><dd data-summary-value="locationCount" data-empty="true">—</dd></div>
+              <div class="request-mini__row"><dt>Ort</dt><dd data-summary-value="location" data-empty="true">—</dd></div>
+              <div class="request-mini__row"><dt>Zeitraum</dt><dd data-summary-value="timing" data-empty="true">—</dd></div>
+            </dl>
+            <p class="request-mini__price"><span data-summary-price data-empty="true">—</span><span class="badge">DEMO-PREIS</span></p>
+          </aside>
+
+          <form class="request-form request-sheet plane plane-paper" novalidate data-request-form>
 
             <!-- REQUEST_STEP_01_SERVICE -->
-            <section class="request-step" data-section-id="REQUEST_STEP_01_SERVICE" data-step-id="REQUEST_STEP_01_SERVICE" data-step-index="1" aria-labelledby="step-1-question">
+            <section class="request-step slide-step" data-section-id="REQUEST_STEP_01_SERVICE" data-step-id="REQUEST_STEP_01_SERVICE" data-step-index="1" aria-labelledby="step-1-question">
               <h2 class="request-step__question" id="step-1-question" tabindex="-1">Welche Schulung benötigen Sie?</h2>
               <div class="request-options" role="group" aria-labelledby="step-1-question" data-field-id="FIELD_SERVICE">
                 <button class="selectable-card request-option" type="button" aria-pressed="false" data-value="brandschutzhelfer">
@@ -226,7 +252,7 @@
             </section>
 
             <!-- REQUEST_STEP_02_PARTICIPANTS -->
-            <section class="request-step" data-section-id="REQUEST_STEP_02_PARTICIPANTS" data-step-id="REQUEST_STEP_02_PARTICIPANTS" data-step-index="2" aria-labelledby="step-2-question" hidden>
+            <section class="request-step slide-step" data-section-id="REQUEST_STEP_02_PARTICIPANTS" data-step-id="REQUEST_STEP_02_PARTICIPANTS" data-step-index="2" aria-labelledby="step-2-question" hidden>
               <h2 class="request-step__question" id="step-2-question" tabindex="-1">Wie viele Personen sollen teilnehmen?</h2>
               <div class="request-options request-options--compact" role="group" aria-labelledby="step-2-question" data-field-id="FIELD_PARTICIPANTS">
                 <button class="selectable-card request-option" type="button" aria-pressed="false" data-value="1-10">
@@ -270,7 +296,7 @@
             </section>
 
             <!-- REQUEST_STEP_03_LOCATION -->
-            <section class="request-step" data-section-id="REQUEST_STEP_03_LOCATION" data-step-id="REQUEST_STEP_03_LOCATION" data-step-index="3" aria-labelledby="step-3-question" hidden>
+            <section class="request-step slide-step" data-section-id="REQUEST_STEP_03_LOCATION" data-step-id="REQUEST_STEP_03_LOCATION" data-step-index="3" aria-labelledby="step-3-question" hidden>
               <h2 class="request-step__question" id="step-3-question" tabindex="-1">Wo soll die Schulung stattfinden?</h2>
               <div class="request-fields">
                 <div class="field request-field--postal" data-field-id="FIELD_POSTAL_CODE">
@@ -295,7 +321,7 @@
             </section>
 
             <!-- REQUEST_STEP_04_TIMING -->
-            <section class="request-step" data-section-id="REQUEST_STEP_04_TIMING" data-step-id="REQUEST_STEP_04_TIMING" data-step-index="4" aria-labelledby="step-4-question" hidden>
+            <section class="request-step slide-step" data-section-id="REQUEST_STEP_04_TIMING" data-step-id="REQUEST_STEP_04_TIMING" data-step-index="4" aria-labelledby="step-4-question" hidden>
               <h2 class="request-step__question" id="step-4-question" tabindex="-1">Wann passt die Schulung ungefähr?</h2>
               <div class="request-options" role="group" aria-labelledby="step-4-question" data-field-id="FIELD_TIMING">
                 <button class="selectable-card request-option" type="button" aria-pressed="false" data-value="asap">
@@ -333,7 +359,7 @@
             </section>
 
             <!-- REQUEST_STEP_05_CONTACT -->
-            <section class="request-step" data-section-id="REQUEST_STEP_05_CONTACT" data-step-id="REQUEST_STEP_05_CONTACT" data-step-index="5" aria-labelledby="step-5-question" hidden>
+            <section class="request-step slide-step" data-section-id="REQUEST_STEP_05_CONTACT" data-step-id="REQUEST_STEP_05_CONTACT" data-step-index="5" aria-labelledby="step-5-question" hidden>
               <h2 class="request-step__question" id="step-5-question" tabindex="-1">Wie können wir Sie erreichen?</h2>
               <div class="request-fields">
                 <div class="field" data-field-id="FIELD_COMPANY">
@@ -375,7 +401,7 @@
         </div>
 
         <!-- REQUEST_03_SUMMARY -->
-        <aside class="request-summary" data-component="RequestSummary" data-section-id="REQUEST_03_SUMMARY" aria-labelledby="summary-title">
+        <aside class="request-summary glass glass--ember" data-component="RequestSummary" data-section-id="REQUEST_03_SUMMARY" aria-labelledby="summary-title">
           <h2 class="request-summary__title" id="summary-title">Ihre Anfrage</h2>
           <dl class="request-summary__list">
             <div class="request-summary__row" data-summary-row="service">

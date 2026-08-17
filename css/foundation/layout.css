@@ -11,9 +11,7 @@
   gap: var(--grid-gap);
 }
 
-
 .text-column { max-width: 47.5rem; }
-
 
 .stack > * + * { margin-top: var(--stack-space, 1.5rem); }
 .stack--tight { --stack-space: .5rem; }
@@ -29,6 +27,12 @@
 .surface-authority h1, .surface-authority h2,
 .surface-authority h3, .surface-authority h4 { color: var(--color-text-on-dark); }
 
+/* No overflow containment here any more. `overflow-x: clip` was a belt against
+   laterally entering reveals; that overflow is fixed at its source — the lateral
+   reveals become vertical below 1024px and travel inside the container above it
+   — so the belt guards a condition that no longer occurs. Verified at 1440,
+   1024, 768, 390 and 320 across all four routes: no horizontal overflow without
+   it, and one fewer overflow container in the tree. */
 .page-shell { min-height: 100vh; display: flex; flex-direction: column; }
 .page-shell main { flex: 1; }
 

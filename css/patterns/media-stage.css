@@ -21,7 +21,9 @@
   width: min(38%, 22rem);
   height: min(46%, 12rem);
   border-radius: var(--radius-image);
-  background: linear-gradient(135deg, var(--color-brand) 0%, #8f1f17 100%);
+  /* The accent runs the heat axis rather than sitting on one flat red, so it
+     belongs to the palette instead of being a brand rectangle. */
+  background: linear-gradient(135deg, var(--color-attention) 0%, var(--color-brand) 55%, var(--color-brand-hover) 100%);
   opacity: .92;
 }
 
@@ -51,8 +53,17 @@
   width: fit-content;
 }
 
+/* The accent hangs outward past the anchor, which needs page gutter to hang
+   into. Desktop has it; from the tablet breakpoint down the container is close
+   enough to the viewport edge that the outward offset becomes horizontal page
+   overflow, so below 1024px it stays flush and only the vertical offset
+   remains. Vertical offset costs nothing — the page already scrolls that way. */
+@media (max-width: 1023px) {
+  .media-stage__accent { right: 0; }
+}
+
 @media (max-width: 767px) {
-  .media-stage__accent { top: -.625rem; right: -.5rem; width: 44%; height: 38%; }
+  .media-stage__accent { top: -.625rem; right: 0; width: 44%; height: 38%; }
   /* Mobile puts the inset bottom-RIGHT: the caption bar owns the top-left on a
      narrow stage, and a left-hanging inset would sit under it. */
   .media-stage__inset { width: 34%; min-width: 7rem; left: auto; right: .875rem; bottom: -1.5rem; }

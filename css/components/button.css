@@ -1,36 +1,153 @@
 /* COMPONENT — PrimaryButton / SecondaryButton / TextLinkCTA
    Canonical class is .btn. `.button` is DEPRECATED (deprecations.json) and is
-   deliberately not defined anywhere in this foundation. */
+   deliberately not defined anywhere in this foundation.
+
+   SIGNATURE. The primary action has a silhouette of its own: the arrow sits in
+   its own chamber behind a hairline, and the trailing lower corner is chamfered
+   at the same angle the section planes clip at — the button speaks the same
+   edge language as the architecture it sits in. Hover slides the ember fill
+   toward the chamber, the divider brightens and the arrow leads; press
+   compresses the whole control slightly.
+
+   The chamfered surface is painted by a ::before layer rather than by clipping
+   the element, because clip-path clips everything the element paints —
+   including the focus outline, which must stay visible and un-cut. */
 
 .btn {
+  position: relative;
+  isolation: isolate;
   min-height: var(--control-height);
   min-width: var(--control-min-target);
-  padding: 0 1.375rem;
+  padding: 0 1.5rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .5rem;
+  gap: .625rem;
   border: 1px solid transparent;
   border-radius: var(--radius-button);
-  font-weight: 650;
+  font-weight: 600;
+  font-size: .9375rem;
+  letter-spacing: -.008em;
   line-height: 1;
   text-align: center;
   cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-standard),
+  transition: color var(--motion-fast) var(--ease-standard),
               border-color var(--motion-fast) var(--ease-standard),
-              transform var(--motion-fast) var(--ease-standard);
+              scale var(--motion-micro) var(--ease-standard);
 }
 
-.btn--primary { background: var(--color-brand); color: #fff; }
-.btn--primary:hover { background: var(--color-brand-hover); }
+/* --- Primary: ember chamber --- */
+.btn--primary {
+  color: #fff;
+  padding-right: 3.625rem;
+}
+.btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - .625rem), calc(100% - .625rem) 100%, 0 100%);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-brand);
+  background-image: linear-gradient(100deg,
+    var(--color-brand-hover) 0 45%, var(--color-brand) 55% 100%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  transition: background-position var(--motion-base) var(--ease-standard);
+  box-shadow: 0 1px 2px rgba(13, 17, 19, .18);
+}
+/* The chamber divider. */
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  top: .625rem;
+  bottom: .625rem;
+  right: 2.6875rem;
+  width: 1px;
+  background: rgba(255, 255, 255, .32);
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+.btn--primary .btn__arrow {
+  position: absolute;
+  right: 1.0625rem;
+}
+.btn--primary:hover::before { background-position: 0 0; box-shadow: var(--shadow-raised); }
+.btn--primary:hover::after { background: rgba(255, 255, 255, .58); }
 
-.btn--secondary { background: transparent; color: var(--color-text); border-color: var(--color-border-strong); }
-.btn--secondary:hover { background: var(--color-surface); }
+/* --- Light: the chamber on an ink plane --- */
+.btn--light {
+  color: var(--color-ink);
+  padding-right: 3.625rem;
+}
+.btn--light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - .625rem), calc(100% - .625rem) 100%, 0 100%);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  background-image: linear-gradient(100deg, var(--color-bg) 0 45%, var(--color-surface) 55% 100%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  transition: background-position var(--motion-base) var(--ease-standard);
+}
+.btn--light::after {
+  content: "";
+  position: absolute;
+  top: .625rem;
+  bottom: .625rem;
+  right: 2.6875rem;
+  width: 1px;
+  background: rgba(13, 17, 19, .22);
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+.btn--light .btn__arrow { position: absolute; right: 1.0625rem; }
+.btn--light:hover::before { background-position: 0 0; box-shadow: var(--shadow-float); }
+.btn--light:hover::after { background: rgba(13, 17, 19, .42); }
 
-.btn--light { background: #fff; color: var(--color-dark); }
-.btn--light:hover { background: #f2f2ef; }
+/* Primary/light without an arrow keep the plain chamber-less surface. */
+.btn--primary:not(:has(.btn__arrow)),
+.btn--light:not(:has(.btn__arrow)) { padding-right: 1.5rem; }
+.btn--primary:not(:has(.btn__arrow))::after,
+.btn--light:not(:has(.btn__arrow))::after { content: none; }
 
-.btn:active { transform: translateY(1px); }
+/* --- Secondary: technical ghost of the same family --- */
+.btn--secondary {
+  color: var(--ctx-text, var(--color-text));
+  background-color: transparent;
+  border-color: var(--ctx-border-strong, var(--color-border-strong));
+  background-image: linear-gradient(100deg,
+    var(--ctx-sunken, var(--color-surface-sunken)) 0 45%, transparent 55% 100%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  transition: background-position var(--motion-base) var(--ease-standard),
+              border-color var(--motion-fast) var(--ease-standard),
+              color var(--motion-fast) var(--ease-standard),
+              scale var(--motion-micro) var(--ease-standard);
+}
+/* The corner tick: the chamfer's echo, drawn instead of cut. */
+.btn--secondary::after {
+  content: "";
+  position: absolute;
+  right: .1875rem;
+  bottom: .3125rem;
+  width: .5625rem;
+  height: 1px;
+  background: currentColor;
+  opacity: .45;
+  transform: rotate(-45deg);
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+.btn--secondary:hover {
+  background-position: 0 0;
+  border-color: var(--ctx-brand, var(--color-brand));
+  color: var(--ctx-brand, var(--color-brand));
+}
+.btn--secondary:hover::after { opacity: .9; }
+
+/* Tactile press: the control compresses as one object, chamber included. */
+.btn:active { scale: .97; }
 
 .btn:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
@@ -40,34 +157,64 @@
 .btn[disabled], .btn[aria-disabled="true"] {
   opacity: .45;
   cursor: not-allowed;
-  transform: none;
+  scale: none;
   pointer-events: none;
 }
 
 /* Arrow is part of the component, not page markup. */
 .btn__arrow {
   flex: 0 0 auto;
-  width: 1.125rem;
-  height: 1.125rem;
-  transition: transform var(--motion-fast) var(--ease-standard);
+  width: 1.0625rem;
+  height: 1.0625rem;
+  transition: transform var(--motion-base) var(--ease-standard);
 }
-.btn:hover .btn__arrow { transform: translateX(3px); }
+.btn:hover .btn__arrow { transform: translateX(5px); }
 
 .btn--block { width: 100%; }
 
-/* Text link CTA: no button surface, same arrow contract. */
+/* Magnetic response. js/core/motion.js writes --btn-mx/--btn-my in device
+   pixels while a fine pointer is inside the control, and clears them on leave.
+   Gated on pointer:fine so a touch device never gets a control that drifts
+   away from the finger, and removed entirely under reduced motion. */
+@media (hover: hover) and (pointer: fine) {
+  .btn--magnetic {
+    translate: calc(var(--btn-mx, 0) * 1px) calc(var(--btn-my, 0) * 1px);
+    transition: translate var(--motion-fast) var(--ease-standard),
+                color var(--motion-fast) var(--ease-standard),
+                border-color var(--motion-fast) var(--ease-standard),
+                scale var(--motion-micro) var(--ease-standard);
+  }
+}
+
+/* --- Tertiary: editorial text CTA, underline draws from the leading edge --- */
 .link-cta {
   min-height: var(--control-min-target);
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  color: var(--color-text);
+  color: var(--ctx-text, var(--color-text));
   font-size: .9375rem;
-  font-weight: 650;
+  font-weight: 600;
+  letter-spacing: -.008em;
+  background-image: linear-gradient(90deg,
+    var(--ctx-brand, var(--color-brand)), var(--ctx-brand, var(--color-brand)));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size var(--motion-base) var(--ease-standard),
+              color var(--motion-fast) var(--ease-standard);
 }
-.link-cta:hover .btn__arrow { transform: translateX(3px); }
+.link-cta:hover {
+  background-size: 100% 2px;
+  color: var(--ctx-brand, var(--color-brand));
+}
+.link-cta:hover .btn__arrow { transform: translateX(5px); }
 .link-cta:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-offset);
   border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--magnetic { translate: none !important; }
 }

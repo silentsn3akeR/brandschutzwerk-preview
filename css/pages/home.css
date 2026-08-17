@@ -1,20 +1,67 @@
 
 
 /* ---------------------------------------------------------------- HOME_01_HERO
-   Layered composition: copy cols 1-6, media anchor cols 7-12 rising to the top
-   of the section, fact panel overlapping the anchor's lower left as the proof
-   layer. The media is the first thing in view rather than a rectangle below
-   the fold; the text hierarchy and the CTA pair are unchanged. */
+   An immersive opening on the ink plane rather than an editorial block on the
+   page background. The route now starts dark, breaks into light for the
+   reading sections, and closes dark again, so a plane change reads as a
+   chapter instead of a background swap.
+
+   Layer order, back to front: atmosphere (owned by .plane-ink), the media
+   anchor on a slow parallax layer, the copy, and the offer panel floating in
+   glass over the anchor's lower left. That is the depth ladder the flat
+   version did not have — everything used to sit on one plane. */
+
+/* The hero runs under the header rather than starting below it, so the header's
+   transparent rest state has a scene to sit in and the route opens at the top
+   of the viewport. The negative margin is taken back as padding, so nothing
+   moves under the navigation. */
+.home-hero {
+  min-height: min(92vh, 54rem);
+  margin-top: calc(-1 * var(--header-height));
+  padding-top: calc(var(--space-7) + var(--header-height));
+  display: flex;
+  align-items: center;
+}
+/* A second, stronger light field on top of the plane's own atmosphere. Home is
+   the cinematic route; the other ink planes keep the quieter default. */
+.home-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 80% at 78% 85%, var(--atmos-ember), transparent 60%),
+    radial-gradient(40% 50% at 5% 75%, var(--atmos-steel), transparent 70%);
+  opacity: .8;
+}
 
 .home-hero__grid { row-gap: var(--space-5); align-items: start; }
+
+/* The one statement per route that gets the full display voice. */
+.home-hero__display {
+  font-size: var(--font-size-display);
+  font-weight: 620;
+  line-height: .97;
+  letter-spacing: var(--tracking-display);
+  margin-top: 1.25rem;
+  text-wrap: balance;
+}
 
 /* Desktop: headline and action block stack in the left column, the media
    anchor holds the whole right column across both rows. Mobile inherits the
    DOM order instead — headline, image, offer, actions — so the anchor is in
    the first view there too. */
-.home-hero__copy { grid-column: 1 / span 6; grid-row: 1; padding-top: var(--space-2); }
-.home-hero__action-block { grid-column: 1 / span 6; grid-row: 2; align-self: start; }
-.home-hero__media { grid-column: 7 / span 6; grid-row: 1 / span 2; margin-top: 0; align-self: start; }
+/* The statement gets the full measure and the evidence assembles underneath it,
+   rather than the headline sharing row one with a picture. A display size only
+   reads as a display size if it has the width to be one — in the old six-column
+   column this sentence broke into six lines and looked like a mistake. */
+.home-hero__copy { grid-column: 1 / span 10; grid-row: 1; position: relative; z-index: 2; }
+.home-hero__action-block { grid-column: 1 / span 5; grid-row: 2; align-self: start; padding-top: var(--space-2); position: relative; z-index: 2; }
+/* The media plane tucks under the statement instead of starting below it. The
+   overlap is what turns two stacked rows into foreground and midground — the
+   statement is in front of the scene, not above it. */
+.home-hero__media { grid-column: 7 / span 6; grid-row: 2; margin-top: -4.75rem; align-self: start; z-index: 1; }
 /* Desktop anchor stands taller than the 16:7 the mobile crop keeps: in a
    six-column column a 16:7 strip reads as a banner, 3:2 reads as a subject.
    The ratio class stays 16:7 so the mobile crop and its QA contract are
@@ -32,8 +79,18 @@
   margin-left: var(--space-3);
 }
 
-.home-hero__supporting { margin-top: 1.25rem; color: var(--color-text); font-weight: 560; }
-.home-hero__body { margin-top: .875rem; max-width: 34rem; }
+/* The display voice is set here rather than in the token so the hero can be
+   large without dragging every h1 on the site with it. */
+.home-hero__display { font-size: clamp(3rem, 6.6vw, 5.75rem); }
+
+.home-hero__supporting {
+  margin-top: 1.5rem;
+  color: var(--ctx-text);
+  font-size: var(--font-size-lead);
+  font-weight: 480;
+  letter-spacing: -.012em;
+}
+.home-hero__body { margin-top: .875rem; max-width: 34rem; color: var(--ctx-text-muted); }
 
 .home-hero__actions {
   display: flex;
@@ -42,19 +99,17 @@
   margin-top: 2rem;
 }
 
-.home-fact-panel {
-  padding: 1.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-}
+/* Material comes from .glass in the foundation; this only owns layout and type,
+   so the one glass recipe stays in one place. */
+.home-fact-panel { padding: 1.75rem; }
+
 .home-fact-panel__status {
-  margin-bottom: .875rem;
-  color: var(--color-brand);
+  margin-bottom: 1rem;
+  color: var(--ctx-brand);
+  font-family: var(--font-mono);
   font-size: var(--font-size-xs);
-  font-weight: 720;
-  letter-spacing: .08em;
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
 }
 .home-fact-panel__list { display: grid; gap: 0; }
 .home-fact-panel__row {
@@ -63,25 +118,27 @@
   justify-content: space-between;
   gap: 1rem;
   padding-block: .875rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--ctx-border);
 }
 .home-fact-panel__row:first-child { border-top: 0; padding-top: 0; }
 .home-fact-panel__row dt {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
+  color: var(--ctx-steel);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-label);
 }
 .home-fact-panel__row dd {
   margin: 0;
-  color: var(--color-text);
+  color: var(--ctx-text);
   font-size: var(--font-size-sm);
-  font-weight: 680;
+  font-weight: 620;
   text-align: right;
 }
 .home-fact-panel__footnote {
   margin-top: 1.25rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+  border-top: 1px solid var(--ctx-border);
+  color: var(--ctx-text-muted);
   font-size: var(--font-size-xs);
   line-height: 1.5;
 }
@@ -106,67 +163,94 @@
 }
 .home-credibility__item p { font-size: var(--font-size-sm); }
 
-/* ------------------------------------- HOME_03_SERVICE_INTRO + HOME_04_BENTO
-   Intro and bento read as one editorial block, so the intro drops its bottom
-   padding and the bento supplies the section rhythm. */
+/* ------------------------------- HOME_03_SERVICE_INTRO + HOME_04_SERVICE_RAIL
+   Intro and services read as one editorial block, so the intro drops its bottom
+   padding and the rail supplies the section rhythm.
+
+   This replaced a big-card-plus-two-small-cards grid. Three bordered, filled,
+   shadowed containers became zero: the lead offer earns its weight from the
+   media plane and the display size, the two supporting offers are rows
+   separated by a rule. Grouping now comes from measure, alignment and space,
+   which is what card soup was standing in for.
+
+   The offers are deliberately not numbered. They are parallel services, not a
+   sequence, and a numeral would assert an order the content does not have. */
 
 .home-service-intro { padding-bottom: 0; }
-.home-bento { padding-bottom: var(--space-9); padding-top: var(--space-5); }
+.home-services { padding-bottom: var(--space-9); padding-top: var(--space-5); }
 
-.home-bento__grid {
+.service-rail { list-style: none; margin: 0; padding: 0; }
+
+.service-rail__item {
+  position: relative;
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--ctx-border);
+}
+.service-rail__item:first-child { border-top: 0; padding-top: 0; }
+
+/* The lead offer: media on the right, statement on the left, no container. */
+.service-rail__item--lead {
   display: grid;
-  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
-  gap: var(--grid-gap);
-  align-items: stretch;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  grid-template-areas:
+    "head  media"
+    "title media"
+    "copy  media"
+    "meta  media"
+    "cta   media";
+  column-gap: var(--space-5);
+  align-items: start;
 }
-
-.home-bento__primary {
-  display: flex;
-  flex-direction: column;
-  min-height: 36.25rem; 
-  padding: 2.5rem;
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
-}
-.home-bento__primary-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.home-bento__primary-head .icon { color: var(--color-brand); }
-.home-bento__media { margin-top: 1.75rem; }
-.home-bento__primary h3 {
-  margin-top: 1.75rem;
-  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
-  letter-spacing: -.03em;
-}
-.home-bento__primary > p { margin-top: .875rem; max-width: 34rem; }
-.home-bento__meta {
-  margin-top: 1.25rem;
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
+.service-rail__head { grid-area: head; display: flex; align-items: center; gap: 1rem; }
+.service-rail__head .icon { color: var(--ctx-brand); }
+.service-rail__media { grid-area: media; align-self: center; }
+.service-rail__item--lead h3 {
+  grid-area: title;
+  margin-top: 1.5rem;
+  font-size: var(--font-size-h2);
   font-weight: 620;
+  line-height: 1.02;
+  letter-spacing: var(--tracking-tight);
 }
-.home-bento__cta { margin-top: 1.75rem; align-self: flex-start; }
+.service-rail__lead-copy { grid-area: copy; margin-top: 1rem; max-width: 32rem; }
+.service-rail__meta { grid-area: meta; margin-top: 1.25rem; }
+.service-rail__cta { grid-area: cta; margin-top: 1.75rem; justify-self: start; }
 
-.home-bento__secondary { display: grid; grid-template-rows: 1fr 1fr; gap: var(--grid-gap); }
-.home-bento__card {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 1.75rem;
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+/* Supporting offers: an icon column, the text, and the action at the end of the
+   row. The rule above each one heats up on hover, which is the only decoration
+   the row gets. */
+.service-rail__item:not(.service-rail__item--lead) {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: center;
 }
-.home-bento__card .icon--feature { color: var(--color-brand); }
-.home-bento__card-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.home-bento__card h3 { margin-top: 1.125rem; font-size: var(--font-size-xl); letter-spacing: -.02em; }
-.home-bento__card p { margin-top: .5rem; font-size: var(--font-size-sm); }
-.home-bento__card .link-cta { margin-top: auto; padding-top: 1rem; color: var(--color-brand); }
+.service-rail__icon { color: var(--ctx-steel); transition: color var(--motion-base) var(--ease-standard); }
+.service-rail__item h3 { font-size: var(--font-size-h3); font-weight: 620; letter-spacing: var(--tracking-tight); }
+.service-rail__item:not(.service-rail__item--lead) p {
+  margin-top: .375rem;
+  max-width: 42rem;
+  color: var(--ctx-text-muted);
+  font-size: var(--font-size-sm);
+}
+.service-rail__badge { margin-left: .75rem; vertical-align: middle; }
+.service-rail__link { white-space: nowrap; }
+
+/* The heat line. It grows from the leading edge of the row that is being
+   considered, using the same direction as every other action on the site. */
+.service-rail__item:not(.service-rail__item--lead)::before {
+  content: "";
+  position: absolute;
+  inset: -1px auto auto 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--ctx-brand), var(--ctx-attention));
+  transition: width var(--motion-reveal) var(--ease-entrance);
+}
+@media (hover: hover) {
+  .service-rail__item:not(.service-rail__item--lead):hover::before { width: 100%; }
+  .service-rail__item:hover .service-rail__icon { color: var(--ctx-brand); }
+}
 
 /* ------------------------------------------------------------ HOME_05_PROCESS
    Surface, spacing and rule colours come from .surface-authority + .timeline. */
@@ -359,9 +443,12 @@
      track wider than its container and the page scrolls sideways at 320.
      Chromium hid it because the blowout stayed just inside the viewport;
      Firefox and WebKit both overflowed by 7px. */
-  .home-bento__grid { grid-template-columns: minmax(0, 1fr); }
-  .home-bento__primary { min-height: 0; }
-  .home-bento__secondary { grid-template-rows: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Tablet: the lead offer stops competing for width and stacks, media last. */
+  .service-rail__item--lead {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "head" "title" "media" "copy" "meta" "cta";
+  }
+  .service-rail__media { margin-block: 1.5rem; }
 
   .home-trainer__media .asset-frame { position: static; }
 
@@ -396,11 +483,18 @@
   .home-fact-panel { margin-top: var(--space-4); margin-left: 0; padding: 1.5rem; }
 
   .home-credibility__grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .home-bento { padding-top: var(--space-4); }
-  .home-bento__primary { padding: 1.75rem; }
-  .home-bento__primary h3 { margin-top: 1.75rem; }
-  .home-bento__cta { align-self: stretch; }
-  .home-bento__secondary { grid-template-columns: minmax(0, 1fr); }
+  .home-services { padding-top: var(--space-4); }
+  .service-rail__cta { justify-self: stretch; }
+  /* Mobile: the supporting rows become a stack, action under the text rather
+     than beside it, so nothing has to shrink below a comfortable measure. */
+  .service-rail__item:not(.service-rail__item--lead) {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "icon body" ".    link";
+    row-gap: 1rem;
+  }
+  .service-rail__icon { grid-area: icon; align-self: start; }
+  .service-rail__body { grid-area: body; }
+  .service-rail__link { grid-area: link; justify-self: start; }
   .home-audience-fit__list { grid-template-columns: 1fr; gap: 1.5rem; }
   .home-quote-widget { padding: 1.5rem; }
   .home-quote-widget__options { grid-template-columns: repeat(2, minmax(0, 1fr)); }

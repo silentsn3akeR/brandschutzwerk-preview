@@ -2,8 +2,28 @@
    Link targets meet --control-min-target. V1 shipped 20px-tall footer links;
    that is corrected here once, centrally. */
 
-.site-footer { background: #171a1d; color: var(--color-text-on-dark); padding: 5rem 0 2rem; }
-.site-footer p { color: rgba(248, 249, 250, .58); font-size: var(--font-size-sm); }
+/* The end of the route is a scene, not a strip of links. It runs on the deepest
+   plane, carries the same ember atmosphere the immersive sections use, and
+   closes with the brand set at a size that reads as a sign-off. */
+
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-text-on-dark);
+  padding: 6rem 0 2rem;
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(58% 70% at 8% 100%, var(--atmos-ember), transparent 68%),
+              radial-gradient(46% 60% at 96% 8%, var(--atmos-flame), transparent 70%);
+}
+.site-footer p { color: var(--color-text-muted-on-dark); font-size: var(--font-size-sm); }
 
 .site-footer__grid {
   display: grid;
@@ -12,15 +32,22 @@
   padding-bottom: 4rem;
 }
 .site-footer__brand { max-width: 20rem; display: grid; gap: 1rem; justify-items: start; }
-.site-footer__brand-name { color: #fff; font-weight: 720; letter-spacing: -.025em; }
+.site-footer__brand-name {
+  color: var(--color-text-on-dark);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+}
 
 .site-footer__column { display: flex; flex-direction: column; align-items: flex-start; }
 .site-footer__column h2 {
   margin-bottom: .5rem;
-  color: rgba(255, 255, 255, .48);
-  font-size: .6875rem;
-  font-weight: 720;
-  letter-spacing: .1em;
+  color: var(--color-steel-on-dark);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 /* Both dimensions of the target contract, not just height. A short

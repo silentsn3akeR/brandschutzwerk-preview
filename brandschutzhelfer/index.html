@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="Praxisnahe Brandschutzhelfer-Ausbildung direkt im Unternehmen – verständliche Theorie, praktische Löschübung und persönliche Durchführung.">
   <meta name="twitter:image" content="https://silentsn3aker.github.io/brandschutzwerk-preview/assets/brand/og-card.jpg">
   <meta name="twitter:image:alt" content="Vorschaukarte der BrandschutzWerk-Konzeptdemo: Schriftzug, Leitsatz „Im Ernstfall zählt, was Ihre Mitarbeiter wirklich können.“ und die Kennzeichnung Konzeptdemo.">
-  <meta name="theme-color" content="#f7f7f5">
+  <meta name="theme-color" content="#0d1113">
   <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
   <link rel="preload" href="../assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="../css/foundation/reset.css">
   <link rel="stylesheet" href="../css/foundation/typography.css">
   <link rel="stylesheet" href="../css/foundation/layout.css">
+  <link rel="stylesheet" href="../css/foundation/planes.css">
   <link rel="stylesheet" href="../css/foundation/utilities.css">
   <link rel="stylesheet" href="../css/foundation/motion.css">
   <link rel="stylesheet" href="../css/components/icon.css">
@@ -49,6 +50,10 @@
   <link rel="stylesheet" href="../css/patterns/split-layout.css">
   <link rel="stylesheet" href="../css/patterns/micro-trust.css">
   <link rel="stylesheet" href="../css/patterns/timeline.css">
+  <link rel="stylesheet" href="../css/patterns/process.css">
+  <link rel="stylesheet" href="../css/patterns/scene.css">
+  <link rel="stylesheet" href="../css/patterns/truth-rail.css">
+  <link rel="stylesheet" href="../css/patterns/stage-set.css">
   <link rel="stylesheet" href="../css/patterns/media-stage.css">
   <link rel="stylesheet" href="../css/patterns/final-cta.css">
   <link rel="stylesheet" href="../css/pages/training.css">
@@ -199,7 +204,7 @@
 </svg>
   <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
 
-  <header class="site-header" data-component="SiteHeader" data-section-id="TRAINING_00_HEADER">
+  <header class="site-header site-header--over-scene" data-component="SiteHeader" data-section-id="TRAINING_00_HEADER">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="../" aria-label="BrandschutzWerk Startseite">
         <img src="../assets/brand/brand-mark.svg" alt="" width="28" height="28">
@@ -233,12 +238,12 @@
   <main id="main-content">
 
     <!-- TRAINING_01_HERO -->
-    <section class="section section--large surface-editorial training-hero" data-section-id="TRAINING_01_HERO" data-component="TrainingHero">
+    <section class="section section--large plane plane-ink plane-edge-fall training-hero" data-section-id="TRAINING_01_HERO" data-component="TrainingHero">
       <div class="container">
         <div class="grid-12 training-hero__grid">
           <div class="training-hero__copy reveal">
             <p class="eyebrow">BRANDSCHUTZHELFER-AUSBILDUNG</p>
-            <h1>Mitarbeiter auf den Ernstfall vorbereiten – verständlich und praxisnah.</h1>
+            <h1 class="training-hero__display reveal reveal--mask">Mitarbeiter auf den Ernstfall vorbereiten – verständlich und praxisnah.</h1>
             <p class="lead" data-status="FACHLICHE_FREIGABE_REQUIRED">Die Schulung vermittelt wesentliche Grundlagen des betrieblichen Brandschutzes und verbindet diese mit einer praktischen Löschübung direkt bei Ihnen vor Ort.</p>
             <div class="training-hero__actions">
               <a class="btn btn--primary" href="../anfrage/">Schulung anfragen<svg class="icon btn__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
@@ -246,7 +251,7 @@
             </div>
           </div>
 
-          <aside class="training-quick-facts reveal" data-delay="1" data-component="CourseMetaBar" aria-labelledby="quick-facts-title">
+          <aside class="training-quick-facts glass glass--ember reveal reveal--from-end" data-delay="2" data-component="CourseMetaBar" aria-labelledby="quick-facts-title">
             <h2 class="sr-only" id="quick-facts-title">Eckdaten der Schulung</h2>
             <dl class="training-quick-facts__list">
               <div class="training-quick-facts__row">
@@ -273,7 +278,7 @@
     </section>
 
     <!-- TRAINING_02_META_BAR -->
-    <section class="training-meta-bar surface-functional" data-section-id="TRAINING_02_META_BAR" aria-labelledby="meta-bar-title">
+    <section class="training-meta-bar plane plane-smoked" data-section-id="TRAINING_02_META_BAR" aria-labelledby="meta-bar-title">
       <div class="container">
         <h2 class="sr-only" id="meta-bar-title">Merkmale der Schulung</h2>
         <ul class="training-meta-bar__grid">
@@ -310,12 +315,77 @@
     </section>
 
     <!-- TRAINING_04_CURRICULUM -->
-    <section class="section surface-functional training-curriculum" data-section-id="TRAINING_04_CURRICULUM" data-component="CurriculumTimeline">
+    <section class="section plane plane-smoked training-curriculum" data-section-id="TRAINING_04_CURRICULUM" data-component="CurriculumTimeline">
       <div class="container">
         <div class="section-heading reveal">
           <p class="eyebrow">ABLAUF DER INHALTE</p>
           <h2>Vom Verstehen zum Handeln.</h2>
         </div>
+        <figure class="signature reveal reveal--quiet" data-component="TrainingSignature" aria-hidden="true">
+          <svg class="signature__core signature__core--wide" viewBox="0 0 900 320" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-grid"><path d="M0 80H900M0 160H900M0 240H900M225 0V320M450 0V320M675 0V320" /></g>
+
+            <g class="sig-band" data-band="theorie">
+              <text class="core-caption" x="60" y="96">THEORIE</text>
+              <path class="core-branch" d="M60 112V150M60 150H300" />
+              <text class="core-node" x="60" y="176">VERSTEHEN</text>
+            </g>
+
+            <g class="sig-core">
+              <rect class="core-media" x="320" y="70" width="260" height="180" rx="6" />
+              <path class="core-corner" d="M334 96V82H348M552 82H566V96M334 224V238H348M552 238H566V224" />
+              <text class="core-anchor" x="450" y="166" text-anchor="middle">SCHULUNG</text>
+            </g>
+
+            <g class="sig-band" data-band="praxis">
+              <text class="core-caption core-caption--end" x="840" y="96" text-anchor="end">PRAXIS</text>
+              <path class="core-branch" d="M840 112V150M840 150H600" />
+              <text class="core-node core-node--end" x="840" y="176" text-anchor="end">ANWENDEN</text>
+            </g>
+
+            <g class="sig-transfer">
+              <path class="core-branch core-track" d="M450 250V286M120 286H780" />
+              <path class="core-arrow" d="M766 278L782 286L766 294" />
+              <text class="core-caption" x="450" y="312" text-anchor="middle">TRANSFER IN DEN BETRIEB</text>
+            </g>
+          </svg>
+
+          <!-- The same progression, turned upright for the phone. The wide field
+               put these labels at 3px, which makes the route's signature moment
+               a texture. Same bands, same classes, so the sequence and the
+               reduced-motion contract carry over unchanged. -->
+          <svg class="signature__core signature__core--stack" viewBox="0 0 230 306" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-grid"><path d="M0 76H230M0 176H230M0 246H230" /></g>
+
+            <g class="sig-band" data-band="theorie">
+              <text class="core-caption core-caption--left" x="8" y="20">THEORIE</text>
+              <text class="core-node" x="8" y="40">VERSTEHEN</text>
+              <path class="core-branch" d="M18 50V62" />
+              <path class="core-arrow" d="M12 58L18 66L24 58" />
+            </g>
+
+            <g class="sig-core">
+              <rect class="core-media" x="8" y="80" width="214" height="76" rx="6" />
+              <path class="core-corner" d="M20 100V90H30M200 90H210V100M20 136V146H30M200 146H210V136" />
+              <text class="core-anchor" x="115" y="123" text-anchor="middle">SCHULUNG</text>
+            </g>
+
+            <g class="sig-band" data-band="praxis">
+              <path class="core-branch" d="M18 166V178" />
+              <path class="core-arrow" d="M12 174L18 182L24 174" />
+              <text class="core-caption core-caption--left" x="8" y="204">PRAXIS</text>
+              <text class="core-node" x="8" y="224">ANWENDEN</text>
+            </g>
+
+            <g class="sig-transfer">
+              <path class="core-branch" d="M18 234V246" />
+              <path class="core-branch core-track" d="M8 268H206" />
+              <path class="core-arrow" d="M198 260L216 268L198 276" />
+              <text class="core-caption core-caption--left" x="8" y="296">TRANSFER IN DEN BETRIEB</text>
+            </g>
+          </svg>
+        </figure>
+
         <ol class="timeline training-curriculum__timeline">
           <li class="timeline__step reveal" data-module-id="MODULE_01">
             <span class="timeline__number">MODUL 01</span>
@@ -347,7 +417,7 @@
     </section>
 
     <!-- TRAINING_05_PRACTICE -->
-    <section class="section surface-authority training-practice" data-section-id="TRAINING_05_PRACTICE" data-component="PracticeFeature">
+    <section class="section plane plane-ink training-practice" data-section-id="TRAINING_05_PRACTICE" data-component="PracticeFeature">
       <div class="container">
         <div class="grid-12 training-practice__grid">
           <div class="media-stage media-stage--has-inset training-practice__media reveal-image">
@@ -437,7 +507,7 @@
     </section>
 
     <!-- TRAINING_07_REQUIREMENTS -->
-    <section class="section section--compact surface-functional training-requirements" data-section-id="TRAINING_07_REQUIREMENTS">
+    <section class="section section--compact plane plane-smoked training-requirements" data-section-id="TRAINING_07_REQUIREMENTS">
       <div class="container">
         <div class="section-heading reveal">
           <p class="eyebrow">VOR ORT</p>
@@ -499,275 +569,453 @@
       </div>
     </section>
 
-    <!-- TRAINING_09_BEDARF -->
-    <section class="section surface-functional training-bedarf" id="bedarf" data-section-id="TRAINING_09_BEDARF" data-status="PLANNED">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">BEDARF EINSCHÄTZEN</p>
-          <h2>Wie viele Brandschutzhelfer braucht mein Betrieb?</h2>
-        </div>
+<!-- TRAINING_09_BEDARF -->
+<section class="section surface-functional training-bedarf" id="bedarf" data-section-id="TRAINING_09_BEDARF" data-status="PLANNED">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="eyebrow">BEDARF EINSCHÄTZEN</p>
+      <h2>Wie viele Brandschutzhelfer braucht mein Betrieb?</h2>
+    </div>
 
-        <!-- A · direct answer -->
-        <div class="training-bedarf__answer reveal" data-delay="1">
-          <p class="training-bedarf__lead">Bei <strong>normaler Brandgefährdung</strong> ist ein Anteil von <strong>5 % der Beschäftigten</strong> in der Regel ausreichend. Maßgeblich ist aber die Gefährdungsbeurteilung Ihres Betriebs, nicht der Prozentwert.</p>
-          <p>Die 5 % sind ein Orientierungswert, keine gesetzlich festgelegte Stückzahl. Ob er für Sie trägt, hängt davon ab, wie viele Menschen gleichzeitig anwesend sind, wie Ihre Schichten laufen und ob besondere Brandgefahren bestehen.</p>
-        </div>
+    <!-- A · direct answer -->
+    <div class="training-bedarf__answer reveal" data-delay="1">
+      <p class="training-bedarf__lead">Bei <strong>normaler Brandgefährdung</strong> ist ein Anteil von <strong>5 % der Beschäftigten</strong> in der Regel ausreichend. Maßgeblich ist aber die Gefährdungsbeurteilung Ihres Betriebs, nicht der Prozentwert.</p>
+      <p>Die 5 % sind ein Orientierungswert, keine gesetzlich festgelegte Stückzahl. Ob er für Sie trägt, hängt davon ab, wie viele Menschen gleichzeitig anwesend sind, wie Ihre Schichten laufen und ob besondere Brandgefahren bestehen.</p>
+    </div>
+
+    <figure class="scene scene--bedarf" aria-hidden="true">
+          <svg class="scene__core scene__core--wide" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-grid"><path d="M0 75H400M0 150H400M0 225H400M100 0V300M200 0V300M300 0V300" /></g>
+            <g class="core-layer"><text class="core-figure" x="200" y="86" text-anchor="middle">5 %</text>
+                  <text class="core-caption" x="200" y="112" text-anchor="middle">ORIENTIERUNG</text>
+                  <path class="core-branch" d="M200 124V150M200 150H72M200 150H328M72 150V178M200 150V178M328 150V178" />
+                  <text class="core-node" x="72" y="198" text-anchor="middle">ANWESENHEIT</text>
+                  <text class="core-node" x="200" y="198" text-anchor="middle">SCHICHTEN</text>
+                  <text class="core-node" x="328" y="198" text-anchor="middle">GEF&#196;HRDUNG</text>
+                  <path class="core-branch core-branch--down" d="M72 210V236M200 210V236M328 210V236M72 236H328M200 236V258" />
+                  <text class="core-anchor" x="200" y="276" text-anchor="middle">BETRIEBSKONTEXT</text></g>
+          </svg>
+
+          <!-- Three factors side by side need width the phone does not have, so
+               they run down a spine instead. The grid goes: at this size it was
+               decoration competing with the labels. -->
+          <svg class="scene__core scene__core--stack" viewBox="0 0 230 248" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-layer">
+              <text class="core-figure" x="115" y="44" text-anchor="middle">5 %</text>
+              <text class="core-caption" x="115" y="66" text-anchor="middle">ORIENTIERUNG</text>
+              <path class="core-branch" d="M115 78V94M115 94H20M20 94V196" />
+              <path class="core-branch" d="M20 112H38M20 146H38M20 180H38" />
+              <text class="core-node" x="46" y="116">ANWESENHEIT</text>
+              <text class="core-node" x="46" y="150">SCHICHTEN</text>
+              <text class="core-node" x="46" y="184">GEF&#196;HRDUNG</text>
+              <path class="core-branch core-branch--down" d="M20 196V214" />
+              <text class="core-anchor" x="8" y="236">BETRIEBSKONTEXT</text>
+            </g>
+          </svg>
+        </figure>
 
         <!-- B/C/D/E · why the baseline alone is not the answer -->
-        <ul class="training-bedarf__conditions reveal" data-delay="2">
-          <li data-bedarf-condition="baseline">
-            <strong>Warum 5 % allein nicht reicht</strong>
-            <span>Die Regel nennt vier Situationen, in denen mehr erforderlich sein können: erhöhte Brandgefährdung, die Anwesenheit vieler Personen, Personen mit eingeschränkter Mobilität und eine große räumliche Ausdehnung der Arbeitsstätte. Eine feste Erhöhung ist dafür nicht angegeben.</span>
-          </li>
-          <li data-bedarf-condition="shifts">
-            <strong>Schichtbetrieb</strong>
-            <span>Der Anteil muss während der Betriebszeiten tatsächlich verfügbar sein. In jeder Schicht müssen genügend ausgebildete Personen anwesend sein – nicht nur rechnerisch im gesamten Unternehmen.</span>
-          </li>
-          <li data-bedarf-condition="absence">
-            <strong>Urlaub, Krankheit, Fortbildung</strong>
-            <span>Abwesenheiten sind ausdrücklich zu berücksichtigen. Ein fester Zuschlag ist dafür nicht vorgegeben – die Planung muss zum Betrieb passen.</span>
-          </li>
-          <li data-bedarf-condition="hazard">
-            <strong>Erhöhte oder unklare Brandgefährdung</strong>
-            <span>Liegt eine erhöhte Brandgefährdung vor oder ist sie nicht sicher eingeschätzt, trägt der einfache Orientierungswert nicht. Dann ist eine individuelle Betrachtung der richtige nächste Schritt.</span>
-          </li>
+    <div class="evidence" data-component="BedarfEvidence">
+      <p class="evidence__title label-technical">Was den Bedarf ver&auml;ndert</p>
+      <div class="evidence__row" data-bedarf-condition="baseline">
+        <p class="evidence__label">Grundwert</p>
+        <p class="evidence__claim">Warum 5 % allein nicht reicht</p>
+        <p class="evidence__detail">Die Regel nennt vier Situationen, in denen mehr erforderlich sein können: erhöhte Brandgefährdung, die Anwesenheit vieler Personen, Personen mit eingeschränkter Mobilität und eine große räumliche Ausdehnung der Arbeitsstätte. Eine feste Erhöhung ist dafür nicht angegeben.</p>
+      </div>
+      <div class="evidence__row" data-bedarf-condition="shifts">
+        <p class="evidence__label">Schichtbetrieb</p>
+        <p class="evidence__claim">Schichtbetrieb</p>
+        <p class="evidence__detail">Der Anteil muss während der Betriebszeiten tatsächlich verfügbar sein. In jeder Schicht müssen genügend ausgebildete Personen anwesend sein – nicht nur rechnerisch im gesamten Unternehmen.</p>
+      </div>
+      <div class="evidence__row" data-bedarf-condition="absence">
+        <p class="evidence__label">Abwesenheit</p>
+        <p class="evidence__claim">Urlaub, Krankheit, Fortbildung</p>
+        <p class="evidence__detail">Abwesenheiten sind ausdrücklich zu berücksichtigen. Ein fester Zuschlag ist dafür nicht vorgegeben – die Planung muss zum Betrieb passen.</p>
+      </div>
+      <div class="evidence__row" data-bedarf-condition="hazard">
+        <p class="evidence__label">Brandgefährdung</p>
+        <p class="evidence__claim">Erhöhte oder unklare Brandgefährdung</p>
+        <p class="evidence__detail">Liegt eine erhöhte Brandgefährdung vor oder ist sie nicht sicher eingeschätzt, trägt der einfache Orientierungswert nicht. Dann ist eine individuelle Betrachtung der richtige nächste Schritt.</p>
+      </div>
+    </div>
+
+    <!-- F · the check -->
+    <form class="training-bedarf__check reveal" data-delay="3" data-component="Bedarfscheck" novalidate>
+      <h3 class="training-bedarf__check-title">Bedarfscheck</h3>
+      <p class="training-bedarf__check-intro">Eine Orientierung für das Gespräch – keine Gefährdungsbeurteilung und keine rechtliche Feststellung.</p>
+
+      <div class="field">
+        <label class="field__label" for="bedarf-present">Wie viele Beschäftigte sind gleichzeitig anwesend?</label>
+        <p class="field__help" id="bedarf-present-hint">Nicht die Gesamtzahl aller Mitarbeitenden, sondern die Zahl je Schicht bzw. Betriebszeit.</p>
+        <input class="field__control" type="number" id="bedarf-present" name="present" min="1" step="1" inputmode="numeric" aria-describedby="bedarf-present-hint" data-bedarf-input="presentPerShift">
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="bedarf-shifts">Wie viele Schichten sollen abgedeckt sein?</label>
+        <input class="field__control" type="number" id="bedarf-shifts" name="shifts" min="1" step="1" value="1" inputmode="numeric" data-bedarf-input="shifts">
+      </div>
+
+      <fieldset class="field field--group">
+        <legend class="field__label">Wie schätzen Sie die Brandgefährdung ein?</legend>
+        <label class="field__choice"><input type="radio" name="hazard" value="NORMAL" data-bedarf-input="hazard"> <span>Normal – z. B. Büronutzung</span></label>
+        <label class="field__choice"><input type="radio" name="hazard" value="ELEVATED" data-bedarf-input="hazard"> <span>Erhöht – z. B. brennbare Stoffe, besondere Verfahren</span></label>
+        <label class="field__choice"><input type="radio" name="hazard" value="UNCLEAR" data-bedarf-input="hazard"> <span>Das kann ich nicht sicher einschätzen</span></label>
+      </fieldset>
+
+      <fieldset class="field field--group">
+        <legend class="field__label">Trifft eines davon auf Ihren Betrieb zu?</legend>
+        <label class="field__choice"><input type="checkbox" name="condition" value="MANY_PERSONS" data-bedarf-input="condition"> <span>Regelmäßig viele Personen anwesend, z. B. Besuchs- oder Publikumsverkehr</span></label>
+        <label class="field__choice"><input type="checkbox" name="condition" value="LIMITED_MOBILITY" data-bedarf-input="condition"> <span>Personen mit eingeschränkter Mobilität</span></label>
+        <label class="field__choice"><input type="checkbox" name="condition" value="LARGE_EXTENT" data-bedarf-input="condition"> <span>Große räumliche Ausdehnung oder mehrere Gebäude</span></label>
+      </fieldset>
+
+      <div class="training-bedarf__result result-stage" data-bedarf-result role="status" aria-live="polite" data-state="IDLE">
+        <p class="training-bedarf__result-idle" data-bedarf-slot="idle">Ergebnis erscheint hier, sobald die Angaben vollständig sind.</p>
+
+        <div class="training-bedarf__result-body morph-content" data-bedarf-slot="incomplete" hidden>
+          <span class="result-stage__state-label">Angaben unvollständig</span>
+          <p class="result-stage__verdict">Noch keine Einschätzung möglich</p>
+          <p>Für eine Einschätzung fehlen noch: <span data-bedarf-slot="missing"></span></p>
+        </div>
+
+        <div class="training-bedarf__result-body morph-content" data-bedarf-slot="review" hidden>
+          <span class="result-stage__state-label">Individuelle Betrachtung</span>
+          <p class="result-stage__verdict">Hier wäre eine Zahl eine Scheingenauigkeit</p>
+          <p data-bedarf-slot="review-reason"></p>
+          <p>Für diese Situation nennt die Regel keine feste Erhöhung. Ein Orientierungswert wäre hier eine Scheingenauigkeit – deshalb wird bewusst keine Zahl ausgegeben.</p>
+          <p class="training-bedarf__next result-stage__next"><a class="btn btn--primary" href="../anfrage/">Situation gemeinsam klären</a></p>
+        </div>
+
+        <div class="training-bedarf__result-body morph-content" data-bedarf-slot="orientation" hidden>
+          <span class="result-stage__state-label">Orientierungswert</span>
+          <p class="training-bedarf__figure result-stage__figure"><strong data-bedarf-slot="figure"></strong> <span data-bedarf-slot="figure-unit">Brandschutzhelfer je Schicht</span></p>
+          <p data-bedarf-slot="total"></p>
+          <p class="training-bedarf__assumptions">Angenommen wurde: <span data-bedarf-slot="assumptions"></span></p>
+          <p>Das ist ein Planungswert für das Gespräch, keine rechtliche Feststellung. Verbindlich ist die Gefährdungsbeurteilung Ihres Betriebs.</p>
+          <p class="training-bedarf__assumptions">Zusätzlich einzuplanen: Abwesenheiten durch Urlaub, Krankheit und Fortbildung sowie die Verfügbarkeit je Schicht.</p>
+          <p class="training-bedarf__assumptions">Mehr können erforderlich sein bei: erhöhter Brandgefährdung, Anwesenheit vieler Personen, eingeschränkter Mobilität, großer räumlicher Ausdehnung.</p>
+          <p class="training-bedarf__next result-stage__next"><a class="btn btn--secondary" href="#inhalte">Ausbildung ansehen</a> <a class="btn btn--primary" href="../anfrage/">Anfrage stellen</a></p>
+        </div>
+      </div>
+
+      <script type="application/json" data-bedarf-labels>{"missing":{"presentPerShift":"Anzahl gleichzeitig anwesender Beschäftigter","shifts":"Anzahl der Schichten","hazard":"Einschätzung der Brandgefährdung"},"reasons":{"ERHOEHTE_BRANDGEFAEHRDUNG":"erhöhte Brandgefährdung","BRANDGEFAEHRDUNG_UNKLAR":"die Brandgefährdung ist nicht sicher eingeschätzt","ANWESENHEIT_VIELER_PERSONEN":"regelmäßig viele anwesende Personen","EINGESCHRAENKTE_MOBILITAET":"Personen mit eingeschränkter Mobilität","GROSSE_RAEUMLICHE_AUSDEHNUNG":"große räumliche Ausdehnung oder mehrere Gebäude"},"assumptions":{"BRANDGEFAEHRDUNG_NORMAL":"normale Brandgefährdung","ANTEIL_FUENF_PROZENT":"ein Anteil von 5 %","BEZUG_GLEICHZEITIG_ANWESENDE":"bezogen auf die gleichzeitig anwesenden Beschäftigten","SCHICHTEN":"{n} Schicht(en)"},"total":"Bei {shifts} Schichten müssen insgesamt {total} ausgebildete Personen verfügbar sein, damit der Anteil in jeder Schicht tatsächlich besetzt ist."}</script>
+      <noscript>
+        <p class="status-note">Der interaktive Bedarfscheck benötigt JavaScript. Die Einschätzung oben gilt unabhängig davon: bei normaler Brandgefährdung sind in der Regel etwa 5 % der gleichzeitig anwesenden Beschäftigten ein sinnvoller Orientierungswert, maßgeblich bleibt die Gefährdungsbeurteilung.</p>
+      </noscript>
+    </form>
+
+    <!-- G/H · basis and related questions -->
+    <details class="training-bedarf__sources reveal" data-delay="4">
+      <summary>Grundlage dieser Angaben</summary>
+      <p>Der Anteil von 5 % bei normaler Brandgefährdung, die genannten erhöhenden Bedingungen sowie die Berücksichtigung von Schichtbetrieb und Abwesenheiten stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong> (Technische Regeln für Arbeitsstätten). Maßgeblich für den konkreten Betrieb bleibt die Gefährdungsbeurteilung.</p>
+    </details>
+
+    <p class="status-note">Orientierungshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine verbindliche Feststellung.</p>
+    <p class="training-bedarf__bridge">Häufige Fragen dazu – etwa zu Schichtbetrieb, Urlaub und erhöhter Brandgefährdung – beantworten wir weiter unten.</p>
+    <p class="training-bedarf__next result-stage__next"><a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
+  </div>
+</section>
+
+<!-- TRAINING_10_CHECKLISTS -->
+<section class="section surface-editorial training-checklists" id="checklisten" data-section-id="TRAINING_10_CHECKLISTS" data-status="PLANNED">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="eyebrow">VORBEREITEN UND VERANKERN</p>
+      <h2>Vor der Schulung und danach im Betrieb</h2>
+      <p class="lead">Eine Ausbildung wirkt erst, wenn der Betrieb sie vorbereitet und danach im Alltag verankert. Zwei Checklisten für die beiden Momente, die nicht im Schulungsraum stattfinden.</p>
+    </div>
+
+    <p class="training-checklists__legend">
+      <span class="duty" data-duty="REQUIRED">Erforderlich</span> beruht auf der genannten Quelle.
+      <span class="duty" data-duty="RECOMMENDED">Empfohlen</span> ist organisatorisch sinnvoll.
+      <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span> hängt von Ihren Gegebenheiten ab und wird hier bewusst nicht vorgegeben.
+    </p>
+
+    <div class="workbench">
+
+      <!-- U2 -->
+<fieldset class="workbench__phase workbench__phase--with-scene reveal" id="phase-vorbereitung" data-checklist="U2_INHOUSE_VORBEREITUNG" data-delay="1">
+        <figure class="scene scene--vorbereitung" aria-hidden="true">
+          <svg class="scene__core scene__core--wide" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-grid"><path d="M0 75H400M0 150H400M0 225H400M100 0V300M200 0V300M300 0V300" /></g>
+            <g class="core-layer"><text class="core-caption" x="200" y="66" text-anchor="middle">RAHMEN</text>
+                  <path class="core-branch" d="M200 78V104M200 104H72M200 104H328M72 104V132M200 104V132M328 104V132" />
+                  <text class="core-node" x="72" y="152" text-anchor="middle">ORT</text>
+                  <text class="core-node" x="200" y="152" text-anchor="middle">PERSONEN</text>
+                  <text class="core-node" x="328" y="152" text-anchor="middle">ORGANISATION</text>
+                  <path class="core-branch core-branch--down" d="M72 164V206M200 164V206M328 164V206M72 206H328M200 206V232" />
+                  <text class="core-anchor" x="200" y="252" text-anchor="middle">VORBEREITET</text></g>
+          </svg>
+
+          <!-- Same frame, same three things to settle, read downward. -->
+          <svg class="scene__core scene__core--stack" viewBox="0 0 230 206" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-layer">
+              <text class="core-caption core-caption--left" x="8" y="20">RAHMEN</text>
+              <path class="core-branch" d="M20 30V150" />
+              <path class="core-branch" d="M20 48H38M20 82H38M20 116H38" />
+              <text class="core-node" x="46" y="52">ORT</text>
+              <text class="core-node" x="46" y="86">PERSONEN</text>
+              <text class="core-node" x="46" y="120">ORGANISATION</text>
+              <path class="core-branch core-branch--down" d="M20 150V172" />
+              <text class="core-anchor" x="8" y="194">VORBEREITET</text>
+            </g>
+          </svg>
+        </figure>
+            <legend class="workbench__phase-head"><span class="workbench__phase-index">Phase 02 · Vorher</span><span class="workbench__phase-title">Inhouse-Schulung vorbereiten</span></legend>
+        <p class="workbench__intro">Was im Betrieb geklärt sein sollte, damit ein Termin sinnvoll stattfinden kann.</p>
+        <ul class="workbench__items">
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Ansprechpartner im Betrieb benennen <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Eine Person, die Fragen zum Ablauf und zu den Räumlichkeiten verbindlich beantworten kann.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Teilnehmende und ihre Schichten zusammenstellen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Der Anteil muss in jeder Schicht verfügbar sein, nicht nur rechnerisch im Unternehmen.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Termin auf den Betriebsablauf abstimmen <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Damit die Schulung nicht mit Spitzenzeiten oder Schichtwechseln kollidiert.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Raum für den Theorieteil klären <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Welcher Raum geeignet ist, hängt von Gruppengröße und Gegebenheiten ab.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Geeigneten Bereich für die praktische Übung abstimmen <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Die praktische Übung mit Feuerlöscheinrichtungen gehört zur Ausbildung; wo sie stattfinden kann, wird gemeinsam festgelegt.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Zugang, Anfahrt und Regeln für Externe klären <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Anmeldung, Zutritt und betriebliche Sicherheitsregeln für externe Personen.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Betriebliche Besonderheiten zusammenstellen <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Was eine externe Person nicht wissen kann: besondere Stoffe, Verfahren, Bereiche oder Abläufe.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Vorhandene Brandschutzunterlagen bereitlegen <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Sofern vorhanden, etwa eine Brandschutzordnung oder Flucht- und Rettungspläne.</em></span></label></li>
         </ul>
+        <p class="training-checklists__next"><a class="btn btn--primary" href="../anfrage/">Inhouse-Schulung anfragen</a></p>
+      </fieldset>
 
-        <!-- F · the check -->
-        <form class="training-bedarf__check reveal" data-delay="3" data-component="Bedarfscheck" novalidate>
-          <h3 class="training-bedarf__check-title">Bedarfscheck</h3>
-          <p class="training-bedarf__check-intro">Eine Orientierung für das Gespräch – keine Gefährdungsbeurteilung und keine rechtliche Feststellung.</p>
+      <!-- U3 -->
+<fieldset class="workbench__phase workbench__phase--transfer reveal" id="phase-betrieb" data-checklist="U3_BETRIEBLICHE_NACHBEREITUNG" data-delay="2">
+        <figure class="scene scene--betrieb" aria-hidden="true">
+          <svg class="scene__core scene__core--wide" viewBox="0 0 620 220" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-grid"><path d="M0 55H620M0 110H620M0 165H620M155 0V220M310 0V220M465 0V220" /></g>
+            <text class="core-caption core-caption--left" x="24" y="42">AUSBILDUNG</text>
+            <path class="core-branch" d="M60 56V88" />
+            <text class="core-node" x="24" y="106">ABSCHLUSS</text>
+            <path class="core-branch core-track core-escape" d="M24 132H600" />
+            <path class="core-arrow" d="M588 122L608 132L588 142" />
+            <text class="core-anchor" x="596" y="106" text-anchor="end">BETRIEBLICHER ALLTAG</text>
+            <path class="core-branch" d="M200 132V162M340 132V162M480 132V162" />
+            <text class="core-node" x="200" y="182" text-anchor="middle">VERTEILEN</text>
+            <text class="core-node" x="340" y="182" text-anchor="middle">ZUST&#196;NDIGKEIT</text>
+            <text class="core-node" x="480" y="182" text-anchor="middle">&#196;NDERUNGEN</text>
+          </svg>
 
-          <div class="field">
-            <label class="field__label" for="bedarf-present">Wie viele Beschäftigte sind gleichzeitig anwesend?</label>
-            <p class="field__help" id="bedarf-present-hint">Nicht die Gesamtzahl aller Mitarbeitenden, sondern die Zahl je Schicht bzw. Betriebszeit.</p>
-            <input class="field__control" type="number" id="bedarf-present" name="present" min="1" step="1" inputmode="numeric" aria-describedby="bedarf-present-hint" data-bedarf-input="presentPerShift">
-          </div>
+          <!-- The continuation runs downward on the phone. The dashed track and
+               the ember head stay: what leaves the training is the same thing
+               that arrives in the working day. -->
+          <svg class="scene__core scene__core--stack" viewBox="0 0 230 258" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <text class="core-caption core-caption--left" x="8" y="20">AUSBILDUNG</text>
+            <path class="core-branch" d="M20 30V44" />
+            <text class="core-node" x="8" y="64">ABSCHLUSS</text>
+            <path class="core-branch core-track core-escape" d="M20 76V112" />
+            <path class="core-arrow" d="M12 106L20 116L28 106" />
+            <text class="core-anchor" x="8" y="140">BETRIEBLICHER ALLTAG</text>
+            <path class="core-branch" d="M20 150V232" />
+            <path class="core-branch" d="M20 168H38M20 200H38M20 232H38" />
+            <text class="core-node" x="46" y="172">VERTEILEN</text>
+            <text class="core-node" x="46" y="204">ZUST&#196;NDIGKEIT</text>
+            <text class="core-node" x="46" y="236">&#196;NDERUNGEN</text>
+          </svg>
+        </figure>
+            <legend class="workbench__phase-head"><span class="workbench__phase-index">Phase 04 · Im Betrieb</span><span class="workbench__phase-title">Im Betrieb verankern</span></legend>
+        <p class="workbench__intro">Eine Ausbildung vermittelt allgemeine Handlungsfähigkeit. Der betriebsspezifische Teil bleibt beim Arbeitgeber.</p>
+        <ul class="workbench__items">
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Ausgebildete Personen auf Schichten und Bereiche verteilen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Schichtbetrieb ist bei der Anzahl zu berücksichtigen.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Abwesenheiten einplanen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Fortbildung, Urlaub und Krankheit sind zu berücksichtigen. Einen festen Zuschlag gibt die Quelle nicht vor.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Ortskenntnis vermitteln <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Fluchtwege, Standorte der Löscheinrichtungen und Meldewege im eigenen Betrieb begehen.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Zuständigkeiten im Betrieb klären <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Wer im Ereignisfall was übernimmt und wer informiert wird.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Teilnahme festhalten <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Wer wann ausgebildet wurde. Ob und in welcher Form eine schriftliche Benennung erfolgt, richtet sich nach Ihren betrieblichen Vorgaben.</em></span></label></li>
+          <li><label class="workbench__item"><input type="checkbox"> <span class="workbench__text">Nach betrieblichen Änderungen erneut prüfen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Umbauten, neue Verfahren oder veränderte Personalstärke wirken auf die Gefährdungsbeurteilung, die für den Bedarf maßgeblich bleibt.</em></span></label></li>
+        </ul>
+        <p class="training-checklists__note">Kein fester Wiederholungsabstand genannt: Für ein Auffrischungsintervall liegt hier keine belegte Quelle vor, deshalb steht hier keine Zahl.</p>
+      </fieldset>
 
-          <div class="field">
-            <label class="field__label" for="bedarf-shifts">Wie viele Schichten sollen abgedeckt sein?</label>
-            <input class="field__control" type="number" id="bedarf-shifts" name="shifts" min="1" step="1" value="1" inputmode="numeric" data-bedarf-input="shifts">
-          </div>
+    </div>
 
-          <fieldset class="field field--group">
-            <legend class="field__label">Wie schätzen Sie die Brandgefährdung ein?</legend>
-            <label class="field__choice"><input type="radio" name="hazard" value="NORMAL" data-bedarf-input="hazard"> <span>Normal – z. B. Büronutzung</span></label>
-            <label class="field__choice"><input type="radio" name="hazard" value="ELEVATED" data-bedarf-input="hazard"> <span>Erhöht – z. B. brennbare Stoffe, besondere Verfahren</span></label>
-            <label class="field__choice"><input type="radio" name="hazard" value="UNCLEAR" data-bedarf-input="hazard"> <span>Das kann ich nicht sicher einschätzen</span></label>
-          </fieldset>
+    <p class="training-checklists__actions">
+      <button class="btn btn--secondary" type="button" data-checklist-print hidden>Checklisten drucken</button>
+    </p>
 
-          <fieldset class="field field--group">
-            <legend class="field__label">Trifft eines davon auf Ihren Betrieb zu?</legend>
-            <label class="field__choice"><input type="checkbox" name="condition" value="MANY_PERSONS" data-bedarf-input="condition"> <span>Regelmäßig viele Personen anwesend, z. B. Besuchs- oder Publikumsverkehr</span></label>
-            <label class="field__choice"><input type="checkbox" name="condition" value="LIMITED_MOBILITY" data-bedarf-input="condition"> <span>Personen mit eingeschränkter Mobilität</span></label>
-            <label class="field__choice"><input type="checkbox" name="condition" value="LARGE_EXTENT" data-bedarf-input="condition"> <span>Große räumliche Ausdehnung oder mehrere Gebäude</span></label>
-          </fieldset>
+    <details class="training-checklists__sources reveal" data-delay="3">
+      <summary>Grundlage dieser Angaben</summary>
+      <p>Die als <strong>erforderlich</strong> gekennzeichneten Punkte zu Schichtbetrieb, Abwesenheiten und zur maßgeblichen Gefährdungsbeurteilung stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong> (Technische Regeln für Arbeitsstätten). Alle übrigen Punkte sind organisatorische Empfehlungen oder betriebliche Klärungen und keine Rechtspflichten.</p>
+    </details>
 
-          <div class="training-bedarf__result" data-bedarf-result role="status" aria-live="polite" data-state="IDLE">
-            <p class="training-bedarf__result-idle" data-bedarf-slot="idle">Ergebnis erscheint hier, sobald die Angaben vollständig sind.</p>
+    <p class="status-note">Organisationshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine verbindliche Feststellung. Ihre Häkchen werden nicht gespeichert.</p>
+    <p class="training-checklists__next"><a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
+  </div>
+</section>
 
-            <div class="training-bedarf__result-body" data-bedarf-slot="incomplete" hidden>
-              <p class="training-bedarf__result-headline">Angaben unvollständig</p>
-              <p>Für eine Einschätzung fehlen noch: <span data-bedarf-slot="missing"></span></p>
-            </div>
+<!-- TRAINING_11_AUFFRISCHUNG -->
+<section class="section surface-functional training-auffrischung" id="auffrischung" data-section-id="TRAINING_11_AUFFRISCHUNG" data-status="PLANNED">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="eyebrow">PRÜFEN UND AUFFRISCHEN</p>
+      <h2>Wann sollte die Ausbildung wiederholt werden?</h2>
+      <p class="lead">Dazu gibt es zwei verschiedene Aussagen – und sie sind nicht dasselbe. Die eine ist eine Empfehlung, die andere greift nach betrieblichen Änderungen.</p>
+    </div>
 
-            <div class="training-bedarf__result-body" data-bedarf-slot="review" hidden>
-              <p class="training-bedarf__result-headline">Individuelle Betrachtung empfohlen</p>
-              <p data-bedarf-slot="review-reason"></p>
-              <p>Für diese Situation nennt die Regel keine feste Erhöhung. Ein Orientierungswert wäre hier eine Scheingenauigkeit – deshalb wird bewusst keine Zahl ausgegeben.</p>
-              <p class="training-bedarf__next"><a class="btn btn--primary" href="../anfrage/">Situation gemeinsam klären</a></p>
-            </div>
+    <!-- the two rules, kept visibly apart -->
+    <figure class="scene scene--auffrischung" aria-hidden="true">
+          <svg class="scene__core scene__core--wide" viewBox="0 0 620 260" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="core-grid"><path d="M0 65H620M0 130H620M0 195H620M155 0V260M310 0V260M465 0V260" /></g>
 
-            <div class="training-bedarf__result-body" data-bedarf-slot="orientation" hidden>
-              <p class="training-bedarf__result-headline">Orientierungswert unter Ihren Angaben</p>
-              <p class="training-bedarf__figure"><strong data-bedarf-slot="figure"></strong> <span data-bedarf-slot="figure-unit">Brandschutzhelfer je Schicht</span></p>
-              <p data-bedarf-slot="total"></p>
-              <p class="training-bedarf__assumptions">Angenommen wurde: <span data-bedarf-slot="assumptions"></span></p>
-              <p>Das ist ein Planungswert für das Gespräch, keine rechtliche Feststellung. Verbindlich ist die Gefährdungsbeurteilung Ihres Betriebs.</p>
-              <p class="training-bedarf__assumptions">Zusätzlich einzuplanen: Abwesenheiten durch Urlaub, Krankheit und Fortbildung sowie die Verfügbarkeit je Schicht.</p>
-              <p class="training-bedarf__assumptions">Mehr können erforderlich sein bei: erhöhter Brandgefährdung, Anwesenheit vieler Personen, eingeschränkter Mobilität, großer räumlicher Ausdehnung.</p>
-              <p class="training-bedarf__next"><a class="btn btn--secondary" href="#inhalte">Ausbildung ansehen</a> <a class="btn btn--primary" href="../anfrage/">Anfrage stellen</a></p>
-            </div>
-          </div>
+            <g class="core-time">
+              <text class="core-caption core-caption--left" x="24" y="46">ZEIT</text>
+              <path class="core-branch core-track" d="M24 74H596" />
+              <path class="core-tick" d="M170 64V84M300 64V84" />
+              <text class="core-node" x="170" y="102" text-anchor="middle">3 JAHRE</text>
+              <text class="core-node" x="300" y="102" text-anchor="middle">5 JAHRE</text>
+              <path class="core-window" d="M170 74H300" />
+              <text class="core-strength" x="235" y="122" text-anchor="middle">EMPFEHLUNG</text>
+            </g>
 
-          <script type="application/json" data-bedarf-labels>{"missing":{"presentPerShift":"Anzahl gleichzeitig anwesender Beschäftigter","shifts":"Anzahl der Schichten","hazard":"Einschätzung der Brandgefährdung"},"reasons":{"ERHOEHTE_BRANDGEFAEHRDUNG":"erhöhte Brandgefährdung","BRANDGEFAEHRDUNG_UNKLAR":"die Brandgefährdung ist nicht sicher eingeschätzt","ANWESENHEIT_VIELER_PERSONEN":"regelmäßig viele anwesende Personen","EINGESCHRAENKTE_MOBILITAET":"Personen mit eingeschränkter Mobilität","GROSSE_RAEUMLICHE_AUSDEHNUNG":"große räumliche Ausdehnung oder mehrere Gebäude"},"assumptions":{"BRANDGEFAEHRDUNG_NORMAL":"normale Brandgefährdung","ANTEIL_FUENF_PROZENT":"ein Anteil von 5 %","BEZUG_GLEICHZEITIG_ANWESENDE":"bezogen auf die gleichzeitig anwesenden Beschäftigten","SCHICHTEN":"{n} Schicht(en)"},"total":"Bei {shifts} Schichten müssen insgesamt {total} ausgebildete Personen verfügbar sein, damit der Anteil in jeder Schicht tatsächlich besetzt ist."}</script>
-          <noscript>
-            <p class="status-note">Der interaktive Bedarfscheck benötigt JavaScript. Die Einschätzung oben gilt unabhängig davon: bei normaler Brandgefährdung sind in der Regel etwa 5 % der gleichzeitig anwesenden Beschäftigten ein sinnvoller Orientierungswert, maßgeblich bleibt die Gefährdungsbeurteilung.</p>
-          </noscript>
-        </form>
+            <g class="core-change">
+              <text class="core-caption core-caption--left" x="24" y="180">WESENTLICHE BETRIEBLICHE &#196;NDERUNG</text>
+              <path class="core-branch core-track core-track--change" d="M24 208H580" />
+              <path class="core-arrow" d="M568 198L588 208L568 218" />
+              <!-- At rest the track states the rule and its precedence, conditionally.
+                   The result wording below replaces it only when U4 has actually
+                   produced EARLIER_REPETITION_REQUIRED. -->
+              <text class="core-strength core-strength--rule" x="24" y="238">WENN SIE GREIFT &#183; GEHT DER ZEIT VOR</text>
+              <text class="core-strength core-strength--required" x="24" y="238">ERFORDERLICH &#183; FR&#220;HERE WIEDERHOLUNG</text>
+            </g>
+          </svg>
 
-        <!-- G/H · basis and related questions -->
-        <details class="training-bedarf__sources reveal" data-delay="4">
-          <summary>Grundlage dieser Angaben</summary>
-          <p>Der Anteil von 5 % bei normaler Brandgefährdung, die genannten erhöhenden Bedingungen sowie die Berücksichtigung von Schichtbetrieb und Abwesenheiten stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong> (Technische Regeln für Arbeitsstätten). Maßgeblich für den konkreten Betrieb bleibt die Gefährdungsbeurteilung.</p>
-        </details>
+          <!-- The same two rules, projected vertically for the phone. Scaling the
+               wide field down put its labels at roughly 4px, which leaves a shape
+               that carries structure but no information. Both tracks keep their
+               group classes, so every state rule below applies to this projection
+               without a second implementation and without a second authority. -->
+          <svg class="scene__core scene__core--stack" viewBox="0 0 230 228" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <!-- Horizontals only. The wide field can carry verticals behind sparse
+                 labels; here the copy wraps across them and they read as strikes
+                 through the words. -->
+            <g class="core-grid"><path d="M0 57H230M0 114H230M0 171H230" /></g>
 
-        <p class="status-note">Orientierungshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine verbindliche Feststellung.</p>
-        <p class="training-bedarf__bridge">Häufige Fragen dazu – etwa zu Schichtbetrieb, Urlaub und erhöhter Brandgefährdung – beantworten wir weiter unten.</p>
-        <p class="training-bedarf__next"><a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
-      </div>
-    </section>
+            <g class="core-time">
+              <text class="core-caption core-caption--left" x="8" y="20">ZEIT</text>
+              <path class="core-branch core-track" d="M8 52H222" />
+              <path class="core-tick" d="M70 44V60M160 44V60" />
+              <text class="core-node" x="70" y="76" text-anchor="middle">3 JAHRE</text>
+              <text class="core-node" x="160" y="76" text-anchor="middle">5 JAHRE</text>
+              <path class="core-window" d="M70 52H160" />
+              <text class="core-strength" x="115" y="98" text-anchor="middle">EMPFEHLUNG</text>
+            </g>
 
-    <!-- TRAINING_10_CHECKLISTS -->
-    <section class="section surface-editorial training-checklists" id="checklisten" data-section-id="TRAINING_10_CHECKLISTS" data-status="PLANNED">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">VORBEREITEN UND VERANKERN</p>
-          <h2>Vor der Schulung und danach im Betrieb</h2>
-          <p class="lead">Eine Ausbildung wirkt erst, wenn der Betrieb sie vorbereitet und danach im Alltag verankert. Zwei Checklisten für die beiden Momente, die nicht im Schulungsraum stattfinden.</p>
-        </div>
+            <!-- Both tracks start at the same left edge and the hairline carries
+                 across, so the two blocks read as one decision rather than two
+                 unrelated cards. -->
+            <path class="core-branch" d="M8 106V128" />
 
-        <p class="training-checklists__legend">
-          <span class="duty" data-duty="REQUIRED">Erforderlich</span> beruht auf der genannten Quelle.
-          <span class="duty" data-duty="RECOMMENDED">Empfohlen</span> ist organisatorisch sinnvoll.
-          <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span> hängt von Ihren Gegebenheiten ab und wird hier bewusst nicht vorgegeben.
-        </p>
+            <g class="core-change">
+              <text class="core-caption core-caption--left" x="8" y="140">WESENTLICHE<tspan x="8" y="156">BETRIEBLICHE &#196;NDERUNG</tspan></text>
+              <path class="core-branch core-track core-track--change" d="M8 180H206" />
+              <path class="core-arrow" d="M198 172L216 180L198 188" />
+              <text class="core-strength core-strength--rule" x="8" y="206">WENN SIE GREIFT &#183;<tspan x="8" y="222">GEHT DER ZEIT VOR</tspan></text>
+              <text class="core-strength core-strength--required" x="8" y="206">ERFORDERLICH &#183;<tspan x="8" y="222">FR&#220;HERE WIEDERHOLUNG</tspan></text>
+            </g>
+          </svg>
+        </figure>
 
-        <div class="training-checklists__grid">
-
-          <!-- U2 -->
-          <fieldset class="training-checklists__list reveal" data-checklist="U2_INHOUSE_VORBEREITUNG" data-delay="1">
-            <legend class="training-checklists__legend-title"><span class="training-checklists__phase">Vorher</span> Inhouse-Schulung vorbereiten</legend>
-            <p class="training-checklists__intro">Was im Betrieb geklärt sein sollte, damit ein Termin sinnvoll stattfinden kann.</p>
-            <ul class="training-checklists__items">
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Ansprechpartner im Betrieb benennen <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Eine Person, die Fragen zum Ablauf und zu den Räumlichkeiten verbindlich beantworten kann.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Teilnehmende und ihre Schichten zusammenstellen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Der Anteil muss in jeder Schicht verfügbar sein, nicht nur rechnerisch im Unternehmen.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Termin auf den Betriebsablauf abstimmen <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Damit die Schulung nicht mit Spitzenzeiten oder Schichtwechseln kollidiert.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Raum für den Theorieteil klären <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Welcher Raum geeignet ist, hängt von Gruppengröße und Gegebenheiten ab.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Geeigneten Bereich für die praktische Übung abstimmen <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Die praktische Übung mit Feuerlöscheinrichtungen gehört zur Ausbildung; wo sie stattfinden kann, wird gemeinsam festgelegt.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Zugang, Anfahrt und Regeln für Externe klären <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Anmeldung, Zutritt und betriebliche Sicherheitsregeln für externe Personen.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Betriebliche Besonderheiten zusammenstellen <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Was eine externe Person nicht wissen kann: besondere Stoffe, Verfahren, Bereiche oder Abläufe.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Vorhandene Brandschutzunterlagen bereitlegen <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Sofern vorhanden, etwa eine Brandschutzordnung oder Flucht- und Rettungspläne.</em></span></label></li>
-            </ul>
-            <p class="training-checklists__next"><a class="btn btn--primary" href="../anfrage/">Inhouse-Schulung anfragen</a></p>
-          </fieldset>
-
-          <!-- U3 -->
-          <fieldset class="training-checklists__list reveal" data-checklist="U3_BETRIEBLICHE_NACHBEREITUNG" data-delay="2">
-            <legend class="training-checklists__legend-title"><span class="training-checklists__phase">Danach</span> Im Betrieb verankern</legend>
-            <p class="training-checklists__intro">Eine Ausbildung vermittelt allgemeine Handlungsfähigkeit. Der betriebsspezifische Teil bleibt beim Arbeitgeber.</p>
-            <ul class="training-checklists__items">
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Ausgebildete Personen auf Schichten und Bereiche verteilen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Schichtbetrieb ist bei der Anzahl zu berücksichtigen.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Abwesenheiten einplanen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Fortbildung, Urlaub und Krankheit sind zu berücksichtigen. Einen festen Zuschlag gibt die Quelle nicht vor.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Ortskenntnis vermitteln <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Fluchtwege, Standorte der Löscheinrichtungen und Meldewege im eigenen Betrieb begehen.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Zuständigkeiten im Betrieb klären <span class="duty" data-duty="RECOMMENDED">Empfohlen</span><em>Wer im Ereignisfall was übernimmt und wer informiert wird.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Teilnahme festhalten <span class="duty" data-duty="CLARIFY">Im Betrieb zu klären</span><em>Wer wann ausgebildet wurde. Ob und in welcher Form eine schriftliche Benennung erfolgt, richtet sich nach Ihren betrieblichen Vorgaben.</em></span></label></li>
-              <li><label class="training-checklists__item"><input type="checkbox"> <span class="training-checklists__text">Nach betrieblichen Änderungen erneut prüfen <span class="duty" data-duty="REQUIRED">Erforderlich</span><em>Umbauten, neue Verfahren oder veränderte Personalstärke wirken auf die Gefährdungsbeurteilung, die für den Bedarf maßgeblich bleibt.</em></span></label></li>
-            </ul>
-            <p class="training-checklists__note">Kein fester Wiederholungsabstand genannt: Für ein Auffrischungsintervall liegt hier keine belegte Quelle vor, deshalb steht hier keine Zahl.</p>
-          </fieldset>
-
-        </div>
-
-        <p class="training-checklists__actions">
-          <button class="btn btn--secondary" type="button" data-checklist-print hidden>Checklisten drucken</button>
-        </p>
-
-        <details class="training-checklists__sources reveal" data-delay="3">
-          <summary>Grundlage dieser Angaben</summary>
-          <p>Die als <strong>erforderlich</strong> gekennzeichneten Punkte zu Schichtbetrieb, Abwesenheiten und zur maßgeblichen Gefährdungsbeurteilung stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong> (Technische Regeln für Arbeitsstätten). Alle übrigen Punkte sind organisatorische Empfehlungen oder betriebliche Klärungen und keine Rechtspflichten.</p>
-        </details>
-
-        <p class="status-note">Organisationshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine verbindliche Feststellung. Ihre Häkchen werden nicht gespeichert.</p>
-        <p class="training-checklists__next"><a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
-      </div>
-    </section>
-
-    <!-- TRAINING_11_AUFFRISCHUNG -->
-    <section class="section surface-functional training-auffrischung" id="auffrischung" data-section-id="TRAINING_11_AUFFRISCHUNG" data-status="PLANNED">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">PRÜFEN UND AUFFRISCHEN</p>
-          <h2>Wann sollte die Ausbildung wiederholt werden?</h2>
-          <p class="lead">Dazu gibt es zwei verschiedene Aussagen – und sie sind nicht dasselbe. Die eine ist eine Empfehlung, die andere greift nach betrieblichen Änderungen.</p>
-        </div>
-
-        <!-- the two rules, kept visibly apart -->
         <div class="training-auffrischung__rules reveal" data-delay="1">
-          <div class="training-auffrischung__rule" data-rule="TIME">
-            <p class="training-auffrischung__rule-head"><span class="duty" data-duty="RECOMMENDED">Empfehlung</span></p>
-            <h3>Alle 3 bis 5 Jahre auffrischen</h3>
-            <p>Zur Auffrischung der Kenntnisse empfiehlt es sich, die Ausbildung in Abständen von drei bis fünf Jahren zu wiederholen. Das ist eine Empfehlung – keine gesetzlich festgelegte Frist und kein Ablaufdatum.</p>
+      <div class="training-auffrischung__rule" data-rule="TIME">
+        <p class="training-auffrischung__rule-head"><span class="duty" data-duty="RECOMMENDED">Empfehlung</span></p>
+        <h3>Alle 3 bis 5 Jahre auffrischen</h3>
+        <p>Zur Auffrischung der Kenntnisse empfiehlt es sich, die Ausbildung in Abständen von drei bis fünf Jahren zu wiederholen. Das ist eine Empfehlung – keine gesetzlich festgelegte Frist und kein Ablaufdatum.</p>
+      </div>
+      <div class="training-auffrischung__rule" data-rule="CHANGE">
+        <p class="training-auffrischung__rule-head"><span class="duty" data-duty="REQUIRED">Erforderlich bei Änderungen</span></p>
+        <h3>Nach wesentlichen betrieblichen Änderungen früher</h3>
+        <p>Bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich. Diese Regel hängt nicht am Kalender: Sie kann auch dann greifen, wenn die letzte Schulung noch nicht lange zurückliegt.</p>
+      </div>
+    </div>
+
+    <p class="training-auffrischung__note">Warum das auseinandergehalten wird: <q data-antipattern>alle drei bis fünf Jahre Pflicht</q> wäre in beide Richtungen falsch. Es macht aus einer Empfehlung eine Frist – und es verdeckt den Fall, der tatsächlich verbindlich ist.</p>
+
+    <!-- U4 -->
+    <form class="training-auffrischung__check glass reveal" data-delay="2" data-component="Auffrischungscheck" novalidate>
+      <h3 class="training-auffrischung__check-title">Änderungs- und Auffrischungscheck</h3>
+      <p class="training-auffrischung__check-intro">Zwei Fragen. Der Check nennt Ihnen, welche der beiden Aussagen bei Ihnen greift – und warum. Es wird nichts gespeichert und kein Termin berechnet.</p>
+
+      <fieldset class="field field--group">
+        <legend class="field__label">Wie lange liegt die letzte Brandschutzhelfer-Ausbildung zurück?</legend>
+        <label class="field__choice"><input type="radio" name="since" value="UNDER_3" data-auff-input="since"> <span>Weniger als 3 Jahre</span></label>
+        <label class="field__choice"><input type="radio" name="since" value="BETWEEN_3_AND_5" data-auff-input="since"> <span>3 bis 5 Jahre</span></label>
+        <label class="field__choice"><input type="radio" name="since" value="OVER_5" data-auff-input="since"> <span>Mehr als 5 Jahre</span></label>
+        <label class="field__choice"><input type="radio" name="since" value="UNKNOWN" data-auff-input="since"> <span>Das ist mir nicht bekannt</span></label>
+      </fieldset>
+
+      <fieldset class="field field--group">
+        <legend class="field__label">Hat sich seitdem etwas davon im Betrieb geändert?</legend>
+        <label class="field__choice"><input type="checkbox" name="change" value="GEFAEHRDUNGSBEURTEILUNG_GEAENDERT" data-auff-input="change"> <span>Die Gefährdungsbeurteilung wurde geändert</span></label>
+        <label class="field__choice"><input type="checkbox" name="change" value="NEUE_VERFAHREN_ANDERE_BRANDGEFAHREN" data-auff-input="change"> <span>Neue Verfahren mit veränderten Brandgefahren</span></label>
+        <label class="field__choice"><input type="checkbox" name="change" value="PERSONEN_IN_ANDERE_BEREICHE" data-auff-input="change"> <span>Personen arbeiten jetzt in Bereichen mit anderen Löschbedingungen</span></label>
+        <label class="field__choice"><input type="checkbox" name="changesUnknown" value="1" data-auff-input="changesUnknown"> <span>Das kann ich nicht sicher sagen</span></label>
+      </fieldset>
+
+      <div class="training-auffrischung__result result-stage" data-auff-result role="status" aria-live="polite" data-state="IDLE">
+        <!-- Visual restatement of the precedence rule. aria-hidden because every
+             state below says the same thing in words; this must not be announced twice. -->
+        <div class="precedence" aria-hidden="true">
+          <div class="precedence__track precedence__track--time">
+            <span class="precedence__label">Zeit</span>
+            <ol class="precedence__marks">
+              <li>unter 3 Jahren</li>
+              <li data-mark="window">3 bis 5 Jahre</li>
+              <li>&uuml;ber 5 Jahre</li>
+            </ol>
+            <span class="precedence__strength">Empfehlung</span>
           </div>
-          <div class="training-auffrischung__rule" data-rule="CHANGE">
-            <p class="training-auffrischung__rule-head"><span class="duty" data-duty="REQUIRED">Erforderlich bei Änderungen</span></p>
-            <h3>Nach wesentlichen betrieblichen Änderungen früher</h3>
-            <p>Bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich. Diese Regel hängt nicht am Kalender: Sie kann auch dann greifen, wenn die letzte Schulung noch nicht lange zurückliegt.</p>
+          <div class="precedence__track precedence__track--change">
+            <span class="precedence__label">Wesentliche betriebliche &Auml;nderung</span>
+            <span class="precedence__strength">Erforderlich &ndash; geht der Zeit vor</span>
           </div>
         </div>
+        <p data-auff-slot="idle">Das Ergebnis erscheint hier, sobald beide Fragen beantwortet sind.</p>
 
-        <p class="training-auffrischung__note">Warum das auseinandergehalten wird: <q data-antipattern>alle drei bis fünf Jahre Pflicht</q> wäre in beide Richtungen falsch. Es macht aus einer Empfehlung eine Frist – und es verdeckt den Fall, der tatsächlich verbindlich ist.</p>
+        <div class="training-auffrischung__result-body morph-content" data-auff-slot="review" hidden>
+          <p class="training-auffrischung__result-head result-stage__verdict"><span class="duty" data-duty="CLARIFY">Zu klären</span> Angaben unvollständig</p>
+          <p>Offen ist noch: <span data-auff-slot="missing"></span></p>
+          <p>Solange das nicht geklärt ist, gilt hier bewusst kein Ergebnis. „Nicht bekannt" heißt nicht „nichts passiert".</p>
+        </div>
 
-        <!-- U4 -->
-        <form class="training-auffrischung__check reveal" data-delay="2" data-component="Auffrischungscheck" novalidate>
-          <h3 class="training-auffrischung__check-title">Änderungs- und Auffrischungscheck</h3>
-          <p class="training-auffrischung__check-intro">Zwei Fragen. Der Check nennt Ihnen, welche der beiden Aussagen bei Ihnen greift – und warum. Es wird nichts gespeichert und kein Termin berechnet.</p>
+        <div class="training-auffrischung__result-body morph-content" data-auff-slot="required" hidden>
+          <p class="training-auffrischung__result-head result-stage__verdict"><span class="duty" data-duty="REQUIRED">Erforderlich</span> Frühere Wiederholung</p>
+          <p>Bei Ihnen greift die Änderungsregel, nicht der Zeitabstand. Ausschlaggebend: <span data-auff-slot="triggers"></span>.</p>
+          <p data-auff-slot="override"></p>
+          <p>Bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich. Welcher Abstand für Ihren Betrieb angemessen ist, ergibt sich aus Ihrer Gefährdungsbeurteilung.</p>
+          <p class="training-auffrischung__next"><a class="btn btn--primary" href="../anfrage/">Situation gemeinsam klären</a></p>
+        </div>
 
-          <fieldset class="field field--group">
-            <legend class="field__label">Wie lange liegt die letzte Brandschutzhelfer-Ausbildung zurück?</legend>
-            <label class="field__choice"><input type="radio" name="since" value="UNDER_3" data-auff-input="since"> <span>Weniger als 3 Jahre</span></label>
-            <label class="field__choice"><input type="radio" name="since" value="BETWEEN_3_AND_5" data-auff-input="since"> <span>3 bis 5 Jahre</span></label>
-            <label class="field__choice"><input type="radio" name="since" value="OVER_5" data-auff-input="since"> <span>Mehr als 5 Jahre</span></label>
-            <label class="field__choice"><input type="radio" name="since" value="UNKNOWN" data-auff-input="since"> <span>Das ist mir nicht bekannt</span></label>
-          </fieldset>
+        <div class="training-auffrischung__result-body morph-content" data-auff-slot="recommended" hidden>
+          <p class="training-auffrischung__result-head result-stage__verdict"><span class="duty" data-duty="RECOMMENDED">Empfehlung</span> Auffrischung sinnvoll</p>
+          <p>Der empfohlene Auffrischungszeitraum von drei bis fünf Jahren ist erreicht. Das ist eine Empfehlung zur Auffrischung der Kenntnisse – keine abgelaufene Frist und kein Verstoß.</p>
+          <p>Änderungsbedingte Gründe für eine frühere Wiederholung haben Sie nicht angegeben.</p>
+          <p class="training-auffrischung__next"><a class="btn btn--primary" href="../anfrage/">Auffrischung anfragen</a></p>
+        </div>
 
-          <fieldset class="field field--group">
-            <legend class="field__label">Hat sich seitdem etwas davon im Betrieb geändert?</legend>
-            <label class="field__choice"><input type="checkbox" name="change" value="GEFAEHRDUNGSBEURTEILUNG_GEAENDERT" data-auff-input="change"> <span>Die Gefährdungsbeurteilung wurde geändert</span></label>
-            <label class="field__choice"><input type="checkbox" name="change" value="NEUE_VERFAHREN_ANDERE_BRANDGEFAHREN" data-auff-input="change"> <span>Neue Verfahren mit veränderten Brandgefahren</span></label>
-            <label class="field__choice"><input type="checkbox" name="change" value="PERSONEN_IN_ANDERE_BEREICHE" data-auff-input="change"> <span>Personen arbeiten jetzt in Bereichen mit anderen Löschbedingungen</span></label>
-            <label class="field__choice"><input type="checkbox" name="changesUnknown" value="1" data-auff-input="changesUnknown"> <span>Das kann ich nicht sicher sagen</span></label>
-          </fieldset>
-
-          <div class="training-auffrischung__result" data-auff-result role="status" aria-live="polite" data-state="IDLE">
-            <p data-auff-slot="idle">Das Ergebnis erscheint hier, sobald beide Fragen beantwortet sind.</p>
-
-            <div class="training-auffrischung__result-body" data-auff-slot="review" hidden>
-              <p class="training-auffrischung__result-head"><span class="duty" data-duty="CLARIFY">Zu klären</span> Angaben unvollständig</p>
-              <p>Offen ist noch: <span data-auff-slot="missing"></span></p>
-              <p>Solange das nicht geklärt ist, gilt hier bewusst kein Ergebnis. „Nicht bekannt" heißt nicht „nichts passiert".</p>
-            </div>
-
-            <div class="training-auffrischung__result-body" data-auff-slot="required" hidden>
-              <p class="training-auffrischung__result-head"><span class="duty" data-duty="REQUIRED">Erforderlich</span> Frühere Wiederholung</p>
-              <p>Bei Ihnen greift die Änderungsregel, nicht der Zeitabstand. Ausschlaggebend: <span data-auff-slot="triggers"></span>.</p>
-              <p data-auff-slot="override"></p>
-              <p>Bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich. Welcher Abstand für Ihren Betrieb angemessen ist, ergibt sich aus Ihrer Gefährdungsbeurteilung.</p>
-              <p class="training-auffrischung__next"><a class="btn btn--primary" href="../anfrage/">Situation gemeinsam klären</a></p>
-            </div>
-
-            <div class="training-auffrischung__result-body" data-auff-slot="recommended" hidden>
-              <p class="training-auffrischung__result-head"><span class="duty" data-duty="RECOMMENDED">Empfehlung</span> Auffrischung sinnvoll</p>
-              <p>Der empfohlene Auffrischungszeitraum von drei bis fünf Jahren ist erreicht. Das ist eine Empfehlung zur Auffrischung der Kenntnisse – keine abgelaufene Frist und kein Verstoß.</p>
-              <p>Änderungsbedingte Gründe für eine frühere Wiederholung haben Sie nicht angegeben.</p>
-              <p class="training-auffrischung__next"><a class="btn btn--primary" href="../anfrage/">Auffrischung anfragen</a></p>
-            </div>
-
-            <div class="training-auffrischung__result-body" data-auff-slot="none" hidden>
-              <p class="training-auffrischung__result-head"><span class="duty" data-duty="RECOMMENDED">Kein Anlass aus Zeit oder Änderung</span></p>
-              <p>Die letzte Ausbildung liegt weniger als drei Jahre zurück und Sie haben keine der genannten betrieblichen Änderungen angegeben. Aus diesen beiden Angaben ergibt sich derzeit kein Anlass für eine Wiederholung.</p>
-              <p>Das ist keine Aussage über Ihre gesamte Brandschutzorganisation. Ändert sich etwas Wesentliches im Betrieb, gilt wieder die Änderungsregel – unabhängig davon, wie lange die Schulung zurückliegt.</p>
-            </div>
-          </div>
-
-          <script type="application/json" data-auff-labels>{"missing":{"since":"wie lange die letzte Ausbildung zurückliegt","changes":"ob sich etwas Wesentliches geändert hat"},"triggers":{"GEFAEHRDUNGSBEURTEILUNG_GEAENDERT":"die geänderte Gefährdungsbeurteilung","NEUE_VERFAHREN_ANDERE_BRANDGEFAHREN":"neue Verfahren mit veränderten Brandgefahren","PERSONEN_IN_ANDERE_BEREICHE":"Personen in Bereichen mit anderen Löschbedingungen"},"override":"Das gilt auch, obwohl die letzte Ausbildung weniger als drei Jahre zurückliegt: Die Änderungsregel hängt nicht am Zeitabstand."}</script>
-          <noscript>
-            <p class="status-note">Der interaktive Check benötigt JavaScript. Die beiden Regeln oben gelten unabhängig davon: drei bis fünf Jahre sind eine Empfehlung zur Auffrischung, und bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich.</p>
-          </noscript>
-        </form>
-
-        <details class="training-auffrischung__sources reveal" data-delay="3">
-          <summary>Grundlage dieser Angaben</summary>
-          <p>Die Auffrischungsempfehlung von drei bis fünf Jahren und die Regel zu wesentlichen betrieblichen Änderungen stammen aus <strong>DGUV Information 205-023 „Brandschutzhelfer", Abschnitt 5</strong> (aktualisierte Fassung 2019.11). Die Angaben zur Anzahl der Brandschutzhelfer weiter oben stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong>. Maßgeblich für den konkreten Betrieb bleibt die Gefährdungsbeurteilung.</p>
-        </details>
-
-        <p class="status-note">Orientierungshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine Terminüberwachung. Ihre Angaben werden nicht gespeichert.</p>
-        <p class="training-auffrischung__next"><a class="btn btn--secondary" href="#checklisten">Was danach im Betrieb zu tun ist</a> <a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
+        <div class="training-auffrischung__result-body morph-content" data-auff-slot="none" hidden>
+          <p class="training-auffrischung__result-head result-stage__verdict"><span class="duty" data-duty="RECOMMENDED">Kein Anlass aus Zeit oder Änderung</span></p>
+          <p>Die letzte Ausbildung liegt weniger als drei Jahre zurück und Sie haben keine der genannten betrieblichen Änderungen angegeben. Aus diesen beiden Angaben ergibt sich derzeit kein Anlass für eine Wiederholung.</p>
+          <p>Das ist keine Aussage über Ihre gesamte Brandschutzorganisation. Ändert sich etwas Wesentliches im Betrieb, gilt wieder die Änderungsregel – unabhängig davon, wie lange die Schulung zurückliegt.</p>
+        </div>
       </div>
-    </section>
+
+      <script type="application/json" data-auff-labels>{"missing":{"since":"wie lange die letzte Ausbildung zurückliegt","changes":"ob sich etwas Wesentliches geändert hat"},"triggers":{"GEFAEHRDUNGSBEURTEILUNG_GEAENDERT":"die geänderte Gefährdungsbeurteilung","NEUE_VERFAHREN_ANDERE_BRANDGEFAHREN":"neue Verfahren mit veränderten Brandgefahren","PERSONEN_IN_ANDERE_BEREICHE":"Personen in Bereichen mit anderen Löschbedingungen"},"override":"Das gilt auch, obwohl die letzte Ausbildung weniger als drei Jahre zurückliegt: Die Änderungsregel hängt nicht am Zeitabstand."}</script>
+      <noscript>
+        <p class="status-note">Der interaktive Check benötigt JavaScript. Die beiden Regeln oben gelten unabhängig davon: drei bis fünf Jahre sind eine Empfehlung zur Auffrischung, und bei wesentlichen betrieblichen Änderungen ist eine Wiederholung in kürzeren Abständen erforderlich.</p>
+      </noscript>
+    </form>
+
+    <details class="training-auffrischung__sources reveal" data-delay="3">
+      <summary>Grundlage dieser Angaben</summary>
+      <p>Die Auffrischungsempfehlung von drei bis fünf Jahren und die Regel zu wesentlichen betrieblichen Änderungen stammen aus <strong>DGUV Information 205-023 „Brandschutzhelfer", Abschnitt 5</strong> (aktualisierte Fassung 2019.11). Die Angaben zur Anzahl der Brandschutzhelfer weiter oben stammen aus <strong>ASR A2.2, Abschnitt 7.3</strong>. Maßgeblich für den konkreten Betrieb bleibt die Gefährdungsbeurteilung.</p>
+    </details>
+
+    <p class="status-note">Orientierungshilfe dieser Konzeptdemo – keine Gefährdungsbeurteilung, keine Rechtsberatung und keine Terminüberwachung. Ihre Angaben werden nicht gespeichert.</p>
+    <p class="training-auffrischung__next"><a class="btn btn--secondary" href="#checklisten">Was danach im Betrieb zu tun ist</a> <a class="btn btn--secondary" href="#faq">Zu den häufigen Fragen</a></p>
+  </div>
+</section>
+      
+
+
 
     <!-- TRAINING_12_FAQ -->
-    <section class="section section--compact surface-functional training-faq" id="faq" data-section-id="TRAINING_12_FAQ">
+    <section class="section section--compact plane plane-smoked training-faq" id="faq" data-section-id="TRAINING_12_FAQ">
       <div class="container">
         <div class="grid-12 training-faq__grid">
           <div class="training-faq__intro reveal">
@@ -842,7 +1090,7 @@
     </section>
 
     <!-- TRAINING_13_CTA -->
-    <section class="final-cta surface-authority" data-section-id="TRAINING_13_CTA" data-component="FinalCTA">
+    <section class="final-cta plane plane-deep plane-edge-rise" data-section-id="TRAINING_13_CTA" data-component="FinalCTA">
       <div class="container">
         <div class="final-cta__inner reveal">
           <div class="section-heading section-heading--light">

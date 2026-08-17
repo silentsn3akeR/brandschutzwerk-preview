@@ -2,6 +2,7 @@ import { initNavigation } from "../components/navigation.js";
 import { initAccordions } from "../components/accordion.js";
 import { initMobileStickyCta } from "../components/mobile-sticky-cta.js";
 import { initMotion } from "./motion.js";
+import { initPlaneContext } from "./context.js";
 import { initPresentationMode } from "../modes/presentation.js";
 import { initInspector } from "../modes/inspector.js";
 import { initFounderHook } from "../modes/founder.js";
@@ -32,6 +33,7 @@ async function dispatchPageModule() {
 function init() {
   document.documentElement.dataset.specVersion = "V2";
   initNavigation();
+  initPlaneContext();
   initAccordions();
   initMobileStickyCta();
   initMotion();

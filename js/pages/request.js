@@ -1,9 +1,8 @@
+import { initDossier } from "../components/dossier.js";
 import { $, $$ } from "../core/dom.js";
 import { sessionState } from "../core/storage.js";
 import { siteUrl, ROUTES } from "../core/config.js";
 import { demoPricing } from "../data/demo-pricing.js";
-
-
 
 const STORAGE_SCHEMA_VERSION = 1;
 const STEP_COUNT = 5;
@@ -198,25 +197,30 @@ function formatDemoPrice(value) {
   return `${new Intl.NumberFormat("de-DE").format(value)} €`;
 }
 
+/* The dossier has two projections — the aside beside the form and the compact
+   one under the stepper that a phone can actually see while choosing. Both are
+   written here, from the same state, so a value can never disagree with itself. */
 function renderPrice() {
-  const el = $("[data-summary-price]");
-  if (!el) return;
+  const els = $$("[data-summary-price]");
+  if (!els.length) return;
   const band = state.fields.FIELD_PARTICIPANTS.value || ORIENTATION_BAND;
   const amount = demoPricing.bands[band];
   const isCustom = amount === null || amount === undefined;
-  el.textContent = isCustom ? CUSTOM_INQUIRY_LABEL : `ab ${formatDemoPrice(amount)} netto`;
-  el.dataset.empty = "false";
-  el.dataset.state = isCustom ? "custom" : "default";
+  els.forEach((el) => {
+    el.textContent = isCustom ? CUSTOM_INQUIRY_LABEL : `ab ${formatDemoPrice(amount)} netto`;
+    el.dataset.empty = "false";
+    el.dataset.state = isCustom ? "custom" : "default";
+  });
 }
 
 function renderSummary() {
   const values = summaryValues();
   Object.entries(values).forEach(([key, value]) => {
-    const el = $(`[data-summary-value="${key}"]`);
-    if (!el) return;
-    /* textContent only — user input is never written as markup. */
-    el.textContent = value || EMPTY_LABEL[key] || "—";
-    el.dataset.empty = String(!value);
+    $$(`[data-summary-value="${key}"]`).forEach((el) => {
+      /* textContent only — user input is never written as markup. */
+      el.textContent = value || EMPTY_LABEL[key] || "—";
+      el.dataset.empty = String(!value);
+    });
   });
   renderPrice();
 }
@@ -383,6 +387,10 @@ function bindInput(group) {
 }
 
 export function init() {
+  /* REQUEST_03_SUMMARY. Reacts to values this module writes; it observes
+     rather than participates, so it cannot affect request semantics. */
+  initDossier();
+
   const form = $("[data-request-form]");
   if (!form) return { page: "PAGE_REQUEST", implemented: false };
 

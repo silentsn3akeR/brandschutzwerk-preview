@@ -1,0 +1,340 @@
+/* FOUNDATION — tonal planes, atmosphere and depth.
+
+   The old page rhythm alternated --color-bg and --color-surface, which differed
+   by about 3% luminance. Across a 12000px route that reads as one uninterrupted
+   light field, so section boundaries carried no meaning and every group had to
+   earn its separation with a border. That is where the card soup came from.
+
+   This file replaces that with three real planes — paper, ink and deep — and
+   makes a plane change a narrative event rather than a background swap.
+
+   CONTEXT PROPERTIES
+   Tokens may not be redefined outside the generated foundation, so a plane
+   cannot restate --color-text-muted for its subtree. Instead each plane
+   publishes a --ctx-* context: the plane resolves tokens once, and anything
+   built for both planes reads the context instead of picking a token. --ctx-* is
+   a local pattern, never a token, and never appears in the registry. */
+
+.plane {
+  position: relative;
+  isolation: isolate;
+  background: var(--ctx-bg);
+  color: var(--ctx-text);
+}
+
+/* --- Paper: the reading plane --- */
+.plane-paper,
+.surface-editorial {
+  --ctx-bg: var(--color-bg);
+  --ctx-surface: var(--color-surface);
+  --ctx-sunken: var(--color-surface-sunken);
+  --ctx-text: var(--color-text);
+  --ctx-text-muted: var(--color-text-muted);
+  --ctx-text-inset: var(--color-text-strong-muted);
+  --ctx-steel: var(--color-steel);
+  --ctx-border: var(--color-border);
+  --ctx-border-strong: var(--color-border-strong);
+  --ctx-brand: var(--color-brand);
+  --ctx-attention: var(--color-attention);
+  --ctx-success: var(--color-success);
+  --ctx-glass-bg: var(--glass-bg-light);
+  --ctx-glass-border: var(--glass-border-light);
+  background: var(--ctx-bg);
+  color: var(--ctx-text);
+}
+
+/* Raised paper. Functional sections that should feel one step closer. */
+.plane-raised,
+.surface-functional {
+  --ctx-bg: var(--color-surface);
+  --ctx-surface: var(--color-bg);
+  --ctx-sunken: var(--color-surface-sunken);
+  --ctx-text: var(--color-text);
+  --ctx-text-muted: var(--color-text-muted);
+  --ctx-text-inset: var(--color-text-strong-muted);
+  --ctx-steel: var(--color-steel);
+  --ctx-border: var(--color-border);
+  --ctx-border-strong: var(--color-border-strong);
+  --ctx-brand: var(--color-brand);
+  --ctx-attention: var(--color-attention);
+  --ctx-success: var(--color-success);
+  --ctx-glass-bg: var(--glass-bg-light);
+  --ctx-glass-border: var(--glass-border-light);
+  background: var(--ctx-bg);
+  color: var(--ctx-text);
+}
+
+/* --- Ink: the immersive plane --- */
+.plane-ink,
+.surface-authority {
+  --ctx-bg: var(--color-ink-raised);
+  --ctx-surface: var(--color-ink-veil);
+  --ctx-sunken: var(--color-ink);
+  --ctx-text: var(--color-text-on-dark);
+  --ctx-text-muted: var(--color-text-muted-on-dark);
+  --ctx-text-inset: var(--color-text-muted-on-dark);
+  --ctx-steel: var(--color-steel-on-dark);
+  --ctx-border: var(--color-border-on-dark);
+  --ctx-border-strong: var(--color-border-on-dark-strong);
+  --ctx-brand: var(--color-brand-on-dark);
+  --ctx-attention: var(--color-attention-on-dark);
+  --ctx-success: var(--color-success-on-dark);
+  --ctx-glass-bg: var(--glass-bg-dark);
+  --ctx-glass-border: var(--glass-border-dark);
+  background: var(--ctx-bg);
+  color: var(--ctx-text);
+}
+
+/* --- Deep: the closing plane. Footer and final CTA only. --- */
+.plane-deep {
+  --ctx-bg: var(--color-ink);
+  --ctx-surface: var(--color-ink-raised);
+  --ctx-sunken: var(--color-ink);
+  --ctx-text: var(--color-text-on-dark);
+  --ctx-text-muted: var(--color-text-muted-on-dark);
+  --ctx-text-inset: var(--color-text-muted-on-dark);
+  --ctx-steel: var(--color-steel-on-dark);
+  --ctx-border: var(--color-border-on-dark);
+  --ctx-border-strong: var(--color-border-on-dark-strong);
+  --ctx-brand: var(--color-brand-on-dark);
+  --ctx-attention: var(--color-attention-on-dark);
+  --ctx-success: var(--color-success-on-dark);
+  --ctx-glass-bg: var(--glass-bg-dark);
+  --ctx-glass-border: var(--glass-border-dark);
+  background: var(--ctx-bg);
+  color: var(--ctx-text);
+}
+
+/* Headings follow the plane. The authority pattern already did this for its own
+   subtree; every plane now gets it, so nothing has to restate a heading colour
+   on a per-section basis. */
+.plane-ink h1, .plane-ink h2, .plane-ink h3, .plane-ink h4,
+.plane-deep h1, .plane-deep h2, .plane-deep h3, .plane-deep h4,
+.surface-authority h1, .surface-authority h2,
+.surface-authority h3, .surface-authority h4 { color: var(--ctx-text); }
+
+.plane-ink a:not([class]), .plane-deep a:not([class]),
+.surface-authority a:not([class]) { color: var(--ctx-brand); }
+
+/* ------------------------------------------------------------------ atmosphere
+
+   A flat dark rectangle looks like a black box. Two very large, very soft
+   radial fields give the ink planes somewhere to recede to. They are painted
+   behind content, never animated on the main thread, and they carry no meaning
+   — remove them and nothing becomes unreadable. */
+
+.plane-ink::before,
+.plane-deep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 12% 0%, var(--atmos-ember), transparent 70%),
+    radial-gradient(50% 60% at 92% 30%, var(--atmos-flame), transparent 72%);
+  opacity: .9;
+}
+
+/* A steel field for the paper plane, used only where a section has to feel like
+   it has air behind it rather than paint. */
+.plane-atmosphere-steel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(45% 60% at 85% 10%, var(--atmos-steel), transparent 70%);
+}
+
+/* ------------------------------------------------------------------- material
+
+   One glass recipe. It belongs to floating planes only: the header island, the
+   hero evidence panel, a tool result surface and the source drawer. It is not a
+   card treatment, and applying it to a list of items is the failure mode this
+   comment exists to prevent.
+
+   The solid --ctx-surface background is painted first and stays visible where
+   backdrop-filter is unsupported, so the fallback is opaque rather than
+   transparent-and-unreadable. */
+
+.glass {
+  position: relative;
+  isolation: isolate;
+  background: var(--ctx-surface);
+  border: 1px solid var(--ctx-glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-deep);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass {
+    background: var(--ctx-glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+}
+
+/* Two edges make the pane. The top hairline is the light striking the upper
+   edge; the inner wash is the environment bleeding through the material. A
+   translucent rectangle has neither, which is why timid glass reads as a grey
+   box instead of a pane. */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 8%, var(--glass-highlight), transparent 92%);
+  pointer-events: none;
+}
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    linear-gradient(160deg, var(--glass-tint-steel), transparent 55%),
+    radial-gradient(120% 90% at 85% 110%, var(--glass-tint-ember), transparent 60%);
+  pointer-events: none;
+}
+
+.plane-ink .glass::before,
+.plane-deep .glass::before { opacity: .45; }
+
+/* Ember variant: for panes floating in a warm scene — the hero evidence panel
+   and the training fact surface. The pane keeps the scene's temperature. */
+.glass--ember { border-color: var(--glass-border-dark); }
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass--ember { background: var(--glass-bg-ember); }
+}
+.glass--ember::after {
+  background:
+    linear-gradient(200deg, var(--glass-tint-ember), transparent 50%),
+    radial-gradient(130% 100% at 15% -10%, var(--glass-tint-ember), transparent 55%);
+}
+
+/* ---------------------------------------------------------------- structure */
+
+/* Mono metadata. The technical voice: eyebrows, phase markers, units, counts. */
+.label-technical {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ctx-steel);
+}
+
+/* Oversized chapter numeral. Structure, not ornament: it only appears where the
+   content genuinely is a numbered sequence, which on this site means the
+   lifecycle stages and the request steps. */
+.chapter-numeral {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-chapter);
+  font-weight: 200;
+  line-height: .8;
+  letter-spacing: var(--tracking-display);
+  color: var(--ctx-text);
+  opacity: .07;
+  pointer-events: none;
+  user-select: none;
+}
+
+.plane-ink .chapter-numeral,
+.plane-deep .chapter-numeral { opacity: .1; }
+
+/* A rule that carries heat. Used to open a chapter. */
+.rule-ember {
+  height: 2px;
+  border: 0;
+  background: linear-gradient(90deg, var(--ctx-brand), var(--ctx-attention) 45%, transparent);
+}
+
+/* ------------------------------------------------------- section transitions
+
+   Chapters, not section boundaries. A plane change is announced by a clipped
+   leading edge so the incoming plane reads as a sheet sliding over the previous
+   one. Applied at three narrative boundaries per route at most — every boundary
+   getting an effect is the same monotony in a different costume. */
+
+.plane-edge-rise {
+  clip-path: polygon(0 2.5rem, 100% 0, 100% 100%, 0 100%);
+  margin-top: -2.5rem;
+  padding-top: calc(var(--space-9) + 2.5rem);
+}
+
+.plane-edge-fall {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), 0 100%);
+  padding-bottom: calc(var(--space-9) + 2.5rem);
+}
+
+@media (max-width: 767px) {
+  .plane-edge-rise { clip-path: polygon(0 1.25rem, 100% 0, 100% 100%, 0 100%); margin-top: -1.25rem; }
+  .plane-edge-fall { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.25rem), 0 100%); }
+}
+
+/* The atmosphere fields are decoration with a real paint cost. Under reduced
+   motion they stay — they do not move — but the parallax layer that reads them
+   is switched off elsewhere. */
+
+/* --- Smoked: the cool light plane ---
+   Limestone is warm, smoked is cool, and both are light. A route can now change
+   material in the middle of its bright stretch instead of running one
+   undifferentiated white from the hero to the closing scene. Text values are
+   identical to paper, so nothing about legibility changes with the material. */
+.plane-smoked {
+  --ctx-bg: var(--color-smoked);
+  --ctx-surface: var(--color-bg);
+  --ctx-sunken: var(--color-surface-sunken);
+  --ctx-text: var(--color-text);
+  --ctx-text-muted: var(--color-text-muted);
+  --ctx-text-inset: var(--color-text-strong-muted);
+  --ctx-steel: var(--color-steel);
+  --ctx-border: var(--color-border);
+  --ctx-border-strong: var(--color-border-strong);
+  --ctx-brand: var(--color-brand);
+  --ctx-attention: var(--color-attention);
+  --ctx-success: var(--color-success);
+  --ctx-glass-bg: var(--glass-bg-light);
+  --ctx-glass-border: var(--glass-border-light);
+  background: var(--ctx-bg);
+  color: var(--ctx-text);
+}
+/* A steel breath across the plane, so the surface has grain rather than paint. */
+.plane-smoked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(60% 70% at 80% 0%, var(--atmos-steel), transparent 72%);
+}
+
+/* --- Light planes need something to refract ---------------------------------
+
+   A perfectly flat bright section gives backdrop-filter nothing to show, so the
+   adaptive light header reads as an opaque bar however translucent it actually
+   is. A very soft steel field near the top of each light plane gives the glass
+   something to blur. It is felt rather than noticed: no visible blob, no
+   gradient decoration, and nothing in it carries meaning. */
+
+.plane-paper::after,
+.plane-raised::after,
+.surface-editorial::after,
+.surface-functional::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 40% at 78% -5%, var(--atmos-steel), transparent 70%),
+    radial-gradient(50% 30% at 10% 0%, var(--glass-tint-ember), transparent 75%);
+  opacity: .7;
+}
+/* The plane classes already isolate; the legacy surface aliases need it too so
+   the field stays behind their content. */
+.surface-editorial,
+.surface-functional { position: relative; isolation: isolate; }

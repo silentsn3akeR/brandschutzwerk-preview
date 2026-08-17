@@ -1,72 +1,132 @@
-/* COMPONENT — RequestStepper (COMP_REQUEST_STEPPER, REUSE_TYPE=SHARED)
-   Discrete step progression only. There is no percentage bar, because the flow
-   has five real states and nothing in between; a percentage would be invented
-   precision. Progress is announced through a live status line rather than
-   inferred from colour. */
+/* COMPONENT — RequestStepper.
+
+   The same LINE + NODE + STAGE vocabulary the training lifecycle uses, so a
+   visitor who has read the lifecycle already knows how to read this. It is not
+   the same component: a lifecycle is scrolled through and a form is stepped
+   through, so this one is horizontal, compact, and driven by state rather than
+   by scroll position.
+
+   State comes from js/pages/request.js, which writes data-current-step on the
+   list and data-stepper-state="done" on each completed step. Nothing here
+   computes anything. */
 
 .stepper {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: .75rem;
-  counter-reset: step;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: .5rem;
 }
 
 .stepper__step {
-  min-width: 0;
+  position: relative;
   display: grid;
-  gap: .5rem;
-  padding-top: .875rem;
-  border-top: 2px solid var(--color-border);
-  color: var(--color-text-muted);
+  gap: .625rem;
+  min-width: 0;
 }
-.stepper__step[aria-current="step"] { border-top-color: var(--color-brand); color: var(--color-text); }
-.stepper__step[data-stepper-state="done"] { border-top-color: var(--color-brand); color: var(--color-text); }
+
+/* The connector, and the lit portion drawn over it. */
+.stepper__step:not(:last-child)::before,
+.stepper__step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: .9375rem;
+  left: 2.25rem;
+  height: 2px;
+}
+.stepper__step:not(:last-child)::before {
+  right: -0.5rem;
+  background: var(--ctx-border-strong, var(--color-border-strong));
+}
+.stepper__step:not(:last-child)::after {
+  width: 0;
+  background: linear-gradient(90deg, var(--ctx-brand, var(--color-brand)), var(--ctx-attention, var(--color-attention)));
+  transition: width var(--motion-reveal) var(--ease-entrance);
+}
+.stepper__step[data-stepper-state="done"]:not(:last-child)::after {
+  width: calc(100% - 2.25rem + .5rem);
+}
 
 .stepper__marker {
-  width: 1.5rem;
-  height: 1.5rem;
+  position: relative;
+  z-index: 1;
+  width: 1.875rem;
+  height: 1.875rem;
   display: grid;
   place-items: center;
-  border: 1px solid var(--color-border-strong);
+  border: 2px solid var(--ctx-border-strong, var(--color-border-strong));
   border-radius: 50%;
+  background: var(--ctx-surface, var(--color-surface));
+  color: var(--ctx-steel, var(--color-steel));
+  font-family: var(--font-mono);
   font-size: var(--font-size-xs);
-  font-weight: 720;
-  line-height: 1;
+  font-weight: 600;
+  transition: border-color var(--motion-base) var(--ease-standard),
+              background-color var(--motion-base) var(--ease-standard),
+              color var(--motion-base) var(--ease-standard),
+              scale var(--motion-base) var(--ease-entrance);
 }
-.stepper__step[aria-current="step"] .stepper__marker {
-  border-color: var(--color-brand);
-  background: var(--color-brand);
-  color: #fff;
-}
-/* Completed steps carry a check mark, not only a colour change. */
-.stepper__step[data-stepper-state="done"] .stepper__marker {
-  border-color: var(--color-brand);
-  background: var(--color-brand-soft);
-  color: var(--color-brand);
-}
+
 .stepper__check { display: none; }
 .stepper__step[data-stepper-state="done"] .stepper__check { display: block; }
 .stepper__step[data-stepper-state="done"] .stepper__number { display: none; }
 
+.stepper__step[data-stepper-state="done"] .stepper__marker {
+  border-color: var(--ctx-brand, var(--color-brand));
+  color: var(--ctx-brand, var(--color-brand));
+}
+.stepper__step[aria-current="step"] .stepper__marker {
+  border-color: var(--ctx-brand, var(--color-brand));
+  background: var(--color-brand);
+  color: #fff;
+  scale: 1.08;
+}
+
 .stepper__label {
-  font-size: var(--font-size-sm);
-  font-weight: 620;
-  line-height: 1.3;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ctx-steel, var(--color-steel));
+  overflow-wrap: anywhere;
+  transition: color var(--motion-base) var(--ease-standard);
 }
-
-.stepper__status {
-  margin-top: 1rem;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  font-weight: 620;
+.stepper__step[aria-current="step"] .stepper__label {
+  color: var(--ctx-text, var(--color-text));
+  font-weight: 600;
 }
+.stepper__step[data-stepper-state="done"] .stepper__label { color: var(--ctx-text-muted, var(--color-text-muted)); }
 
-/* Mobile: the five labels do not fit side by side, and a horizontally
-   scrolling stepper hides progress. The markers stay as a compact row and the
-   live status line carries the wording. */
 @media (max-width: 767px) {
-  .stepper { gap: .375rem; }
+  /* Five equal columns leave about 62px each, which is narrower than the
+     labels: shown in place, the current one broke mid-word. The markers keep
+     the row and the active label moves below the whole rail, where it has the
+     full width and never hyphenates. */
+  .stepper { gap: .25rem; position: relative; padding-bottom: 1.75rem; }
   .stepper__label { display: none; }
-  .stepper__step { padding-top: .625rem; justify-items: center; }
-  .stepper__status { margin-top: .75rem; font-size: var(--font-size-sm); }
+  /* The step is the positioned ancestor, so bottom:0 put the label back on the
+     marker row and it crossed the rail. top:100% places it under the step's own
+     box instead. It is anchored to its marker rather than centred on it, and the
+     last two steps anchor from the right, so the name cannot leave the field at
+     320 or hyphenate. */
+  .stepper__step[aria-current="step"] .stepper__label {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: .5rem;
+    width: max-content;
+    max-width: 100vw;
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+  .stepper__step:nth-last-child(-n+2)[aria-current="step"] .stepper__label {
+    left: auto;
+    right: 0;
+  }
+  .stepper__step:not(:last-child)::before,
+  .stepper__step:not(:last-child)::after { left: 2rem; }
 }

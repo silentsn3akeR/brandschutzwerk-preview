@@ -15,35 +15,40 @@
   margin-top: 2rem;
 }
 
-.training-quick-facts {
-  padding: 1.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-}
+/* The evidence surface. It used to be a white card, which put a piece of the
+   previous design generation into the middle of the new hero; the material now
+   comes from .glass--ember in the foundation and this block only owns layout
+   and type. On the ink plane the ctx values keep every row legible through the
+   translucency. */
+.training-quick-facts { padding: 1.75rem; }
 .training-quick-facts__row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  padding-block: .875rem;
-  border-top: 1px solid var(--color-border);
+  padding-block: .9375rem;
+  border-top: 1px solid var(--ctx-border);
 }
 .training-quick-facts__row:first-child { border-top: 0; padding-top: 0; }
-.training-quick-facts__row dt { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.training-quick-facts__row dt {
+  color: var(--ctx-steel);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
 .training-quick-facts__row dd {
   margin: 0;
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
-  font-weight: 680;
+  color: var(--ctx-text);
+  font-size: var(--font-size-base);
+  font-weight: 620;
   text-align: right;
 }
 .training-quick-facts__footnote {
   margin-top: 1.25rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+  border-top: 1px solid var(--ctx-border);
+  color: var(--ctx-text-muted);
   font-size: var(--font-size-xs);
   line-height: 1.5;
 }
@@ -112,9 +117,15 @@
    shared .timeline pattern's own responsive contract. */
 
 .training-curriculum__timeline { --timeline-columns: 5; }
-.training-curriculum__timeline .timeline__step { padding-right: 1.25rem; }
-.training-curriculum__timeline .timeline__step + .timeline__step { padding-left: 1.25rem; }
-.training-curriculum__timeline .timeline__step + .timeline__step::before { left: 1.25rem; }
+/* Five columns need tighter gutters than the three-column default — but only
+   where there are five columns. Unscoped, these outrank the pattern's own
+   mobile block by specificity, which put the marker back inside the label and
+   left the dot sitting on the M of MODUL 02 through 05. */
+@media (min-width: 1024px) {
+  .training-curriculum__timeline .timeline__step { padding-right: 1.25rem; }
+  .training-curriculum__timeline .timeline__step + .timeline__step { padding-left: 1.25rem; }
+  .training-curriculum__timeline .timeline__step + .timeline__step::before { left: 1.25rem; }
+}
 .training-curriculum__timeline h3 { font-size: var(--font-size-lg); letter-spacing: -.015em; }
 .training-curriculum__timeline p { font-size: var(--font-size-sm); }
 
@@ -132,11 +143,11 @@
    is composition, not a redefinition of the component. */
 .training-practice__media .asset-frame__stage { border-color: rgba(255, 255, 255, .16); }
 
-/* `.surface-authority p` (0,1,1) outranks `.asset-frame__label` (0,1,0), so the
-   label rendered light-on-white and was invisible — the first AssetFrame label
-   ever placed on the authority surface. Restored here; the specificity clash
-   belongs in the foundation. See report, OUT_OF_SCOPE_FINDINGS. */
-.training-practice__media .asset-frame__label { color: var(--color-text); }
+/* The per-page label patch is gone. It forced dark text onto the label to undo
+   a specificity clash with `.surface-authority p`; the shared component now
+   owns both the label's dark background and its light text on every plane, so
+   this override only reinstated the clash from the other side — dark on dark,
+   measured at 1.21:1. Fixed centrally in css/components/asset-frame.css. */
 
 .training-practice__copy .lead { margin-top: 1.125rem; }
 .training-practice__highlight {
@@ -261,6 +272,13 @@
   .training-requirements__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (max-width: 479px) {
+  /* The fact rows stack: a single unbreakable value like Teilnahmebescheinigung
+     cannot share a 320px row with its mono label. */
+  .training-quick-facts__row { flex-direction: column; align-items: flex-start; gap: .25rem; }
+  .training-quick-facts__row dd { text-align: left; overflow-wrap: anywhere; }
+}
+
 @media (max-width: 767px) {
   /* 4-column grid below 768. */
   .training-hero__copy,
@@ -359,14 +377,37 @@
    Duty is carried by a written badge, never by colour alone: the distinction
    between "erforderlich" and "empfohlen" is the honest part of this section
    and must survive greyscale, print and a screen reader. */
-.training-checklists__legend { margin: 0 0 1.5rem; font-size: .9375rem;
-  color: var(--color-text-muted, #55605c); }
-.duty { display: inline-block; margin-left: .375rem; padding: .0625rem .4375rem;
-  font-size: .6875rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-  border: 1px solid currentColor; border-radius: 2px; white-space: nowrap; vertical-align: .05em; }
-.duty[data-duty="REQUIRED"] { color: var(--color-brand, #35543f); }
-.duty[data-duty="RECOMMENDED"] { color: var(--color-text-muted, #55605c); }
-.duty[data-duty="CLARIFY"] { color: var(--color-attention); }
+.training-checklists__legend { margin: 0 0 2rem; font-size: var(--font-size-sm);
+  color: var(--ctx-text-muted); }
+
+/* Duty marker. Three outlined pills read as three decorative chips and made
+   every instruction look equally loud; this is a technical label preceded by a
+   short rule, so the duty attaches to the line it qualifies. Meaning survives
+   greyscale, print and a screen reader because the word is the label — the
+   colour only reinforces what the text already says. */
+.duty {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  margin-left: .5rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: .04em;
+}
+.duty::before {
+  content: "";
+  width: 1.125rem;
+  height: 2px;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+.duty[data-duty="REQUIRED"] { color: var(--ctx-brand, var(--color-brand)); }
+.duty[data-duty="RECOMMENDED"] { color: var(--ctx-success, var(--color-success)); }
+.duty[data-duty="CLARIFY"] { color: var(--ctx-attention, var(--color-attention)); }
 
 .training-checklists__grid { display: grid; gap: 1.5rem; }
 .training-checklists__list { border: 1px solid var(--color-border, #cfd5d3); margin: 0;
@@ -377,21 +418,21 @@
   font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase;
   letter-spacing: .06em; }
 .training-checklists__intro { margin: .5rem 0 1rem; color: var(--color-text-muted, #55605c); }
-.training-checklists__items { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
-.training-checklists__item { display: flex; gap: .625rem; align-items: flex-start;
+.workbench__items { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
+.workbench__item { display: flex; gap: .625rem; align-items: flex-start;
   padding: .5rem .25rem; min-height: 44px; cursor: pointer; }
 /* Same native-control-with-a-real-hit-area treatment as the Bedarfscheck. */
-.training-checklists__item input {
+.workbench__item input {
   appearance: none; -webkit-appearance: none; margin: 0; flex: none;
   width: 24px; min-height: 44px; display: grid; place-content: center;
   background: none; border: 0; cursor: pointer; }
-.training-checklists__item input::before {
+.workbench__item input::before {
   content: ""; width: 20px; height: 20px; box-sizing: border-box;
   border: 2px solid var(--color-text-muted, #55605c); background: var(--color-surface, #fff); }
-.training-checklists__item input:checked::before {
+.workbench__item input:checked::before {
   background: var(--color-brand, #35543f); border-color: var(--color-brand, #35543f);
   box-shadow: inset 0 0 0 3px var(--color-surface, #fff); }
-.training-checklists__item input:focus-visible {
+.workbench__item input:focus-visible {
   outline: 2px solid var(--color-text, #171d1c); outline-offset: 2px; }
 .training-checklists__text { display: block; }
 .training-checklists__text em { display: block; margin-top: .125rem; font-style: normal;
@@ -421,12 +462,12 @@
   .training-checklists__grid { grid-template-columns: 1fr; gap: 1rem; }
   .training-checklists__list { border: 1px solid #000; break-inside: avoid;
     page-break-inside: avoid; background: #fff !important; padding: 1rem; }
-  .training-checklists__item { min-height: 0; padding: .25rem 0; }
-  .training-checklists__item input { min-height: 0; height: 18px; width: 18px;
+  .workbench__item { min-height: 0; padding: .25rem 0; }
+  .workbench__item input { min-height: 0; height: 18px; width: 18px;
     -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .training-checklists__item input::before { width: 16px; height: 16px;
+  .workbench__item input::before { width: 16px; height: 16px;
     border: 1.5px solid #000; background: #fff; box-shadow: none; }
-  .training-checklists__item input:checked::before { background: #fff; }
+  .workbench__item input:checked::before { background: #fff; }
   .duty { border-color: #000; color: #000 !important; }
   /* The basis must print with the checklist — a page of obligations without
      its source is the artefact this whole project exists to avoid. */
@@ -438,19 +479,30 @@
 /* TRAINING_11_AUFFRISCHUNG — the two rules, and the check that says which one
    applies. The layout exists to keep them apart: side by side at width, never
    merged, each carrying its own written strength label. */
-.training-auffrischung__rules { display: grid; gap: 1rem; margin: 0 0 1.25rem; }
-.training-auffrischung__rule { padding: 1.25rem; background: var(--color-surface, #fff);
-  border: 1px solid var(--color-border, #cfd5d3); }
-.training-auffrischung__rule[data-rule="CHANGE"] { border-left: 3px solid var(--color-brand, #35543f); }
-.training-auffrischung__rule[data-rule="TIME"] { border-left: 3px solid var(--color-text-muted, #55605c); }
+/* The two rules were two bordered boxes distinguished by a coloured left edge —
+   the exact shape this section must not use, because it presents a
+   recommendation and a requirement as two instances of one kind of thing. They
+   are now two statements on a rail, and the strength of each is carried by the
+   duty marker and the rule weight rather than by a container.
+   The wording, the ordering and the source reference are untouched. */
+.training-auffrischung__rules { display: grid; gap: var(--space-4); margin: 0 0 1.75rem; min-width: 0; }
+.training-auffrischung__rule { min-width: 0; padding: 1.25rem 0 0; background: none; border: 0; }
+.training-auffrischung__rule[data-rule="CHANGE"] { border-top: 3px solid var(--ctx-brand); }
+.training-auffrischung__rule[data-rule="TIME"] { border-top: 3px solid var(--ctx-success); }
 .training-auffrischung__rule-head { margin: 0 0 .5rem; }
-.training-auffrischung__rule h3 { margin: 0 0 .5rem; font-size: 1.0625rem; }
-.training-auffrischung__rule p { margin: 0; color: var(--color-text-muted, #55605c); }
-.training-auffrischung__note { margin: 0 0 1.75rem; padding: .875rem 1rem; font-size: .9375rem;
-  background: var(--color-surface-sunken); border-left: 3px solid var(--color-border, #cfd5d3); }
+.training-auffrischung__rule h3 {
+  margin: 0 0 .5rem;
+  font-size: var(--font-size-h4);
+  font-weight: 620;
+  letter-spacing: var(--tracking-tight);
+}
+.training-auffrischung__rule p { margin: 0; color: var(--ctx-text-muted); }
+.training-auffrischung__note { margin: 0 0 1.75rem; padding: .875rem 0 .875rem 1rem; font-size: var(--font-size-sm);
+  color: var(--ctx-text-inset); border-left: 2px solid var(--ctx-border-strong); }
 
-.training-auffrischung__check { padding: 1.5rem; display: grid; gap: 1.25rem;
-  background: var(--color-surface, #fff); border: 1px solid var(--color-border, #cfd5d3); }
+/* Material from .glass in the foundation — the one utility surface that earns
+   the pane, because it is the instrument the visitor operates. Layout only. */
+.training-auffrischung__check { min-width: 0; padding: var(--space-4); display: grid; gap: 1.25rem; }
 .training-auffrischung__check-title { margin: 0; font-size: 1.25rem; }
 .training-auffrischung__check-intro { margin: -.75rem 0 0; color: var(--color-text-muted, #55605c); }
 .training-auffrischung .field--group { border: 0; margin: 0; padding: 0; }
@@ -610,4 +662,92 @@
   border-left: 3px solid var(--color-border-strong);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   max-width: 72ch;
+}
+
+/* ------------------------------------------------------- TRAINING_01_HERO V3
+   The route opens on the ink plane, matching the home hero, so the two entry
+   points to the product read as the same place. The header runs over the scene
+   rather than above it. */
+
+.training-hero {
+  min-height: min(78vh, 44rem);
+  margin-top: calc(-1 * var(--header-height));
+  padding-top: calc(var(--space-7) + var(--header-height));
+  display: flex;
+  align-items: center;
+}
+.training-hero__display {
+  font-size: clamp(2.75rem, 5.6vw, 4.75rem);
+  font-weight: 620;
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+/* ------------------------------- SECTIONS 05-08 EDITORIAL RHYTHM (closure)
+
+   Four consecutive sections ran the same eyebrow-heading-paragraph shape for
+   roughly 2.8 viewports right after the Curriculum signature. The fix is
+   composition, not four more widgets: exactly two devices are introduced and
+   each is used where the existing content already justifies it.
+
+   DEVICE 1 — the statement. TRAINING_05_PRACTICE already ends on three words,
+   "Anfassen. Auslösen. Anwenden.", which are the section's actual argument.
+   They get the display scale. A first attempt enlarged the surrounding lead
+   instead and pushed body copy above the statement it supports, inverting the
+   hierarchy the route's own QA asserts.
+
+   DEVICE 2 — the continuation trace. A hairline that leaves the Curriculum
+   scene and reappears at the head of the day flow, so the signature moment
+   visibly has consequences below it. It is a graphical device only: two rules
+   and no scroll behaviour whatsoever. */
+
+.training-practice__highlight {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 560;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+  max-width: 14ch;
+}
+
+/* The trace: it exits the curriculum section and re-enters at the day flow. */
+.training-curriculum { position: relative; }
+.training-curriculum::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 1px;
+  height: var(--space-5);
+  background: linear-gradient(180deg, var(--color-brand), transparent);
+  opacity: .5;
+}
+.training-day-flow { position: relative; }
+.training-day-flow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: var(--space-5);
+  background: linear-gradient(180deg, transparent, var(--ctx-border-strong));
+}
+
+/* Requirements read as evidence rather than as four equal blocks: the rule
+   above each one is the same grammar the truth rail uses elsewhere. */
+.training-requirements__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4) var(--space-5); }
+.training-requirement-card {
+  padding: 1.25rem 0 0;
+  border: 0;
+  border-top: 2px solid var(--ctx-text);
+  border-radius: 0;
+  background: none;
+}
+
+/* The fit section closes the stretch quietly: narrower measure, more air. */
+.training-qualification-fit .section-heading { max-width: 34rem; }
+
+@media (max-width: 767px) {
+  .training-requirements__grid { grid-template-columns: minmax(0, 1fr); }
+  .training-curriculum::after, .training-day-flow::before { display: none; }
 }

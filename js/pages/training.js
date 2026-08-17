@@ -4,8 +4,6 @@ import { initBedarfscheck } from "../components/bedarfscheck.js";
 import { initChecklistPrint } from "../components/checklist-print.js";
 import { initAuffrischungscheck } from "../components/auffrischungscheck.js";
 
-
-
 function verifyFaqMirror() {
   const items = $$("[data-component='FAQAccordion'] .accordion__item");
   const expected = faq.training;
@@ -47,5 +45,20 @@ export function init() {
      the model's decision, and every sentence is authored in the markup. */
   const auffrischung = initAuffrischungscheck();
 
-  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck, bedarf, checklists, auffrischung };
+  /* TRAINING_11_AUFFRISCHUNG. The local precedence scene reacts to U4's
+     authoritative state, mirrored onto its own section so CSS can respond.
+     initAuffrischungscheck stays the only place that decides which outcome
+     applies; this copies the attribute and nothing else. It replaced a global
+     lifecycle controller that existed only for the sticky instrument. */
+  const section = document.querySelector("[data-section-id='TRAINING_11_AUFFRISCHUNG']");
+  const result = document.querySelector("[data-auff-result]");
+  let precedence = false;
+  if (section && result && "MutationObserver" in window) {
+    const mirror = () => { section.dataset.u4 = result.dataset.state || "IDLE"; };
+    new MutationObserver(mirror).observe(result, { attributes: true, attributeFilter: ["data-state"] });
+    mirror();
+    precedence = true;
+  }
+
+  return { page: "PAGE_TRAINING", implemented: true, faq: faqCheck, bedarf, checklists, auffrischung, precedence };
 }

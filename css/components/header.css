@@ -1,42 +1,261 @@
 /* COMPONENT — SiteHeader + MobileNavigation
    Every navigation control meets --control-min-target. The V1 20px-tall
-   desktop nav links are the defect this contract exists to prevent. */
+   desktop nav links are the defect this contract exists to prevent.
+
+   Two states. At rest the header has no surface of its own and belongs to the
+   scene behind it, so the hero starts at the top of the viewport rather than
+   under a bar. Once the page moves, a glass island materialises behind the same
+   content.
+
+   The island is a pseudo element inset past the container edge rather than
+   padding on the container itself. Padding would shift the brand out of
+   alignment with the section content below it, which is visible at rest where
+   the header is transparent. */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: var(--z-header);
+  isolation: isolate;
   min-height: var(--header-height);
   display: flex;
   align-items: center;
-  background: rgba(247, 247, 245, .92);
-  border-bottom: 1px solid transparent;
-  transition: background-color var(--motion-fast) var(--ease-standard),
-              border-color var(--motion-fast) var(--ease-standard);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-.site-header.is-scrolled {
-  background: rgba(247, 247, 245, .97);
-  border-bottom-color: var(--color-border);
+  padding-block: .5rem;
+  background: transparent;
+  transition: padding-block var(--motion-base) var(--ease-standard);
 }
 
+/* No width override here. The element carries .container, and a `width: 100%`
+   at equal specificity used to beat the container's min() — harmless while the
+   header had no surface of its own, but the island below is inset past this
+   box's edge, and against a full-viewport box that inset becomes 20px of
+   horizontal page overflow at every width. */
 .site-header__inner {
-  width: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
 }
 
+.site-header__inner {
+  transition: padding-inline var(--motion-base) var(--ease-standard);
+}
+
+.site-header__inner::before {
+  content: "";
+  position: absolute;
+  inset: -.6875rem 0;
+  z-index: -1;
+  border: 1px solid transparent;
+  border-radius: var(--radius-island);
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--ease-standard),
+              border-color var(--motion-base) var(--ease-standard),
+              box-shadow var(--motion-base) var(--ease-standard);
+}
+/* The pane's top light edge — same recipe as every other glass surface. */
+.site-header__inner::after {
+  content: "";
+  position: absolute;
+  inset: -.6875rem 0 auto;
+  height: 1px;
+  border-radius: var(--radius-island) var(--radius-island) 0 0;
+  background: linear-gradient(90deg, transparent 10%, var(--glass-highlight), transparent 90%);
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--ease-standard);
+  pointer-events: none;
+}
+
+/* The morph is meant to be seen: the bar does not just gain a background, it
+   contracts into an island. The contraction is a transform of the pseudo
+   element rather than an animated max-width — animating a length relaid out
+   the whole header row every frame, and the island is the only thing that
+   actually needs to change size. */
+.site-header.is-scrolled { padding-block: .375rem; }
+
+/* The island contracts INWARD when it appears. Scaling the resting state up
+   past the container was 4px of page overflow at 1280 and tripped the header
+   collision check — a pseudo element's transform still counts toward its
+   parent's scroll width. The visible morph is identical either way, because
+   the resting island is transparent. */
+.site-header__inner::before,
+.site-header__inner::after {
+  transform: scaleX(1);
+  transform-origin: 50% 50%;
+  /* The material change is the signature, so it is animated rather than cut.
+     background is not interpolable between these layer stacks, so the visible
+     morph is carried by the properties that are — edge, shadow, reflection —
+     over the M2 duration. */
+  transition: opacity var(--motion-base) var(--ease-standard),
+              transform var(--motion-base) var(--ease-entrance),
+              border-color var(--motion-reveal) var(--ease-standard),
+              box-shadow var(--motion-reveal) var(--ease-standard);
+}
+.site-header.is-scrolled .site-header__inner::before,
+.site-header.is-scrolled .site-header__inner::after { transform: scaleX(.972); }
+
+/* ------------------------------------------------------------ adaptive glass
+
+   js/core/context.js writes data-context with the plane currently under the
+   header. Four materials, one mechanism.
+
+   The rule that prevents the failure this replaced: TEXT FOLLOWS THE PANE. The
+   old header picked its material from the plane it was declared in and left the
+   text to fend for itself, which is how the navigation ended up at 1.36:1 over
+   a paper section. Here each context sets both, together, and neither is
+   defined without the other. */
+
+.site-header.is-scrolled .site-header__inner::before {
+  opacity: 1;
+  border-width: 1px;
+  border-style: solid;
+}
+.site-header.is-scrolled .site-header__inner::after { opacity: 1; }
+
+/* ON_DARK — a window. Low opacity, strong blur, warm tint, bright top edge. */
+.site-header.is-scrolled .site-header__inner::before,
+.site-header.is-scrolled[data-context="dark"] .site-header__inner::before {
+  background: var(--color-ink-veil);
+  border-color: var(--color-border-on-dark);
+  box-shadow: var(--shadow-float);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .site-header.is-scrolled .site-header__inner::before,
+  .site-header.is-scrolled[data-context="dark"] .site-header__inner::before {
+    background:
+      radial-gradient(120% 160% at 90% 120%, var(--glass-tint-ember), transparent 55%),
+      var(--glass-bg-dark);
+    border-color: var(--glass-border-dark);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+}
+.site-header.is-scrolled .site-header__brand,
+.site-header.is-scrolled .site-header__links a[aria-current="page"],
+.site-header.is-scrolled[data-context="dark"] .site-header__brand,
+.site-header.is-scrolled[data-context="dark"] .site-header__links a[aria-current="page"] { color: var(--color-text-on-dark); }
+.site-header.is-scrolled .site-header__links a,
+.site-header.is-scrolled[data-context="dark"] .site-header__links a { color: var(--color-text-muted-on-dark); }
+.site-header.is-scrolled .site-header__links a:hover,
+.site-header.is-scrolled[data-context="dark"] .site-header__links a:hover { color: var(--color-text-on-dark); }
+.site-header.is-scrolled .menu-toggle,
+.site-header.is-scrolled[data-context="dark"] .menu-toggle {
+  background: transparent;
+  border-color: var(--color-border-on-dark-strong);
+  color: var(--color-text-on-dark);
+}
+.site-header.is-scrolled .site-header__inner::after,
+.site-header.is-scrolled[data-context="dark"] .site-header__inner::after { opacity: .5; }
+
+/* ON_LIGHT — still glass, not paper.
+
+   The previous fix answered a contrast failure by pushing the pane to 94%
+   opacity, which made the header readable and stopped it being a material: the
+   backdrop vanished. Glass that hides what is behind it is a white card.
+
+   The pane is translucent again at 62%. Contrast is solved where it should be —
+   in the text colour — because over every real light backdrop on this site the
+   composite lands between 239 and 248, where the strong muted tone measures
+   5.0:1 or better. The one backdrop that ever broke this was a dark portrait
+   plane sliding under the header, which is now a composition rule rather than
+   luck, and tools/validate-scroll-contrast.mjs samples the composited pixels on
+   every route so it cannot come back unnoticed. */
+.site-header.is-scrolled[data-context="light"] .site-header__inner::before {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-float);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .site-header.is-scrolled[data-context="light"] .site-header__inner::before {
+    /* Every layer is an image. A bare colour in the middle of a background
+       layer list invalidates the whole declaration, which left the pane fully
+       transparent — the failure that looked like a contrast problem. */
+    /* Warm milky body, steel only at the edge. The full-body steel wash was
+       what made the pane read as a grey plate: a tint across the whole surface
+       reads as the surface's colour, while the same tint at the rim reads as
+       the thickness of glass. */
+    background:
+      linear-gradient(168deg, rgba(255, 255, 255, .62), rgba(255, 255, 255, .08) 55%),
+      radial-gradient(120% 180% at 88% 130%, var(--glass-tint-ember), transparent 60%),
+      linear-gradient(color-mix(in srgb, var(--color-surface) 70%, transparent),
+                      color-mix(in srgb, var(--color-surface) 70%, transparent));
+    border-color: rgba(255, 255, 255, .78);
+    box-shadow: var(--shadow-float),
+                inset 0 1px 0 rgba(255, 255, 255, .9),
+                inset 0 0 0 1px var(--glass-tint-steel);
+    -webkit-backdrop-filter: blur(26px) saturate(1.5);
+    backdrop-filter: blur(26px) saturate(1.5);
+  }
+}
+/* The light pane's own reflection: a bright top edge, the counterpart of the
+   dark pane's highlight rather than a different idea. */
+.site-header.is-scrolled[data-context="light"] .site-header__inner::after {
+  opacity: .9;
+  background: linear-gradient(90deg, transparent 8%, rgba(255, 255, 255, .95), transparent 92%);
+}
+.site-header.is-scrolled[data-context="light"] .site-header__brand,
+.site-header.is-scrolled[data-context="light"] .site-header__links a[aria-current="page"] { color: var(--color-text); }
+/* Full-strength ink, with weight carrying the hierarchy instead of colour.
+   A translucent pane cannot promise what is behind it: on About a dark portrait
+   plane passes under the navigation and drags the composite to rgb(185,182,181),
+   where the muted tone measures 3.71:1. The same text in --color-text measures
+   8.96:1 there and ~15:1 everywhere else, so the material stays translucent and
+   the type does the work — which is the rule this route exists to prove. */
+.site-header.is-scrolled[data-context="light"] .site-header__links a {
+  color: var(--color-text);
+  font-weight: 520;
+}
+.site-header.is-scrolled[data-context="light"] .site-header__links a:hover,
+.site-header.is-scrolled[data-context="light"] .site-header__links a[aria-current="page"] { font-weight: 640; }
+.site-header.is-scrolled[data-context="light"] .menu-toggle {
+  background: rgba(255, 255, 255, .55);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+/* ON_EMBER — the request scene and any warm plane. A window like ON_DARK, but
+   the tint is unmistakable rather than a hint: this is the one context where
+   the pane is allowed to announce the material. */
+.site-header.is-scrolled[data-context="ember"] .site-header__inner::before {
+  background: var(--color-ink-veil);
+  border-color: var(--glass-border-dark);
+  box-shadow: var(--shadow-deep);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .site-header.is-scrolled[data-context="ember"] .site-header__inner::before {
+    background:
+      radial-gradient(140% 200% at 80% 130%, var(--glass-tint-ember), transparent 60%),
+      var(--glass-bg-ember);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+}
+.site-header.is-scrolled[data-context="ember"] .site-header__brand,
+.site-header.is-scrolled[data-context="ember"] .site-header__links a[aria-current="page"] { color: var(--color-text-on-dark); }
+.site-header.is-scrolled[data-context="ember"] .site-header__links a { color: var(--color-text-muted-on-dark); }
+.site-header.is-scrolled[data-context="ember"] .menu-toggle {
+  background: transparent;
+  border-color: var(--color-border-on-dark-strong);
+  color: var(--color-text-on-dark);
+}
+
+/* ACTIVE — the pane acknowledges a pointer inside the navigation. One step of
+   opacity and edge, nothing that moves. */
+.site-header.is-scrolled .site-header__nav:hover ~ * .site-header__inner::before,
+.site-header.is-scrolled:hover .site-header__inner::before { box-shadow: var(--shadow-deep); }
+.site-header.is-scrolled:hover .site-header__inner::after { opacity: .8; }
+
 .site-header__brand {
   min-height: var(--control-min-target);
   display: inline-flex;
   align-items: center;
   gap: .625rem;
-  font-weight: 720;
-  letter-spacing: -.025em;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -.03em;
   white-space: nowrap;
+  color: var(--color-text);
 }
 .site-header__brand:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
@@ -44,40 +263,82 @@
   border-radius: var(--radius-sm);
 }
 
-.site-header__nav { display: flex; align-items: center; gap: 1.75rem; }
-.site-header__links { display: flex; align-items: center; gap: .5rem; }
+.site-header__nav { display: flex; align-items: center; gap: 1.5rem; }
+.site-header__links { display: flex; align-items: center; gap: .25rem; }
 
+/* The nav link speaks the same directional underline as the text CTA, so the
+   whole site has one way of saying "this leads somewhere". */
 .site-header__links a {
+  transition: color var(--motion-reveal) var(--ease-standard),
+              background-size var(--motion-base) var(--ease-standard);
   min-height: var(--control-min-target);
   display: inline-flex;
   align-items: center;
   padding-inline: .75rem;
-  border-radius: var(--radius-sm);
-  color: #42474d;
+  color: var(--color-text-muted);
   font-size: .9375rem;
-  font-weight: 560;
-  transition: color var(--motion-fast) var(--ease-standard);
+  font-weight: 550;
+  background-image: linear-gradient(90deg, var(--color-brand), var(--color-brand));
+  background-repeat: no-repeat;
+  background-position: .75rem calc(100% - .75rem);
+  background-size: 0% 2px;
+  transition: color var(--motion-fast) var(--ease-standard),
+              background-size var(--motion-base) var(--ease-standard);
 }
-.site-header__links a:hover { color: var(--color-text); }
-.site-header__links a[aria-current="page"] { color: var(--color-text); font-weight: 650; }
+.site-header__links a:hover { color: var(--color-text); background-size: calc(100% - 1.5rem) 2px; }
+.site-header__links a[aria-current="page"] {
+  color: var(--color-text);
+  font-weight: 620;
+  background-size: calc(100% - 1.5rem) 2px;
+}
+.site-header__links a:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
 
-.site-header__cta { min-height: 2.875rem; padding-inline: 1.125rem; font-size: .9375rem; }
+.site-header__cta { min-height: 2.75rem; padding-inline: 1.125rem; font-size: .9063rem; }
+
+/* Over an immersive hero the header has no surface, so its own contents have to
+   carry the contrast. Once the island materialises the header is back on a light
+   pane and the normal colours apply — which is why every rule here is scoped to
+   :not(.is-scrolled). */
+.site-header--over-scene:not(.is-scrolled) .site-header__brand,
+.site-header--over-scene:not(.is-scrolled) .site-header__links a[aria-current="page"] {
+  color: var(--color-text-on-dark);
+}
+.site-header--over-scene:not(.is-scrolled) .site-header__links a {
+  color: var(--color-text-muted-on-dark);
+}
+.site-header--over-scene:not(.is-scrolled) .site-header__links a:hover {
+  color: var(--color-text-on-dark);
+}
+.site-header--over-scene:not(.is-scrolled) .menu-toggle {
+  background: transparent;
+  border-color: var(--color-border-on-dark-strong);
+  color: var(--color-text-on-dark);
+}
 
 .menu-toggle {
   display: none;
   width: var(--control-min-target);
   height: var(--control-min-target);
   place-items: center;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-button);
   background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color var(--motion-fast) var(--ease-standard),
+              background-color var(--motion-fast) var(--ease-standard);
 }
+.menu-toggle:hover { border-color: var(--color-brand); }
 /* Open state: the plus rotates into a close mark — the same disclosure
    language the accordion trigger already speaks. The rotation persists under
    reduced motion (only the transition is neutralized globally), so the state
    stays visible without movement. */
-.menu-toggle .icon { transition: transform var(--motion-fast) var(--ease-standard); }
-.menu-toggle[aria-expanded="true"] .icon { transform: rotate(45deg); }
+.menu-toggle .icon { transition: transform var(--motion-base) var(--ease-standard); }
+.menu-toggle[aria-expanded="true"] .icon { transform: rotate(135deg); }
+.menu-toggle[aria-expanded="true"] { border-color: var(--color-brand); color: var(--color-brand); }
 
 .mobile-navigation {
   position: fixed;
@@ -89,14 +350,23 @@
   overflow: hidden;
   visibility: hidden;
   opacity: 0;
-  background: rgba(247, 247, 245, .99);
+  background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  transform: translateY(-8px);
-  transition: opacity var(--motion-fast) var(--ease-standard),
-              transform var(--motion-fast) var(--ease-standard),
+  transform: translateY(-12px);
+  transition: opacity var(--motion-base) var(--ease-standard),
+              transform var(--motion-base) var(--ease-entrance),
               max-height var(--motion-base) var(--ease-standard),
-              visibility var(--motion-fast);
+              visibility var(--motion-base);
 }
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .mobile-navigation {
+    background: var(--glass-bg-light);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+}
+
 .mobile-navigation.is-open {
   max-height: calc(100dvh - var(--header-height));
   visibility: visible;
@@ -110,8 +380,10 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--color-border);
-  font-size: 1.0625rem;
-  font-weight: 610;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--color-text);
 }
 .mobile-navigation__cta { margin-top: 1.5rem; }
 
@@ -126,4 +398,6 @@ body.mobile-menu-open { overflow: hidden; }
 }
 @media (max-width: 640px) {
   :root { --header-height: 4.25rem; }
+  .site-header__inner::before { inset: -.5rem 0; }
+  .site-header__inner::after { inset: -.5rem 0 auto; }
 }

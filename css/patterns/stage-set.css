@@ -1,0 +1,149 @@
+/* PATTERN — Stage Set (SP-02 Process Takeover).
+
+   A compact progression. It replaced three columns joined by a hairline — a
+   composition that told the reader there were three steps without ever making
+   the process feel simple — and then replaced its own first answer, a pinned
+   viewport takeover that cost far more scrolling than three sentences earn.
+
+   STATIC FIRST. The resting composition holds on its own: oversized index,
+   statement, copy, a rule between steps. Motion adds emphasis as the reader
+   passes and never carries information.
+
+   Nothing is pinned. An earlier version drove a viewport-pinned takeover across
+   roughly 2.5 viewports to deliver three sentences, which is scroll spent on
+   information that does not deserve it. The section is now about three quarters
+   of a viewport, the page scrolls exactly as far as its content, and
+   js/components/stage-set.js only marks which step has been reached. */
+
+.stage-set { position: relative; margin-top: var(--space-6); }
+.stage-set__stages { position: relative; }
+
+.stage-set__stages { list-style: none; margin: 0; padding: 0; }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  align-items: start;
+  column-gap: var(--space-5);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--ctx-border);
+}
+.stage:first-child { border-top: 0; }
+
+/* The index is structure, not ornament: these steps really are ordered and the
+   order is what the section is about. */
+.stage__index {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-weight: 200;
+  line-height: .85;
+  letter-spacing: var(--tracking-display);
+  color: var(--ctx-text);
+  opacity: .22;
+}
+
+.stage__body { min-width: 0; max-width: 40rem; padding-top: .5rem; }
+.stage__eyebrow { display: block; margin-bottom: .75rem; }
+.stage__title {
+  font-size: var(--font-size-h2);
+  font-weight: 620;
+  line-height: 1.02;
+  letter-spacing: var(--tracking-tight);
+}
+.stage__copy { margin-top: 1rem; color: var(--ctx-text-muted); font-size: var(--font-size-lead); }
+
+.stage-set__progress {
+  margin-top: var(--space-4);
+  color: var(--ctx-steel);
+}
+
+/* ---------------------------------------------------- compact progression
+
+   The takeover is gone. Three steps of one sentence each did not earn several
+   viewport lengths of pinned scrolling: the reader travelled ~2.5 viewports to
+   receive three facts, which reads as inflation rather than confidence. That
+   scroll budget now belongs to the training route, where the content can carry
+   it.
+
+   What survives is the part that was worth keeping — oversized indices, a real
+   spatial hierarchy, and states that respond as the reader passes. The section
+   is now about three quarters of a viewport and the motion happens during
+   ordinary scrolling: nothing is pinned, nothing is trapped, and the page never
+   scrolls further or slower than its content.
+
+   States are written by js/components/stage-set.js from the same observer as
+   before; without the script every step simply sits at its resting values. */
+
+@media (min-width: 1024px) {
+  /* One horizontal sequence rather than three stacked blocks. Three short
+     facts read as a sequence in a row and as a list in a column, and the row
+     costs a third of the height. */
+  .stage-set__stages {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .stage {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: .75rem;
+    padding-block: var(--space-3) 0;
+    border-top: 0;
+  }
+  .stage__index { font-size: clamp(3rem, 4vw, 4rem); }
+  .stage__body { padding-top: 0; max-width: none; }
+  .stage__title { font-size: clamp(1.375rem, 1.9vw, 1.75rem); }
+  .stage__copy { font-size: var(--font-size-sm); margin-top: .5rem; }
+
+  /* The rule runs along the top of each step and fills left to right through
+     the sequence — the ember trace the process is named for. */
+  .stage::after { inset: 0 auto auto 0; }
+  .stage::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: var(--ctx-border);
+  }
+  .stage:first-child::after { content: ""; }
+}
+
+/* The rule between steps carries the progression: it fills as the step becomes
+   current, so the line itself advances down the section while reading. */
+.stage { position: relative; }
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: -1px auto auto 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--ctx-brand), var(--ctx-attention));
+  transition: width var(--motion-stage) var(--ease-entrance);
+}
+.stage:first-child::after { content: none; }
+.stage[data-state="current"]::after,
+.stage[data-state="past"]::after { width: 100%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .stage {
+    transition: opacity var(--motion-reveal) var(--ease-standard),
+                translate var(--motion-reveal) var(--ease-entrance);
+  }
+  /* Priority, not concealment: an upcoming step is fully readable, it simply
+     has not been reached. Nothing here hides information. */
+  .stage[data-state="upcoming"] { opacity: .55; translate: 0 .5rem; }
+  .stage[data-state="past"] { opacity: .68; }
+  .stage[data-state="current"] { opacity: 1; translate: none; }
+  .stage[data-state="current"] .stage__index { opacity: .34; }
+  .stage__index { transition: opacity var(--motion-reveal) var(--ease-standard); }
+}
+
+.stage-set__progress { color: var(--ctx-steel); }
+
+@media (max-width: 767px) {
+  .stage { grid-template-columns: minmax(0, 1fr); row-gap: .5rem; padding-block: var(--space-4); }
+  .stage__index { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+  .stage__body { padding-top: 0; }
+}

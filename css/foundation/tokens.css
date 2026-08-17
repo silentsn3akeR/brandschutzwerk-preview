@@ -1,32 +1,119 @@
 /* FOUNDATION — design tokens
    Generated from project/v2/machine/token-registry.json.
    The registry is the authority; this file must stay in sync with it.
-   No page or component stylesheet may redefine a token. */
+   No page or component stylesheet may redefine a token.
+
+   PALETTE: "Steel to Ember".
+   The colour system runs one axis, from cold structure to heat, and the heat is
+   semantic rather than decorative. Steel carries structure and metadata, ember
+   marks a question the business still has to answer, flame marks something that
+   is actually required, and the escape green is the German escape-route colour
+   doing the job it does on a real building: this part is settled, go here.
+   That maps the palette onto the duty vocabulary the utilities already publish
+   (Erforderlich / Empfohlen / Zu klären) instead of inventing a second one. */
 
 :root {
-  /* --- Colour --- */
-  --color-bg: #f7f7f5;
-  --color-surface: #ffffff;
-  --color-dark: #22272b;
-  --color-dark-soft: #292e33;
-  --color-text: #181b1f;
-  --color-text-muted: #667085;
+  /* --- Colour: ink planes ---
+     Three depths, not one flat dark. Sections choose a plane; the plane owns
+     its own text colours so no page stylesheet has to restate them. */
+  --color-ink: #0d1113;
+  --color-ink-raised: #161b1f;
+  --color-ink-veil: #202830;
+
+  /* --- Colour: paper planes ---
+     Warm limestone rather than paper white. The previous #f7f7f5 / #ffffff pair
+     differed by ~3% luminance, which read as one uninterrupted plane across a
+     12000px page; these three are far enough apart to actually group content. */
+  --color-bg: #eceae4;
+  --color-surface: #f8f7f4;
+  --color-surface-sunken: #e2ded5;
+  /* Smoked: a steel-cooled light plane. The route rhythm had ink, then several
+     interchangeable bright surfaces, then ink again — which read as one long
+     white middle. This is the third light value, cool where limestone is warm,
+     so a light section can change material without changing brightness.
+
+     #e4e3df is the lightest value that is still visibly a different material
+     and the darkest at which every signal colour keeps 4.5:1 as ordinary body
+     text. A first attempt at #dcdcd8 read better but put muted text at 4.27:1;
+     a full section background has to carry the ordinary muted tone, unlike the
+     sunken inset which has --color-text-strong-muted for exactly that reason. */
+  --color-smoked: #e4e3df;
+
+  /* --- Colour: legacy dark aliases ---
+     Kept because the authority section pattern and the footer already bind to
+     them. They now resolve into the ink plane. */
+  --color-dark: #0d1113;
+  --color-dark-soft: #161b1f;
+
+  /* --- Colour: text --- */
+  --color-text: #12171a;
+  --color-text-muted: #5c666e;
   /* Muted text that has to clear 4.5:1 on a tinted (not white) background.
-     #667085 manages 4.97:1 on white but only 4.35:1 on the neutral tint. */
-  --color-text-strong-muted: #5d6675;
-  --color-text-on-dark: #f8f9fa;
-  --color-brand: #b72a20;
-  --color-brand-hover: #9e241b;
-  --color-brand-soft: #fff1ef;
-  /* One step below --color-bg: lets a result or note read as inset without
-     needing a border, which is what turns a page into card soup. */
-  --color-surface-sunken: #f1f1ee;
-  /* An open question is not an error, so it must not borrow the brand red. */
-  --color-attention: #8a5312;
-  --color-border: #e4e7ec;
-  --color-border-strong: #cfd4dc;
-  --color-success: #18794e;
+     #5c666e manages 5.9:1 on --color-surface but only 4.4:1 on the sunken
+     tint, so grouped detail on an inset surface uses this one instead. */
+  --color-text-strong-muted: #4d565e;
+  --color-text-on-dark: #eeece7;
+  /* The dark plane needs its own muted voice. Reusing --color-text-muted on ink
+     lands at 3.1:1 and fails. */
+  --color-text-muted-on-dark: #9aa6b0;
+
+  /* --- Colour: signal ---
+     One heat axis. flame = required, ember = open question, escape = settled.
+     Nothing else in the system is allowed to be red, orange or green.
+
+     Every value here clears 4.5:1 as text on the darkest paper plane
+     (--color-surface-sunken), because all three are used as small text and not
+     only as fills. The luminous versions of the same three live in the
+     *-on-dark tokens, where the ink plane makes them legible and the paper
+     values would go muddy. A brighter flame was tried first and measured
+     4.07:1 on --color-bg. */
+  --color-brand: #b82d16;
+  --color-brand-hover: #a82813;
+  --color-brand-soft: #fbeae5;
+  --color-brand-on-dark: #f2603f;
+  --color-attention: #8a4c0e;
+  --color-attention-on-dark: #e0912f;
+  --color-success: #16653e;
+  --color-success-on-dark: #4fbb85;
   --color-error: #b42318;
+
+  /* Steel is the technical voice: metadata, phase labels, rules, trace lines.
+     It is never used for prose. */
+  --color-steel: #586470;
+  --color-steel-on-dark: #7d8b98;
+
+  /* --- Colour: borders --- */
+  --color-border: #d8d3c9;
+  --color-border-strong: #bab4a7;
+  --color-border-on-dark: rgba(238, 236, 231, .14);
+  --color-border-on-dark-strong: rgba(238, 236, 231, .26);
+
+  /* --- Glass ---
+     One recipe, used as a material for floating planes only: the header island,
+     the hero evidence panel, the tool result surface and the source drawer.
+     Not a card treatment. */
+  --glass-bg-light: rgba(248, 247, 244, .62);
+  --glass-bg-dark: rgba(24, 30, 35, .46);
+  /* Ember glass carries the scene's warmth into the pane instead of reading as
+     neutral frosted plastic. Environmental colour is what separates glass from
+     a translucent rectangle. */
+  --glass-bg-ember: rgba(46, 32, 26, .44);
+  --glass-blur: 30px;
+  --glass-saturate: 1.85;
+  --glass-border-light: rgba(255, 255, 255, .62);
+  --glass-border-dark: rgba(238, 236, 231, .18);
+  --glass-highlight: rgba(255, 255, 255, .72);
+  /* The tint sits over the blur so a pane picks up ember from what is behind it
+     even where the backdrop is flat. */
+  --glass-tint-ember: rgba(217, 122, 30, .10);
+  --glass-tint-steel: rgba(120, 140, 160, .08);
+
+  /* --- Atmosphere ---
+     Large, very soft light fields behind content planes. They carry depth on
+     the ink plane where a flat dark rectangle would look like a black box. */
+  --atmos-ember: rgba(217, 122, 30, .18);
+  --atmos-flame: rgba(212, 51, 24, .16);
+  --atmos-steel: rgba(111, 124, 136, .16);
 
   /* --- Typography --- */
   --font-sans: "Geist", "Inter", Arial, sans-serif;
@@ -36,9 +123,21 @@
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.5rem;
-  --font-size-h3: clamp(1.4rem, 2vw, 1.75rem);
-  --font-size-h2: clamp(2.1rem, 4vw, 2.75rem);
-  --font-size-h1: clamp(2.65rem, 5vw, 3.85rem);
+  /* Lead paragraph and h4 close the hole in the old scale, where h2 landed at
+     44px and h3 at 18px with nothing in between. */
+  --font-size-lead: clamp(1.15rem, 1.5vw, 1.4rem);
+  --font-size-h4: clamp(1.05rem, 1.15vw, 1.2rem);
+  --font-size-h3: clamp(1.35rem, 1.9vw, 1.7rem);
+  --font-size-h2: clamp(2rem, 3.6vw, 3.1rem);
+  --font-size-h1: clamp(2.6rem, 5.2vw, 4.25rem);
+  /* The hero says one thing at full voice. */
+  --font-size-display: clamp(3.1rem, 7.6vw, 6.75rem);
+  /* Chapter numerals sit behind content as structure, not as ornament. */
+  --font-size-chapter: clamp(4rem, 11vw, 10rem);
+
+  --tracking-display: -0.045em;
+  --tracking-tight: -0.022em;
+  --tracking-label: 0.14em;
 
   /* --- Spacing --- */
   --space-1: 0.5rem;
@@ -60,27 +159,43 @@
   --grid-gap: 1.5rem;
   --header-height: 4.75rem;
 
-  /* --- Radius --- */
-  --radius-sm: 0.5rem;
-  --radius-input: 0.75rem;
-  --radius-button: 0.75rem;
-  --radius-card: 1.125rem;
-  --radius-image: 1.5rem;
+  /* --- Radius ---
+     Squarer than before. The old 1.125rem card radius plus a 0.75rem button
+     radius read as consumer software; this system is closer to technical
+     documentation, and the only generous radius left is the floating island. */
+  --radius-sm: 0.375rem;
+  --radius-input: 0.5rem;
+  --radius-button: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-image: 1rem;
+  --radius-island: 1.25rem;
 
-  /* --- Shadow --- */
-  --shadow-card: 0 1px 2px rgba(16,24,40,.03), 0 8px 24px rgba(16,24,40,.04);
+  /* --- Shadow ---
+     A depth ladder rather than one card shadow: raised sits on the page, float
+     leaves it, deep belongs to glass and overlays. */
+  --shadow-card: 0 1px 2px rgba(13, 17, 19, .04), 0 8px 24px rgba(13, 17, 19, .05);
+  --shadow-raised: 0 2px 4px rgba(13, 17, 19, .05), 0 12px 32px -8px rgba(13, 17, 19, .10);
+  --shadow-float: 0 8px 16px -6px rgba(13, 17, 19, .12), 0 24px 56px -16px rgba(13, 17, 19, .18);
+  --shadow-deep: 0 18px 50px -12px rgba(8, 11, 13, .45);
 
-  /* --- Motion --- */
-  --motion-fast: 180ms;
-  --motion-base: 360ms;
-  --motion-reveal: 480ms;
-  --ease-standard: cubic-bezier(.2,.8,.2,1);
+  /* --- Motion ---
+     Four levels. M1 is feedback, M2 is a component changing state, M3 is a
+     narrative reveal, and the stage duration belongs to a section that takes
+     over the viewport. Intensity is meant to track importance, so M3 is rare. */
+  --motion-micro: 140ms;
+  --motion-fast: 200ms;
+  --motion-base: 320ms;
+  --motion-reveal: 620ms;
+  --motion-stage: 900ms;
+  --ease-standard: cubic-bezier(.2, .8, .2, 1);
+  --ease-entrance: cubic-bezier(.16, 1, .3, 1);
+  --ease-exit: cubic-bezier(.7, 0, .84, 0);
 
   /* --- Focus, control sizing and z-index layers ---
      Not in the source token list; declared here as foundation contract so no
      component invents its own focus ring, target size or stacking value. */
   --focus-ring-width: 3px;
-  --focus-ring-color: rgba(183, 42, 32, .28);
+  --focus-ring-color: rgba(184, 45, 22, .34);
   --focus-ring-offset: 3px;
   --control-min-target: 44px;
   --control-height: 3.25rem;

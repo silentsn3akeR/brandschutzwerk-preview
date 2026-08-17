@@ -76,10 +76,13 @@
   left: 1.25rem; right: 1.25rem; bottom: 1.25rem;
   margin: 0;
   padding: .6875rem .875rem;
-  border: 1px solid rgba(255, 255, 255, .55);
-  border-radius: .75rem;
-  background: rgba(255, 255, 255, .94);
-  color: var(--color-text);
+  /* The label sits on the placeholder, which is dark on every plane, so it
+     reads as the same glass pane the rest of the floating layer uses instead
+     of a white pill punched into the composition. */
+  border: 1px solid var(--glass-border-dark);
+  border-radius: var(--radius-sm);
+  background: var(--color-ink-veil);
+  color: var(--color-text-on-dark);
   font-size: var(--font-size-sm);
   font-weight: 700;
   line-height: 1.3;

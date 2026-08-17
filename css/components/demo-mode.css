@@ -97,8 +97,15 @@ body.is-inspecting [data-status="FACHLICHE_FREIGABE_REQUIRED"] { outline: 2px da
   padding: .25rem .625rem;
   border: 1px solid var(--color-brand);
   border-radius: var(--radius-sm);
-  color: var(--color-brand);
-  font-size: var(--step--1);
+  /* The deep flame, not the luminous one. --color-brand is a fill colour that
+     carries white text; as small text on a paper plane it lands at 4.2:1 and
+     fails QA_A11Y_003. Anything setting flame as text on light needs this
+     variant. */
+  color: var(--color-brand-hover);
+  /* Was var(--step--1), a fluid-scale property this repository never defined:
+     the badge silently inherited whatever surrounded it. Found by the token
+     authority guard. */
+  font-size: var(--font-size-xs);
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;

@@ -1,0 +1,308 @@
+/* PATTERN — process language.
+
+   One grammar for everything on this site that is a sequence: the training
+   lifecycle, the two operational checklists, and the request steps. The shared
+   vocabulary is LINE + NODE + STAGE TYPE, so a visitor who learns it on the
+   training page already knows how to read the request flow.
+
+   It is deliberately not a component library. Each surface composes the same
+   three primitives differently, because a lifecycle you scroll through and a
+   form you step through are not the same interaction.
+
+   Numbering is used here and nowhere else on the site: these really are
+   ordered, and the order carries information the reader needs. */
+
+/* ============================================================ RESULT STAGE
+
+   One persistent surface that changes what it says. The old pattern hid one
+   box and showed another, which meant the answer arrived somewhere else on the
+   page and the truth-safe branches read as the failure case of the numeric
+   one. Here the stage never moves; only its state changes.
+
+   Crucially, no state is styled as an error. ORIENTATION_AVAILABLE,
+   REVIEW_RECOMMENDED and INFORMATION_INCOMPLETE are three valid answers, and
+   two of them are the model correctly declining to produce a number. */
+
+.result-stage {
+  position: relative;
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--ctx-sunken);
+  border: 1px solid var(--ctx-border);
+  transition: background-color var(--motion-base) var(--ease-standard),
+              border-color var(--motion-base) var(--ease-standard);
+}
+
+/* The state edge. Weight and colour carry the state, and the label under it
+   carries the same information in words, so nothing depends on colour. */
+.result-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: var(--radius-card) 0 0 var(--radius-card);
+  background: var(--ctx-border-strong);
+  transition: background-color var(--motion-base) var(--ease-standard);
+}
+
+.result-stage[data-state="ORIENTATION_AVAILABLE"]::before { background: var(--ctx-success); }
+.result-stage[data-state="REVIEW_RECOMMENDED"]::before { background: var(--ctx-attention); }
+.result-stage[data-state="INFORMATION_INCOMPLETE"]::before { background: var(--ctx-steel); }
+.result-stage[data-state="EARLIER_REPETITION_REQUIRED"]::before { background: var(--ctx-brand); }
+.result-stage[data-state="REFRESH_RECOMMENDED"]::before { background: var(--ctx-success); }
+
+.result-stage__state-label {
+  display: block;
+  margin-bottom: .875rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ctx-steel);
+}
+.result-stage[data-state="ORIENTATION_AVAILABLE"] .result-stage__state-label { color: var(--ctx-success); }
+.result-stage[data-state="REVIEW_RECOMMENDED"] .result-stage__state-label { color: var(--ctx-attention); }
+.result-stage[data-state="EARLIER_REPETITION_REQUIRED"] .result-stage__state-label { color: var(--ctx-brand); }
+
+/* The number is allowed to be a visual object, but only in the one state where
+   the model is actually permitted to produce one. */
+.result-stage__figure {
+  margin: 0;
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  color: var(--ctx-text);
+}
+.result-stage__figure strong { font-weight: 620; }
+
+/* A qualitative answer gets the same weight as a number, not less. This is the
+   rule that keeps REVIEW_RECOMMENDED from looking like a failed calculation. */
+.result-stage__verdict {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-weight: 560;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ctx-text);
+  text-wrap: balance;
+}
+
+.result-stage__reason { margin: .875rem 0 0; color: var(--ctx-text-inset); font-size: var(--font-size-sm); line-height: 1.6; }
+.result-stage__next { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+
+/* ============================================================== WORKBENCH
+
+   Two operational phases, not a grid of checklist cards. Each item is a
+   procedure line: marker, instruction, duty at the trailing edge, detail
+   underneath. Grouping comes from the phase rail and the rules, so there are
+   no containers at all. */
+
+.workbench { display: grid; gap: var(--space-7); }
+
+.workbench__phase { border: 0; margin: 0; padding: 0; min-width: 0; }
+
+.workbench__phase-head {
+  width: 100%;
+  display: grid;
+  gap: .5rem;
+  padding: 0 0 1rem;
+  border-bottom: 2px solid var(--ctx-text);
+}
+
+.workbench__phase-index {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  color: var(--ctx-brand);
+}
+.workbench__phase-title {
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+}
+
+.workbench__items { list-style: none; margin: 0; padding: 0; }
+.workbench__items > li { border-bottom: 1px solid var(--ctx-border); }
+
+.workbench__item {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  align-items: start;
+  column-gap: 1rem;
+  padding-block: 1.125rem;
+  min-height: var(--control-min-target);
+  cursor: pointer;
+}
+
+/* The control is 24 x 44: a 20px box drawn by ::before inside a target that
+   meets --control-min-target. Sizing the native input to the visual box is what
+   produced fourteen sub-minimum touch targets on this page — the label being
+   44px tall does not help a finger aiming at the box itself. */
+.workbench__item input {
+  grid-column: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  width: 24px;
+  min-height: var(--control-min-target);
+  display: grid;
+  place-content: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.workbench__item input::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--ctx-steel);
+  border-radius: 3px;
+  background: var(--ctx-surface);
+  transition: background-color var(--motion-micro) var(--ease-standard),
+              border-color var(--motion-micro) var(--ease-standard);
+}
+.workbench__item input:checked::before {
+  background: var(--ctx-brand);
+  border-color: var(--ctx-brand);
+  box-shadow: inset 0 0 0 3px var(--ctx-surface);
+}
+
+.workbench__text { grid-column: 2; padding-top: .6875rem; display: block; font-size: var(--font-size-base); line-height: 1.45; }
+.workbench__text em {
+  display: block;
+  margin-top: .375rem;
+  font-style: normal;
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+  color: var(--ctx-text-inset);
+}
+
+/* Checking an item resolves the line rather than striking it out. Operational
+   instructions must stay readable after they are ticked — a struck-through
+   safety instruction is worse than an unticked one. */
+.workbench__item input:checked ~ .workbench__text { color: var(--ctx-text-muted); }
+.workbench__item input:checked ~ .workbench__text em { opacity: .75; }
+.workbench__items > li:has(input:checked) { border-bottom-color: var(--ctx-brand); }
+
+.workbench__item input:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.workbench__intro {
+  margin: 1rem 0 .5rem;
+  max-width: 44rem;
+  color: var(--ctx-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+@media (max-width: 767px) {
+  .workbench { gap: var(--space-6); }
+  .workbench__item { padding-block: 1rem; }
+}
+
+/* ============================================================== PRECEDENCE
+
+   U4 has to teach one rule: a recommendation about time and a requirement
+   triggered by an operational change are not the same kind of statement, and
+   the change outranks the clock. Two coloured boxes state that; they do not
+   show it.
+
+   Two tracks, stacked. Whichever rule currently governs comes forward and the
+   other recedes — which is the rule itself, expressed spatially. The block is
+   aria-hidden because every result state says the same thing in words below
+   it; nothing here is the only carrier of meaning. */
+
+.precedence {
+  display: grid;
+  gap: .75rem;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--ctx-border);
+}
+
+.precedence__track {
+  position: relative;
+  padding: .875rem 1rem .875rem 1.125rem;
+  border-radius: var(--radius-sm);
+  background: var(--ctx-bg);
+  border: 1px solid var(--ctx-border);
+  opacity: .55;
+  transition: opacity var(--motion-base) var(--ease-standard),
+              translate var(--motion-reveal) var(--ease-entrance),
+              border-color var(--motion-base) var(--ease-standard),
+              box-shadow var(--motion-base) var(--ease-standard);
+}
+
+.precedence__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ctx-steel);
+}
+
+.precedence__marks {
+  list-style: none;
+  margin: .625rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .25rem;
+  font-size: var(--font-size-xs);
+  color: var(--ctx-text-muted);
+}
+/* The recommended window is marked, not shouted. Overstating "3 bis 5 Jahre"
+   is the specific failure this section exists to avoid. */
+.precedence__marks [data-mark="window"] {
+  color: var(--ctx-text);
+  border-top: 2px solid var(--ctx-success);
+  padding-top: .3125rem;
+}
+.precedence__marks li:not([data-mark]) { border-top: 2px solid var(--ctx-border-strong); padding-top: .3125rem; }
+
+.precedence__strength {
+  display: block;
+  margin-top: .5rem;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--ctx-text-muted);
+}
+.precedence__track--time .precedence__strength { color: var(--ctx-success); }
+.precedence__track--change .precedence__strength { color: var(--ctx-brand); }
+
+/* Governing track. Time governs by default; a change trigger overtakes it. */
+.result-stage[data-state="REFRESH_RECOMMENDED"] .precedence__track--time,
+.result-stage[data-state="NO_TIME_BASED_ACTION_YET"] .precedence__track--time,
+.result-stage[data-state="IDLE"] .precedence__track--time {
+  opacity: 1;
+  background: var(--ctx-surface);
+  border-color: var(--ctx-border-strong);
+}
+
+.result-stage[data-state="EARLIER_REPETITION_REQUIRED"] .precedence__track--change {
+  opacity: 1;
+  translate: 0 -.375rem;
+  background: var(--ctx-surface);
+  border-color: var(--ctx-brand);
+  box-shadow: var(--shadow-raised);
+}
+.result-stage[data-state="EARLIER_REPETITION_REQUIRED"] .precedence__track--time {
+  opacity: .4;
+  translate: 0 .25rem;
+}
+
+.result-stage[data-state="NO_TIME_BASED_ACTION_YET"]::before { background: var(--ctx-steel); }
+.result-stage[data-state="REVIEW_INFORMATION"]::before { background: var(--ctx-attention); }
+.result-stage[data-state="REVIEW_INFORMATION"] .result-stage__state-label { color: var(--ctx-attention); }
+
+@media (prefers-reduced-motion: reduce) {
+  .precedence__track { translate: none !important; }
+}
+

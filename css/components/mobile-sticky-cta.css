@@ -1,9 +1,20 @@
 /* COMPONENT — MobileStickyCTA
-   Visibility is driven by section IDs, not scroll guesses. Hidden above 767px. */
+   Visibility is driven by section IDs, not scroll guesses. Hidden above 767px.
+
+   A fixed bar covers whatever the page ends on, and the page did not account
+   for it: the last evidence rows and the closing form fields sat underneath it.
+   The bar publishes its own height as a custom property and the page shell
+   reserves that much scroll clearance, so nothing has to be raised out of the
+   way individually and nothing ends up hidden. */
 
 .mobile-sticky-cta { display: none; }
 
 @media (max-width: 767px) {
+  /* Control height + its own inset + breathing room, so content can always be
+     scrolled clear of the bar. */
+  .page-shell { --sticky-cta-clearance: calc(var(--control-height) + 2rem + env(safe-area-inset-bottom)); }
+  .page-shell main { padding-bottom: var(--sticky-cta-clearance); }
+
   .mobile-sticky-cta {
     position: fixed;
     z-index: var(--z-sticky-cta);

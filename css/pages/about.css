@@ -1,53 +1,96 @@
 
 
 /* ------------------------------------------------------------- ABOUT_01_HERO
-   Text 7 cols, portrait 4 cols (4:5) with a floating label. */
+   The one route that does not use the dark-scene-headline-left formula. The
+   portrait plane is the protagonist: it starts above the text line, bleeds
+   off-grid toward the viewport edge, and crosses the hero's lower boundary
+   into the light profile section — which is why this hero has no clipped
+   edge. The statement sits low and left, under the portrait's weight, and the
+   eyebrow stands vertically beside it as a technical spine label.
 
-.about-hero__grid { row-gap: var(--space-5); align-items: center; }
-.about-hero__copy { grid-column: 1 / span 7; }
-.about-hero__portrait { grid-column: 9 / span 4; }
+   The hero itself stacks above its successor so the crossing plane stays
+   visible over the light section. */
+
+/* Less bottom padding than a standard large section: the crossing only reads
+   if the portrait genuinely passes the seam, and the section's own padding was
+   absorbing the entire negative margin. */
+/* clip horizontally only: the off-grid bleed must end at the viewport edge
+   instead of widening the page, while the portrait stays free to cross the
+   lower boundary. visible+clip is the one overflow pair that does not force
+   the other axis. */
+.about-hero { z-index: 2; padding-bottom: var(--space-6); overflow-x: clip; overflow-y: visible; }
+.about-hero__grid { row-gap: var(--space-5); align-items: end; }
+.about-hero__copy {
+  grid-column: 2 / span 6;
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+.about-hero__portrait {
+  grid-column: 8 / span 5;
+  z-index: 3;
+  /* The plane crosses the section boundary downward, never upward into the
+     header: sliding under the sticky navigation both collided visually and
+     dragged the header's light pane toward the portrait's darkness. */
+  margin-top: 0;
+  margin-right: calc(-1 * var(--page-padding-desktop));
+  margin-bottom: calc(-1 * var(--space-10) - var(--space-5));
+}
+
+/* The spine. An existing element turned on its side, not new copy. */
+.about-hero__copy .eyebrow {
+  position: absolute;
+  left: -2.75rem;
+  top: .375rem;
+  margin: 0;
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-label);
+}
 
 .about-hero__copy .lead { margin-top: 1.5rem; }
+
+@media (max-width: 1023px) {
+  .about-hero__copy { grid-column: 1 / -1; padding-bottom: 0; }
+  .about-hero__copy .eyebrow { position: static; writing-mode: horizontal-tb; rotate: none; }
+  .about-hero__portrait {
+    grid-column: 1 / -1;
+    margin: var(--space-4) 0 calc(-1 * var(--space-7));
+    max-width: 26rem;
+  }
+}
 
 /* --------------------------------------------------------- ABOUT_02_PROFILE
    Identity 5 cols, copy 6 cols. No second portrait: ASSET_PHOTO_02 is the only
    authorised asset and the hero already carries it, so this column is the
    factual identity block rather than a decorative repeat. */
 
+/* Extra top padding receives the portrait plane crossing down from the hero. */
+.about-profile { padding-top: calc(var(--space-9) + var(--space-5)); }
 .about-profile__grid { row-gap: var(--space-4); align-items: start; }
-/* The identity column is now an AuthorityBlock (css/patterns/authority-block.css):
-   the name, the confirmed background and the one action a visitor can take sit
-   in one bordered unit instead of floating as loose text. */
+/* The identity column is a Truth Rail, not a bordered card. The card presented
+   a confirmed fact and an openly unverified one as two rows of one object; the
+   rail gives each its own rule — solid for backed, dashed for open — which is
+   the distinction this page exists to draw. */
 .about-profile__identity { grid-column: 1 / span 5; }
+.about-profile__cta { margin-top: 2rem; }
 .about-profile__copy     { grid-column: 7 / span 6; }
 
-.about-profile__name {
-  font-size: clamp(1.75rem, 3vw, 2.4rem);
-  letter-spacing: -.035em;
-}
 .about-profile__role {
-  margin-top: .625rem;
-  color: var(--color-brand);
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-  letter-spacing: .04em;
-}
-.about-profile__facts {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border);
-  display: grid;
-  gap: 1rem;
-}
-.about-profile__fact { display: grid; gap: .1875rem; }
-.about-profile__fact dt {
-  color: var(--color-text-muted);
+  margin-bottom: 1.75rem;
+  color: var(--ctx-steel);
+  font-family: var(--font-mono);
   font-size: var(--font-size-xs);
-  font-weight: 700;
-  letter-spacing: .07em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
-.about-profile__fact dd { margin: 0; color: var(--color-text); font-weight: 620; }
+.about-profile__name {
+  margin-bottom: .75rem;
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 620;
+  letter-spacing: var(--tracking-display);
+}
+.about-profile__facts { margin-top: 0; }
 
 .about-profile__copy p + p { margin-top: 1rem; }
 
@@ -61,32 +104,38 @@
   gap: var(--grid-gap);
   margin-top: 3rem;
 }
+/* Evidence rail, not credential cards. Three filled containers made a verified
+   fact and an openly unanswered one look like the same kind of object, which is
+   exactly the distinction this page exists to draw. A rail lets the confirmed
+   entries carry a solid rule and the open one carry an ember rule, with the
+   state written out underneath. */
 .about-credential {
   min-width: 0;
-  padding: 2rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
+  padding: 1.5rem 0 0;
+  border-top: 2px solid var(--ctx-text);
 }
-.about-credential .icon--feature { color: var(--color-brand); }
+.about-credential .icon--feature { color: var(--ctx-brand); }
 .about-credential h3 {
-  margin-top: 1.25rem;
+  margin-top: 1rem;
   margin-bottom: .5rem;
-  font-size: var(--font-size-lg);
-  font-weight: 650;
+  font-size: var(--font-size-h4);
+  font-weight: 620;
   line-height: 1.3;
-  letter-spacing: -.01em;
+  letter-spacing: var(--tracking-tight);
 }
-.about-credential p { font-size: var(--font-size-sm); }
+.about-credential p { font-size: var(--font-size-sm); color: var(--ctx-text-muted); }
 
-/* The open entry reads as deliberately unfinished, not as broken: dashed edge,
-   muted icon, and a plain-language state chip. No registry vocabulary. */
+/* The open entry reads as deliberately unanswered, not as broken or missing:
+   the rule changes weight and colour rather than the container turning dashed,
+   and the state is named in words directly underneath. An honest gap should
+   look like a decision. */
 .about-credential--open {
-  border-style: dashed;
-  border-color: var(--color-border-strong);
-  background: transparent;
+  border-top-color: var(--ctx-attention);
+  /* Dashed, not merely a different colour. The state must survive greyscale and
+     the text chip alone is not a visual distinction at a glance. */
+  border-top-style: dashed;
 }
-.about-credential--open .icon--feature { color: var(--color-text-muted); }
+.about-credential--open .icon--feature { color: var(--ctx-attention); }
 
 .about-credential__state {
   display: inline-flex;
@@ -108,7 +157,6 @@
   border-radius: 50%;
   background: var(--color-text-muted);
 }
-
 
 [data-inspect-only] { display: none; }
 .is-inspecting [data-inspect-only] {
@@ -135,11 +183,11 @@
   gap: 3rem var(--grid-gap);
   margin-top: 4rem;
 }
-.about-philosophy__pillar { min-width: 0; padding-top: 1.75rem; border-top: 1px solid rgba(255, 255, 255, .22); }
+.about-philosophy__pillar { min-width: 0; padding-top: 1.75rem; border-top: 1px solid var(--ctx-border-strong); }
 .about-philosophy__index {
   display: block;
   margin-bottom: 1.5rem;
-  color: #ff8d84;
+  color: var(--ctx-attention);
   font-size: var(--font-size-xs);
   font-weight: 800;
   letter-spacing: .1em;
@@ -150,7 +198,7 @@
   font-size: clamp(1.5rem, 2.4vw, 1.95rem);
   letter-spacing: -.025em;
 }
-.about-philosophy__pillar p { color: rgba(248, 249, 250, .72); font-size: var(--font-size-base); }
+.about-philosophy__pillar p { color: var(--ctx-text-muted); font-size: var(--font-size-base); }
 
 /* --------------------------------------------------------- ABOUT_05_NETWORK
    One current trainer and one compact, explicitly future perspective. */
@@ -161,13 +209,15 @@
   gap: var(--grid-gap);
   margin-top: 3rem;
 }
+/* Same reasoning as the credential rail: what exists today and what is only
+   planned must not sit in two identical containers. The media plane carries the
+   weight and a rule carries the state. */
 .about-network-card {
   min-width: 0;
-  padding: 1.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  background: var(--color-bg);
+  padding: 1.25rem 0 0;
+  border-top: 2px solid var(--ctx-border-strong);
 }
+.about-network-card--future { border-top-color: var(--ctx-attention); }
 .about-network-card__media { margin-bottom: 1.25rem; }
 .about-network-card .badge { margin-bottom: .875rem; }
 .about-network-card h3 {
@@ -180,10 +230,10 @@
 
 .about-network-card--future {
   align-self: start;
-  padding-block: 2rem;
-  border-style: dashed;
-  border-color: var(--color-border-strong);
-  background: transparent;
+  /* The old boxed treatment is gone with the rest of the cards; what is only
+     planned is still marked by a dashed rule, so the distinction survives
+     greyscale exactly as it did before. */
+  border-top-style: dashed;
 }
 
 .about-network__supporting {
@@ -248,4 +298,25 @@
 
 @media (max-width: 359px) {
   .about-network-card__media { max-width: none; }
+}
+
+/* ---------------------------------------------------------- ABOUT_01_HERO V3
+   Same immersive opening as the other two routes. Until a real portrait exists
+   the composition leans on type and plane rather than on a placeholder shaped
+   like a person, so dropping the final photograph in later changes the picture
+   and not the layout. */
+
+.about-hero {
+  min-height: min(70vh, 40rem);
+  margin-top: calc(-1 * var(--header-height));
+  padding-top: calc(var(--space-7) + var(--header-height));
+  display: flex;
+  align-items: center;
+}
+.about-hero__display {
+  font-size: clamp(2.6rem, 5.2vw, 4.5rem);
+  font-weight: 620;
+  line-height: 1.02;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
 }
